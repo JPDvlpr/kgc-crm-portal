@@ -2,3 +2,12 @@
 
 --Creates the category table which will contain the different categories--
 CREATE TABLE 'category' ( `name` VARCHAR(60) NOT NULL ) ENGINE = MyISAM;
+
+CREATE TABLE IF NOT EXISTS`transaction`(
+    transactionID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    dateOfTrans DATETIME,
+    checkDetails varchar(50),
+    cash varchar(50),
+    cc INT(30),
+    grossAmount varchar(100)
+);
