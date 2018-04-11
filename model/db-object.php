@@ -4,7 +4,8 @@ require '/home/jpappoeg/config.php';
 /**
  * Class DBObject uses the connection function to connect to the database.
  *
- * @author Jhakon Pappoe
+ * @author Just ok team
+ * @version 1.0
  * @copyright  2018
  */
 
