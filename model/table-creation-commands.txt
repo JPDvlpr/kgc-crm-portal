@@ -1,1 +1,4 @@
+--Contains commands for creating tables in SQL --
+
+--Creates the category table which will contain the different categories--
 CREATE TABLE 'category' ( `name` VARCHAR(60) NOT NULL ) ENGINE = MyISAM;
