@@ -3,6 +3,7 @@
 --Creates the category table which will contain the different categories--
 CREATE TABLE 'category' ( `name` VARCHAR(60) NOT NULL ) ENGINE = MyISAM;
 
+--Creates the transaction table--
 CREATE TABLE IF NOT EXISTS`transaction`(
     transactionID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     dateOfTrans DATETIME,
