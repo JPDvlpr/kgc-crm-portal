@@ -7,8 +7,23 @@ CREATE TABLE 'category' ( `name` VARCHAR(60) NOT NULL ) ENGINE = MyISAM;
 CREATE TABLE IF NOT EXISTS`transaction`(
     transactionID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     dateOfTrans DATETIME,
-    checkDetails varchar(50),
-    cash varchar(50),
-    cc INT(30),
-    grossAmount varchar(100)
+    payMethod ENUM('cash','check','paypal','square'),
+    discount INT(11),
+    paymentAmount INT(11)
+);
+
+--Creates the Line Item table--
+CREATE TABLE IF NOT EXISTS `line_item`(
+    lineItemID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    SKU_ID INT DEFAULT NULL,
+    quantity INT(10),
+    FOREIGN KEY (SKU_ID) REFERENCES SKU(SKU_ID)
+);
+
+--Creates the Linking table--
+CREATE TABLE IF NOT EXISTS `transaction_line_item` (
+    transactionID INT NOT NULL,
+    lineItemID INT NOT NULL,
+    FOREIGN KEY (transactionID) REFERENCES transaction(transactionID),
+    FOREIGN KEY (lineItemID) REFERENCES line_item(lineItemID)
 );
