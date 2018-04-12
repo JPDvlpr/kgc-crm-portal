@@ -27,3 +27,16 @@ CREATE TABLE IF NOT EXISTS `transaction_line_item` (
     FOREIGN KEY (transactionID) REFERENCES transaction(transactionID),
     FOREIGN KEY (lineItemID) REFERENCES line_item(lineItemID)
 );
+
+--Creates the sku table--
+CREATE TABLE IF NOT EXISTS `sku`(
+sku_id int NOT NULL AUTO_INCREMENT,
+name varchar(255) NOT NULL,
+description varchar(255) NOT NULL,
+price DECIMAL NOT NULL,
+unit varchar(255) NOT NULL,
+category varchar(60) NOT NULL,
+item_id int NOT NULL,
+PRIMARY KEY(sku_id),
+FOREIGN KEY(category) REFERENCES category(`name`)
+);
