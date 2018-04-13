@@ -11,16 +11,17 @@
 //$id = $_POST['id'];
 
 include_once("./model/db-object.php");
-include_once("./model/db-categories.php");
+include_once("./model/db-sku.php");
+echo '<p>in sku file</p>';
 
-$table = "category";
+$table = "sku";
 
-$dbItem = new DBCategories();
-$results = $dbItem->getCategories(strtolower($table));
+$dbItem = new DBSku();
+$results = $dbItem->getSku(strtolower($table));
 
-echo '<p>in categories file</p>';
 
 foreach ($results as $result){
-    echo '<input type="radio" name="category" value="'.$result['name'].'" checked> '.$result['name'].'<br>';
+    echo '<br>';
+    echo '<input type="radio" name="skus" value="'.$result['name'].'" checked> '.$result['name'].'<br>';
 }
 ?>

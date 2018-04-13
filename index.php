@@ -5,6 +5,7 @@
     echo "hello 3";
 
     require_once("views/categories.php");
+    require_once("views/skus.php");
 
     standard_footer();
 ?>
