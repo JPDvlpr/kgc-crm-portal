@@ -1,0 +1,2 @@
+INSERT INTO `category` (`name`) VALUES('class'),('donation'),('event');
+ALTER TABLE `category` ADD PRIMARY KEY (`name`);
