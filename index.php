@@ -4,5 +4,7 @@
 
     echo "hello 3";
 
+    require_once("views/categories.php");
+
     standard_footer();
 ?>

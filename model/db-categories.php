@@ -30,7 +30,7 @@ class DBCategories extends DBObject
         $dbh = Parent::connect();
 
         //1. Define the query
-        $sql = "SELECT * FROM " . $table . " ORDER BY recommendation DESC";
+        $sql = "SELECT * FROM " . $table;
 
         if ($numReturn != 0) {
             $sql = $sql . " LIMIT :number";
