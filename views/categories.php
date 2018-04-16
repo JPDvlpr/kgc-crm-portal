@@ -10,17 +10,17 @@
 //$table = $_POST['table'];
 //$id = $_POST['id'];
 
-include_once("./model/db-object.php");
-include_once("./model/db-categories.php");
+include_once("../model/db-object.php");
+include_once("../model/db-categories.php");
 
 $table = "category";
 
 $dbItem = new DBCategories();
 $results = $dbItem->getCategories(strtolower($table));
 
-echo '<p>in categories file</p>';
-
 foreach ($results as $result){
-    echo '<input type="radio" name="category" value="'.$result['name'].'" checked> '.$result['name'].'<br>';
+    echo "<div class='radio'>";
+        echo "<label><input type='radio' class='category' name='category' value='".$result['name']."'> ".ucfirst($result['name'])."</label>";
+    echo "</div>";
 }
 ?>
