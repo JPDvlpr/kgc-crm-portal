@@ -15,9 +15,9 @@ CREATE TABLE IF NOT EXISTS`transaction`(
 --Creates the Line Item table--
 CREATE TABLE IF NOT EXISTS `line_item`(
     lineItemID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    SKU_ID INT DEFAULT NULL,
+    sku_id INT DEFAULT NULL,
     quantity INT(10),
-    FOREIGN KEY (SKU_ID) REFERENCES SKU(SKU_ID)
+    FOREIGN KEY (sku_id) REFERENCES sku(sku_id)
 );
 
 --Creates the Linking table--
