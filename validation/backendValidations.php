@@ -12,6 +12,7 @@
 include_once("./model/db-object.php");
 include_once("./model/db-categories.php");
 include_once ("./model/db-sku.php");
+include_once ("./model/db-transaction.php");
 
 /**
  * Takes in the category the user chose, and the error messages array. It
@@ -54,6 +55,25 @@ function validateSku($sku,$errors){
         return true;
     } else { //else the sku is not there display error
         $errors['sku']= "Sku not found.";
+        return false;
+    }
+}
+
+function validateTransaction($transaction, $errors){
+
+    //table name in database
+    $table = "transaction";
+
+    $dbItem = new DBTransactions();
+
+    $transactions = array_map('strtolower', $dbItem->addTransaction(strtolower($table)));
+
+    if(in_array(strtolower($transaction, $transactions))){
+        $errors['transaction'] = "";
+        return true;
+    }
+    else{
+        $errors['transaction'] = "Transaction not found";
         return false;
     }
 }
