@@ -11,6 +11,7 @@
 
 include_once("./model/db-object.php");
 include_once("./model/db-categories.php");
+include_once ("./model/db-sku.php");
 
 /**
  * Takes in the category the user chose, and the error messages array. It
@@ -32,6 +33,27 @@ function validateCategory($category,$errors){
         return true;
     } else {
         $errors['category']="Category not found.";
+        return false;
+    }
+}
+
+function validateSku($sku,$errors){
+
+    //table name in database
+    $table = "sku";
+
+    //setting item to referenced db function
+    $dbItem = new DBSku();
+
+    //returning the item as lowercase to match the db column
+    $skus = array_map('strtolower',$dbItem->getSkus(strtolower($table)));
+
+    //if the sku is in the array (no error)
+    if (in_array(strtolower($sku), $skus)){
+        $errors['sku'] = "";
+        return true;
+    } else { //else the sku is not there display error
+        $errors['sku']= "Sku not found.";
         return false;
     }
 }
