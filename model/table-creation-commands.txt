@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `sku`(
 sku_id int NOT NULL AUTO_INCREMENT,
 name varchar(255) NOT NULL,
 description varchar(255) NOT NULL,
-price DECIMAL NOT NULL,
+price DECIMAL(10,2) NOT NULL,
 unit varchar(255) NOT NULL,
 category varchar(60) NOT NULL,
 item_id int NOT NULL,
