@@ -32,7 +32,7 @@
                         <td colspan="5">Reason for Deposit:
                             <div id="categories" class="container">
                                 <?php
-                                    include ("categories.php");
+                                    include("categories.php");
                                 ?>
                             </div>
                         </td>
