@@ -10,47 +10,47 @@
         <title>New Transaction</title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-        <link rel="stylesheet" href="../../temp.css">
+        <link rel="stylesheet" href="../styles/temp.css">
     </head>
     <body>
-        <div class="container" style="margin-top: 1%">
-            <form action="#" method="post">
-                <table class="table table-bordered">
+        <div class="container">
+            <form name="transactionForm" action="#" method="post">
+                <table id="deposit" class="table table-bordered">
                     <thead>
-                    <th colspan="4"><strong>Deposit Information</strong></th>
+                    <th colspan="5"><strong>Deposit Information</strong></th>
                     </thead>
                     <tbody>
                     <tr>
-                        <td>Deposit By: </td>
-                        <td colspan="3"><input type="text" class="form-control"></td>
+                        <td colspan="2">Deposit By: </td>
+                        <td colspan="3"><input type="text" name="depositby" class="form-control"></td>
                     </tr>
                     <tr>
-                        <td>Date: </td>
-                        <td colspan="3"><input type="text" class="form-control"></td>
+                        <td colspan="2">Date: </td>
+                        <td colspan="3"><input type="date" name="date" class="form-control"></td>
                     </tr>
                     <tr>
-                        <td>Reason for Deposit</td>
-                        <td colspan="3">
-                            <?php
-                                include ("categories.php");
-                            ?>
+                        <td colspan="5">Reason for Deposit:
+                            <div id="categories" class="container">
+                                <?php
+                                    include("categories.php");
+                                ?>
+                            </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Total: </td>
-                        <td id="total" colspan="3">$</td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <table class="table table-bordered">
-                    <thead>
-                    <th colspan="4"><strong>Payment Information</strong></th>
+                    <thead class="hidden">
+                        <th>Quantity</th>
+                        <th>Description</th>
+                        <th>Unit Price</th>
+                        <th>Total Price</th>
+                        <th>Delete</th>
                     </thead>
-                    <tbody>
                     <tr>
-                        <td>Amount Paid: </td><div class="input-group">
-                        <td>
+                        <td colspan="3">Total: </td>
+                        <td id="total" colspan="2">$0.00</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Amount Paid: </td>
+                        <td colspan="2">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
@@ -58,8 +58,10 @@
                                 <input id="paid" type="text" class="form-control">
                             </div>
                         </td>
-                        <td>Discount: </td>
-                        <td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Discount: </td>
+                        <td colspan="2">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
@@ -69,22 +71,29 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Deposit Type: </td>
+                        <td colspan="2">Deposit Type: </td>
                         <td colspan="3">
                             <div class="radio">
                                 <label><input class="payMethod" type="radio" name="payMethod" value="cash"> Cash</label>
                             </div>
+
                             <div class="radio">
                                 <label><input class="payMethod" type="radio" name="payMethod" value="check"> Check</label>
                             </div>
-                            <input class=""
-                            <div class="radio disabled">
+                            <input id="checkNum" class="hidden form-control" type="text" name="checkNum" placeholder="Check Number">
+
+                            <div class="radio">
                                 <label><input class="payMethod" type="radio" name="payMethod" value="credit"> Credit Card</label>
+                                <label id="paypal" class="hidden"><input type="radio" name="credit" value="paypal"> Paypal</label>
+                                <label id="square" class="hidden"><input type="radio" name="credit" value="square"> Square</label>
                             </div>
+
                         </td>
                     </tr>
                     </tbody>
                 </table>
+
+                <button type="submit" class="button" name="submit">Submit Transaction</button>
             </form>
 
         </div>
