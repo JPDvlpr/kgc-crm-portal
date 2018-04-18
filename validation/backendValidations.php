@@ -59,21 +59,44 @@ function validateSku($sku,$errors){
     }
 }
 
-function validateTransaction($transaction, $errors){
+function validateTransaction($dateOfTrans, $discount, $payAmount, $errors){
 
     //table name in database
     $table = "transaction";
 
+    $payMethod = "";
+
     $dbItem = new DBTransactions();
 
-    $transactions = array_map('strtolower', $dbItem->addTransaction(strtolower($table)));
+//    $transactions = array_map('strtolower', $dbItem->addTransaction(strtolower($table)));
+//
+//    if(in_array(strtolower($transaction, $transactions))){
+//        $errors['transaction'] = "";
+//        return true;
+//    }
+//    else{
+//
+//        $errors['transaction'] = "Transaction not found";
+//        return false;
+//    }
+    $dbItem->addTransaction($table, $dateOfTrans, $payMethod, $discount, $payAmount);
 
-    if(in_array(strtolower($transaction, $transactions))){
+    if(!empty($dateOfTrans)){
         $errors['transaction'] = "";
         return true;
     }
     else{
-        $errors['transaction'] = "Transaction not found";
-        return false;
+        $errors['transaction'] = "No date for the transaction selected";
     }
+    if($payMethod == "cash" || $payMethod == "check" || $payMethod == "paypal"
+        || $payMethod == "square"){
+        $errors['transaction'] = "";
+        return true;
+    }
+
+    else {
+        $errors['transaction'] = "No transaction type selected";
+    }
+
+    return false;
 }
