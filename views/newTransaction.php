@@ -14,7 +14,7 @@
     </head>
     <body>
         <div class="container">
-            <form name="transactionForm" action="#" method="post">
+            <form id="transactionForm" name="transactionForm" action="#" method="post">
                 <table id="deposit" class="table table-bordered">
                     <thead>
                     <th colspan="5"><strong>Deposit Information</strong></th>
@@ -37,8 +37,8 @@
                             </div>
                         </td>
                     </tr>
-                    <thead class="hidden">
-                        <th>Quantity</th>
+                    <thead id="lineItems" class="">
+                        <th>Qty</th>
                         <th>Description</th>
                         <th>Unit Price</th>
                         <th>Total Price</th>
@@ -49,17 +49,6 @@
                         <td id="total" colspan="2">$0.00</td>
                     </tr>
                     <tr>
-                        <td colspan="3">Amount Paid: </td>
-                        <td colspan="2">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">$</span>
-                                </div>
-                                <input id="paid" type="text" class="form-control">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
                         <td colspan="3">Discount: </td>
                         <td colspan="2">
                             <div class="input-group">
@@ -67,6 +56,17 @@
                                     <span class="input-group-text">$</span>
                                 </div>
                                 <input id="discount" type="text" class="form-control">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Amount Paid: </td>
+                        <td colspan="2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input id="paid" type="text" class="form-control">
                             </div>
                         </td>
                     </tr>
@@ -93,7 +93,7 @@
                     </tbody>
                 </table>
 
-                <button type="submit" class="button" name="submit">Submit Transaction</button>
+                <button type="submit" class="btn" name="submit">Submit Transaction</button>
             </form>
 
         </div>
