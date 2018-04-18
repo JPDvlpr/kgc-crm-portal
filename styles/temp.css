@@ -1,0 +1,34 @@
+td
+{
+    padding: 0px;
+}
+.hidden
+{
+    display: none;
+    margin-left: 5%;
+    width: 90%;
+}
+#categories
+{
+    margin-left: 5%;
+}
+.subCategory
+{
+    margin-left: 5%;
+}
+
+#itemDonation
+{
+    display: inline;
+    margin-left: 2%;
+    width: 50%;
+}
+div.subCategory div.input-group
+{
+    display: inline-flex;
+    width: 50%;
+}
+.subCategory label
+{
+    margin-right: 2%;
+}
