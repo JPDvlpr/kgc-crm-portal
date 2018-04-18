@@ -55,7 +55,7 @@
 //     return false
 // }
 //
-function priceValidation(price){
+function isPrice(price){
 
         if(price.match(/^\d+\.?\d{0,2}$/) ){
             return true;
@@ -63,23 +63,23 @@ function priceValidation(price){
         return false;
 
 }
-//
-//
-//
-// function emptyStringPrevalidation(anyString){
-//     if (anyString == "") {
-//         return false;
-//     }
-//     return true;
-// }
-//
-function alphStringPrevalidation(anyString){
+
+function isEmptyString(anyString){
+    if (anyString == "") {
+        return true;
+    }
+    return false;
+}
+
+function isAlphString(anyString){
+    if(isEmptyString(anyString)) return false;
     if(anyString.match(/^[a-zA-Z]+$/) ){
         return true;
     }
     return false;
 }
 
+//included for debugging use
 function sayHelloscript(){
     alert("Hello");
 }
