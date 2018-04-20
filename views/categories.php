@@ -20,7 +20,7 @@ $results = $dbItem->getCategories(strtolower($table));
 
 foreach ($results as $result){
     echo "<div class='radio'>";
-        echo "<label class='category' id='".$result['name']."'><input type='radio' name='category' value='".$result['name']."'> ".ucfirst($result['name'])."</label>";
+        echo "<label class='category' id='".$result."'><input type='radio' name='category' value='".$result."'> ".ucfirst($result)."</label>";
     echo "</div>";
 }
 ?>

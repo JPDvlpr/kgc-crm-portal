@@ -30,7 +30,7 @@ class DBCategories extends DBObject
         $dbh = Parent::connect();
 
         //1. Define the query
-        $sql = "SELECT * FROM " . $table;
+        $sql = "SELECT name FROM " . $table;
 
         if ($numReturn != 0) {
             $sql = $sql . " LIMIT :number";
@@ -48,11 +48,15 @@ class DBCategories extends DBObject
         $statement->execute();
 
         //5. Return the results
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
         //print_r($result);
 
         Parent::disconnect();
-        return $result;
+
+        foreach ($results as $result){
+            $categories[] = $result['name'];
+        }
+        return $categories;
     }
 }
 ?>
