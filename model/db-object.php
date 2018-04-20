@@ -1,5 +1,8 @@
 <?php
-require '/home/jpappoeg/config.php';
+//require '/home/jpappoeg/config.php';
+//require '/home/troemerg/config.php';
+//require '/home/kbarterg/config.php';
+require("/home/mfeltong/config_files/config.php");
 
 /**
  * Class DBObject uses the connection function to connect to the database.
@@ -20,7 +23,6 @@ class DBObject
             //Instantiate a database object
             $dbh = new PDO(DB_DSN, DB_USERNAME,
                 DB_PASSWORD);
-            echo "Connected to database!!!";
             return $dbh;
         } catch (PDOException $e) {
             echo $e->getMessage();
