@@ -22,7 +22,7 @@ $(document).on('click', 'label.category', function (){
     var category = $(this).attr('id');
     $.ajax({
         type: "POST",
-        url: "http://troemer.greenriverdev.com/355/kgc-crm-portal-team/views/skus_temp.php",
+        url: "/views/skus_temp.php",
         dataType:"json",
         data: { category: category },
         success: function (data) {
@@ -46,23 +46,20 @@ $(document).on('click', 'label.category', function (){
             }
             else if(category == 'donation'){
                 $('#'+category).after(
-                    "<div class='radio subCategory'>"+
-                        "<label><input id='cash' type='radio' name='subCategory' "+
-                        "value='"+data[1]['sku_id']+"' desc='" +
-                        data[1]['name']+"'> "+data[1]['name']+"  </label>"+
-                        "<div class='input-group'>"+
+                    "<div class='subCategory'>"+
+                        "<select id='subCategory' name='subCategory' class='form-control'>"+
+                            "<option id='cash'"+
+                            "value='"+data[1]['sku_id']+"'> "+data[1]['name']+"</option>"+
+                            "<option id='item'"+
+                            "value='"+data[0]['sku_id']+"'> "+data[0]['name']+"</option>"+
+                        "</select>"+
+                        "<div class='hidden input-group'>"+
                             "<div class='input-group-prepend'>"+
                                 "<span class='input-group-text'>$</span>"+
                             "</div>"+
                             "<input id='cashDonation' type='text' class='form-control'>"+
                         "</div>"+
-                    "</div>");
-                $('#'+category).after(
-                    "<div class='radio subCategory'>"+
-                        "<label><input id='item' type='radio' name='subCategory' "+
-                        "value='"+data[0]['sku_id']+"' desc='" +
-                        data[0]['name']+"'> "+data[0]['name']+"  </label>"+
-                        "<select id='quantity' name='quantity'>"+
+                        "<select id='quantity' name='quantity' class='form-control'>"+
                             optionsString+
                         "</select>"+
                         "<input id='itemDonation' type='text' class='form-control' placeholder='Donated Item'> "+
@@ -112,7 +109,7 @@ $(document).on('click', '#add', function (e) {
     e.preventDefault();
     var valid = true;
     var category = $('input[name=category]:checked', '#transactionForm').val();
-    var desc = $( "#quantity option:selected" ).text().split(' - $');
+    var desc = $( "select#subCategory option:selected" ).text().split(' - $');
     alert(desc);
     var quantity = 1, price = 'N/A';
 
@@ -141,7 +138,8 @@ $(document).on('click', '#add', function (e) {
         }
     }
     else{
-        price = $('input[name=subCategory]:checked', '#transactionForm').attr('price');
+        price = desc[1];
+        desc = desc[0];
         quantity = $('select#quantity').val();
         if(valid){
             $('#lineItems').after(
