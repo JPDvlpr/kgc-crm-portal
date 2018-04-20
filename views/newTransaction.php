@@ -17,19 +17,19 @@
             <form id="transactionForm" name="transactionForm" action="#" method="post">
                 <table id="deposit" class="table table-bordered">
                     <thead>
-                    <th colspan="5"><strong>Deposit Information</strong></th>
+                    <th colspan="6"><strong>Deposit Information</strong></th>
                     </thead>
                     <tbody>
                     <tr>
                         <td colspan="2">Deposit By: </td>
-                        <td colspan="3"><input type="text" name="depositby" class="form-control"></td>
+                        <td colspan="4"><input type="text" name="depositby" class="form-control"></td>
                     </tr>
                     <tr>
                         <td colspan="2">Date: </td>
-                        <td colspan="3"><input type="date" name="date" class="form-control"></td>
+                        <td colspan="4"><input id="date" type="date" name="date" class="form-control"></td>
                     </tr>
                     <tr>
-                        <td colspan="5">Reason for Deposit:
+                        <td colspan="6">Reason for Deposit:
                             <div id="categories" class="container">
                                 <?php
                                     include("categories.php");
@@ -37,19 +37,20 @@
                             </div>
                         </td>
                     </tr>
-                    <thead id="lineItems" class="">
+                    <thead id="lineItems" class="hidden">
                         <th>Qty</th>
+                        <th>Category</th>
                         <th>Description</th>
                         <th>Unit Price</th>
                         <th>Total Price</th>
                         <th>Delete</th>
                     </thead>
                     <tr>
-                        <td colspan="3">Total: </td>
+                        <td colspan="4">Total: </td>
                         <td id="total" colspan="2">$0.00</td>
                     </tr>
                     <tr>
-                        <td colspan="3">Discount: </td>
+                        <td colspan="4">Discount: </td>
                         <td colspan="2">
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -60,7 +61,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="3">Amount Paid: </td>
+                        <td colspan="4">Amount Paid: </td>
                         <td colspan="2">
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -72,7 +73,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">Deposit Type: </td>
-                        <td colspan="3">
+                        <td colspan="4">
                             <div class="radio">
                                 <label><input class="payMethod" type="radio" name="payMethod" value="cash"> Cash</label>
                             </div>

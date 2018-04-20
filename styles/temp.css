@@ -28,7 +28,26 @@ div.subCategory div.input-group
     display: inline-flex;
     width: 50%;
 }
-.subCategory label
+.subCategory select
 {
-    margin-right: 2%;
+    display: inline-flex;
+}
+.subCategory select#quantity
+{
+    width: 10%;
+}
+.subCategory select#subCategory
+{
+    width: 50%;
+}
+select {
+    /*for firefox*/
+    -moz-appearance: none;
+    /*for chrome*/
+    -webkit-appearance:none;
+}
+
+/*for IE10*/
+select::-ms-expand {
+    display: none;
 }

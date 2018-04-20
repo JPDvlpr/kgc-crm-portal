@@ -1,6 +1,21 @@
-var optionsString = ""
+var optionsString = "<option selected=\"selected\">0</option>";
+var total = 0.00;
 for(var i = 1; i <= 10; i++)
     optionsString += "<option>"+i+"</option>";
+
+
+//function to be used to default
+//the date to todays date
+function myFunction() {
+    var currentDt = new Date();
+    var mm =   ("0" + (currentDt.getMonth() + 1)).slice(-2);
+    var dd = currentDt.getDate();
+    var yyyy = currentDt.getFullYear();
+    var date = yyyy + "-" + mm + '-' + dd;
+    $('#date').val(date);
+}
+myFunction();
+
 
 //add drop down to categories(reasons for deposit)
 $(document).on('click', 'label.category', function (){
@@ -14,18 +29,19 @@ $(document).on('click', 'label.category', function (){
             $('.subCategory').remove();
             $('#add').remove();
             if(category == 'class' || category == 'event'){
+                $('#' + category).after(
+                    "<div class='subCategory'>"+
+                        "<select id='quantity' name='quantity' class='form-control'>" +
+                            optionsString +
+                        "</select>"+
+                        "<select id='subCategory' name='subCategory' class='form-control'></select>"+
+                    "</div>");
                 for(var i = 0; i < data.length; i++) {
-                    $('#' + category).after(
-                        "<div class='radio subCategory'>" +
-                            "<label><input type='radio' name='subCategory' " +
-                                "value='" + data[i]['sku_id'] + "' desc='" +
-                                data[i]['name']+"' price='"+data[i]['price']+"'> " +
-                                data[i]['name'] + " - $" + data[i]['price'] +
-                            "  </label>" +
-                            "<select name='quantity' link='"+ data[i]['sku_id'] +"'>" +
-                                optionsString +
-                            "</select>" +
-                        "</div>");
+                    $('#subCategory').append(
+                        "<option value='" + data[i]['sku_id'] + "'> " +
+                            data[i]['name'] + " - $" + data[i]['price'] +
+                        "  </option>"
+                    );
                 }
             }
             else if(category == 'donation'){
@@ -46,7 +62,7 @@ $(document).on('click', 'label.category', function (){
                         "<label><input id='item' type='radio' name='subCategory' "+
                         "value='"+data[0]['sku_id']+"' desc='" +
                         data[0]['name']+"'> "+data[0]['name']+"  </label>"+
-                        "<select name='quantity' link='"+ data[0]['sku_id'] +"'>"+
+                        "<select id='quantity' name='quantity'>"+
                             optionsString+
                         "</select>"+
                         "<input id='itemDonation' type='text' class='form-control' placeholder='Donated Item'> "+
@@ -59,12 +75,14 @@ $(document).on('click', 'label.category', function (){
     });
 });
 
+
 //when amount/description is typed in for item or cash donation it will
 //automatically click radio button(if it isn't already).
 $(document).on('input', '#itemDonation, #cashDonation', function () {
     var radioButton = $(this).attr('id').substring(0,4);
     $("#"+radioButton).prop("checked", true);
 });
+
 
 //add drop downs for check & credit card payment methods
 $(document).on('click', 'input.payMethod', function () {
@@ -79,25 +97,28 @@ $(document).on('click', 'input.payMethod', function () {
     }
 })
 
+
 //display add button after subcategory is selected
-$(document).on('click', '.subCategory', function () {
-    $('#add').remove();
-    $('#categories').append("<button id='add' class='btn btn-success'>Add</button>");
+$(document).on('change', '#quantity', function () {
+    if(parseInt($('#quantity').val()) > 0) {
+        $('#add').remove();
+        $('#categories').append("<button id='add' class='btn btn-success'>Add</button>");
+    }
 });
+
 
 //add row to table when add button is clicked
 $(document).on('click', '#add', function (e) {
     e.preventDefault();
     var valid = true;
     var category = $('input[name=category]:checked', '#transactionForm').val();
-    var id = $('input[name=subCategory]:checked', '#transactionForm').val();
-    var desc = $('input[name=subCategory]:checked', '#transactionForm').attr('desc');
+    var desc = $( "#quantity option:selected" ).text().split(' - $');
+    alert(desc);
     var quantity = 1, price = 'N/A';
-    // alert(category + " : " + id + " : " + desc + " : " + quantity + " : " + price);
 
     if(category == 'donation'){
         if(desc == 'Item'){
-            quantity = $('*[link="'+id+'"]').val();
+            quantity = $('select#quantity').val();
             desc = $('#itemDonation').val();
         }
 
@@ -110,9 +131,10 @@ $(document).on('click', '#add', function (e) {
             $('#lineItems').after(
                 "<tr>"+
                     "<td>"+quantity+"</td>"+
+                    "<td>"+category+"</td>"+
                     "<td>"+desc+"</td>"+
                     "<td>"+price+"</td>"+
-                    "<td>"+price+"</td>"+
+                    "<td class='price'>"+price+"</td>"+
                     "<td class='delete'>X</td>"+
                 "</tr>"
             );
@@ -120,21 +142,41 @@ $(document).on('click', '#add', function (e) {
     }
     else{
         price = $('input[name=subCategory]:checked', '#transactionForm').attr('price');
-        quantity = $('*[link="'+id+'"]').val();
+        quantity = $('select#quantity').val();
         if(valid){
             $('#lineItems').after(
                 "<tr>"+
                 "<td>"+quantity+"</td>"+
+                "<td>"+category+"</td>"+
                 "<td>"+desc+"</td>"+
                 "<td>$"+price+"</td>"+
-                "<td>$"+(quantity*price)+"</td>"+
+                "<td class='price'>$"+(quantity*price)+"</td>"+
                 "<td class='delete'>X</td>"+
                 "</tr>"
             );
         }
     }
 
-    $('.subCategory').remove();
     $('#add').remove();
-    $('input[name=category]:checked').prop('checked', false);
+    $('select#quatity').val(0);
+    $('thead.hidden').removeClass('hidden');
+    total = 0.00;
+    $('.price').each(function() {
+        if($(this).html() == 'N/A')
+            total += parseInt(0);
+        else
+            total += parseInt($(this).html().slice(1));
+    });
+    $('#total').html('$'+total);
+});
+
+
+//auto generate discount/amount paid based on the others input
+$(document).on('input', '#paid, #discount', function () {
+    var value = $(this).val();
+    var other = parseInt($('#total').html().slice(1)) - parseInt(value);
+    if($(this).attr('id') == 'discount')
+        $('#paid').val(other);
+    else
+        $('#discount').val(other);
 });
