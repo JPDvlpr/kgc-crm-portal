@@ -10,8 +10,8 @@
 //$table = $_POST['table'];
 //$id = $_POST['id'];
 
-include_once("../model/db-object.php");
-include_once("../model/db-categories.php");
+include_once("./model/db-object.php");
+include_once("./model/db-categories.php");
 
 $table = "category";
 
