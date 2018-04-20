@@ -49,7 +49,6 @@ class DBCategories extends DBObject
 
         //5. Return the results
         $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-        //print_r($result);
 
         Parent::disconnect();
 
