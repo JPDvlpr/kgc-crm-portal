@@ -61,13 +61,10 @@ function standard_header($title, $stylesheet)
 
     <!-- JQuery for user Login supplies correct path for both parameterized and unparameterized pages -->
     <?php
-
-    echo "<p>included standard header</p>";
 }
 
 function standard_footer()
 {
-    echo "<p>included standard footer</p>";
     ?>
     <!-- bootstrap jquery/popper/javascript -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
