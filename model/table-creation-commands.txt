@@ -4,12 +4,26 @@
 CREATE TABLE 'category' ( `name` VARCHAR(60) NOT NULL ) ENGINE = MyISAM;
 
 --Creates the transaction table--
-CREATE TABLE IF NOT EXISTS`transaction`(
-    transactionID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    dateOfTrans DATETIME,
-    payMethod ENUM('cash','check','paypal','square'),
-    discount INT(11),
-    paymentAmount INT(11)
+CREATE TABLE IF NOT EXISTS `transaction`(
+    trans_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    amount DECIMAL(8,2),
+    trans_date DATE,
+    check_num VARCHAR(45),
+    deposit_by_id INT(11),
+    bank_deposit_date DATe,
+    trans_status VARCHAR(1),
+    trans_desc VARCHAR(1000),
+    source_type VARCHAR(5),
+    source_id VARCHAR(45),
+    trans_type VARCHAR(1),
+    contact_id INT(11),
+    date_created DATETIME,
+    created_by INT(11),
+    date_modified DATETIME,
+    modified_by INT(11),
+    FOREIGN KEY (deposit_by_id) REFERENCES admins(admin_id),
+    FOREIGN KEY (contact_id) REFERENCES contact(contact_id),
+    FOREIGN KEY (source_id) REFERENCES whoKnows(what_id)
 );
 
 --Creates the Line Item table--
