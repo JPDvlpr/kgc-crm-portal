@@ -23,7 +23,25 @@ CREATE TABLE IF NOT EXISTS `transaction`(
     modified_by INT(11),
     FOREIGN KEY (deposit_by_id) REFERENCES admins(admin_id),
     FOREIGN KEY (contact_id) REFERENCES contact(contact_id),
-    FOREIGN KEY (source_id) REFERENCES whoKnows(what_id)
+);
+
+--Creates Contact Table--
+CREATE TABLE IF NOT EXISTS `contact`(
+    contact_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    contact_name VARCHAR(200),
+    address VARCHAR(200),
+    city VARCHAR(45),
+    state VARCHAR(2),
+    zip VARCHAR(10),
+    phone VARCHAR(15),
+    cell VARCHAR(15),
+    email_address VARCHAR(200),
+    alt_contact_name VARCHAR(200),
+    alt_contact_phone VARCHAR(15),
+    created_date DATETIME,
+    created_by INT(6),
+    modified_date DATETIME,
+    modified_by INT(6)
 );
 
 --Creates the Line Item table--
