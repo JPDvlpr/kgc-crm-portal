@@ -30,7 +30,7 @@ function validateCategory($category,$errors){
     $categories = array_map('strtolower',$dbItem->getCategories(strtolower($table)));
 
     if (in_array(strtolower($category), $categories)){
-        $errors['category'] = "";
+        unset($errors['category']);
         return true;
     } else {
         $errors['category']="Category not found.";
