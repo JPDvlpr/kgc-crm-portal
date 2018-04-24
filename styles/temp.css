@@ -4,7 +4,7 @@ td
 }
 .hidden
 {
-    display: none;
+    display: none !important;
     margin-left: 5%;
     width: 90%;
 }
@@ -20,8 +20,7 @@ td
 #itemDonation
 {
     display: inline;
-    margin-left: 2%;
-    width: 50%;
+    width: 40%;
 }
 div.subCategory div.input-group
 {
@@ -38,7 +37,12 @@ div.subCategory div.input-group
 }
 .subCategory select#subCategory
 {
-    width: 50%;
+    width: 40%;
+}
+.subCategory select#donation
+{
+    width: 25%;
+    margin-right: 2em;
 }
 select {
     /*for firefox*/
