@@ -1,56 +1,111 @@
 --Contains commands for creating tables in SQL --
 
---Creates the category table which will contain the different categories--
-CREATE TABLE 'category' ( `name` VARCHAR(60) NOT NULL ) ENGINE = MyISAM;
-
 --Creates the transaction table--
-CREATE TABLE IF NOT EXISTS `transaction`(
-    trans_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    amount DECIMAL(8,2),
-    trans_date DATE,
-    check_num VARCHAR(45),
-    deposit_by_id INT(11),
-    bank_deposit_date DATe,
-    trans_status VARCHAR(1),
-    trans_desc VARCHAR(1000),
-    source_type VARCHAR(5),
-    source_id VARCHAR(45),
-    trans_type VARCHAR(1),
-    contact_id INT(11),
-    date_created DATETIME,
-    created_by INT(11),
-    date_modified DATETIME,
-    modified_by INT(11),
-    FOREIGN KEY (deposit_by_id) REFERENCES admins(admin_id),
-    FOREIGN KEY (contact_id) REFERENCES contact(contact_id),
-    FOREIGN KEY (source_id) REFERENCES whoKnows(what_id)
+CREATE TABLE `transaction` (
+  `trans_id` int(11) NOT NULL AUTO_INCREMENT,
+  `amount` decimal(8,2) DEFAULT NULL,
+  `trans_date` date DEFAULT NULL,
+  `check_num` varchar(45) DEFAULT NULL,
+  `deposit_by_id` int(11) DEFAULT NULL,
+  `bank_deposit_date` date DEFAULT NULL,
+  `trans_status` varchar(1) DEFAULT 'N' COMMENT 'P - Pending, D - Deposit, C - Cancelled',
+  `trans_desc` varchar(1000) DEFAULT NULL,
+  `source_type` varchar(5) DEFAULT NULL,
+  `source_id` varchar(45) DEFAULT NULL,
+  `trans_type` varchar(1) DEFAULT 'H' COMMENT 'c(H)eck, c(A)sh, c(R)edit',
+  `contact_id` int(11) DEFAULT NULL,
+  `date_created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int(11) DEFAULT NULL,
+  `date_modified` datetime DEFAULT CURRENT_TIMESTAMP,
+  `modified_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`trans_id`),
+  KEY `contact_id_fk_idx` (`contact_id`),
+  CONSTRAINT `contact_id_fk` FOREIGN KEY (`contact_id`) REFERENCES `contact` (`contact_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
---Creates the Line Item table--
-CREATE TABLE IF NOT EXISTS `line_item`(
-    lineItemID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    sku_id INT DEFAULT NULL,
-    quantity INT(10),
-    FOREIGN KEY (sku_id) REFERENCES sku(sku_id)
+--Creates Contact Table--
+CREATE TABLE `contact` (
+  `contact_id` int(6) NOT NULL AUTO_INCREMENT,
+  `contact_name` varchar(200) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `city` varchar(45) DEFAULT NULL,
+  `state` varchar(2) DEFAULT 'WA',
+  `zip` varchar(10) DEFAULT NULL,
+  `phone` varchar(15) DEFAULT NULL,
+  `cell` varchar(15) DEFAULT NULL,
+  `email_address` varchar(200) DEFAULT NULL,
+  `alt_contact_name` varchar(200) DEFAULT NULL,
+  `alt_contact_phone` varchar(15) DEFAULT NULL,
+  `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int(6) DEFAULT NULL,
+  `modified_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `modified_by` int(6) DEFAULT NULL,
+  PRIMARY KEY (`contact_id`)
 );
 
---Creates the Linking table--
-CREATE TABLE IF NOT EXISTS `transaction_line_item` (
-    transactionID INT NOT NULL,
-    lineItemID INT NOT NULL,
-    FOREIGN KEY (transactionID) REFERENCES transaction(transactionID),
-    FOREIGN KEY (lineItemID) REFERENCES line_item(lineItemID)
+
+--Creates Admins Table---
+CREATE TABLE `admins` (
+  `admin_id` int(6) NOT NULL AUTO_INCREMENT,
+  `admin_login` varchar(200) NOT NULL,
+  `admin_pwd` varchar(100) NOT NULL,
+  `admin_role` varchar(1) NOT NULL,
+  `admin_name` varchar(100) NOT NULL,
+  `admin_email` varchar(100) NOT NULL,
+  `status` varchar(1) NOT NULL DEFAULT 'A' COMMENT '(A)ctive, (D)isabled',
+  `date_created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int(11) DEFAULT NULL,
+  `date_modified` datetime DEFAULT CURRENT_TIMESTAMP,
+  `modified_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`admin_id`),
+  UNIQUE KEY `admin_login_UNIQUE` (`admin_login`)
 );
 
---Creates the sku table--
-CREATE TABLE IF NOT EXISTS `sku`(
-sku_id int NOT NULL AUTO_INCREMENT,
-name varchar(255) NOT NULL,
-description varchar(255) NOT NULL,
-price DECIMAL(10,2) NOT NULL,
-unit varchar(255) NOT NULL,
-category varchar(60) NOT NULL,
-item_id int NOT NULL,
-PRIMARY KEY(sku_id),
-FOREIGN KEY(category) REFERENCES category(`name`)
+--Creates Item Table---
+CREATE TABLE `item` (
+  `item_id` int(11) NOT NULL AUTO_INCREMENT,
+  `item_name` varchar(50) NOT NULL,
+  `item_desc` varchar(255) DEFAULT NULL,
+  `status` varchar(1) NOT NULL DEFAULT 'A' COMMENT '(A)ctive, (D)isabled',
+  `item_price` decimal(8,2) DEFAULT NULL,
+  `cat_id` int(11) NOT NULL,
+  `date_created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int(11) DEFAULT NULL,
+  `date_modified` datetime DEFAULT CURRENT_TIMESTAMP,
+  `modified_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`item_id`),
+  KEY `item_item_cat_fk_idx` (`cat_id`),
+  CONSTRAINT `item_item_cat_fk` FOREIGN KEY (`cat_id`) REFERENCES `item_category` (`cat_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
+
+--Creates Item Category Table---
+CREATE TABLE `item_category` (
+  `cat_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cat_name` varchar(50) NOT NULL,
+  `cat_desc` varchar(255) DEFAULT NULL,
+  `date_created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int(11) DEFAULT NULL,
+  `date_modified` datetime DEFAULT CURRENT_TIMESTAMP,
+  `modified_by` int(11) DEFAULT NULL,
+  `status` varchar(1) NOT NULL DEFAULT 'A' COMMENT '(A)ctive, (D)isabled',
+  PRIMARY KEY (`cat_id`)
+);
+
+--Creates Transaction Item Table---
+CREATE TABLE `transaction_item` (
+  `trans_item_id` int(11) NOT NULL AUTO_INCREMENT,
+  `trans_id` int(11) NOT NULL,
+  `item_desc` varchar(100) DEFAULT NULL,
+  `amount` decimal(8,2) DEFAULT NULL,
+  `item_id` int(11) NOT NULL,
+  `date_created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int(11) DEFAULT NULL,
+  `date_modified` datetime DEFAULT CURRENT_TIMESTAMP,
+  `modified_by` int(11) DEFAULT NULL,
+  PRIMARY KEY (`trans_item_id`),
+  KEY `trans_id_fk_idx` (`trans_id`),
+  KEY `item_id_fk_idx` (`item_id`),
+  CONSTRAINT `item_id_fk` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `trans_id_fk` FOREIGN KEY (`trans_id`) REFERENCES `transaction` (`trans_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
