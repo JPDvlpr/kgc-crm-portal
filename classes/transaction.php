@@ -60,7 +60,7 @@ class Transaction
      * @param $transactionItems
      */
 //    public function __construct($id(move to end), $amount, $transDate, $checkNum, $depositById (not in initial creation), $bankDepositDate, $transStatus, $sourceType, $sourceId, $transType, $contactId, $dateCreated, $createdBy, $dateModified, $modifiedBy, $transactionItems)
-    public function __construct($amount, $transDate, $sourceType, $sourceId, $transType, $contactId, $dateCreated, $createdBy, $transactionItemsArray, $checkNum, $id = 0)
+    public function __construct($createdBy, $contactId, $transDate, $transactionItemsArray, $amount,  $transType,  $checkNum, $ccType, $id = 0)
     {
         $this->new = true;
         $this->id = $id; // change to use random generator

@@ -3,7 +3,7 @@
     standard_header("sample","");
 
     if(!empty($_POST)){
-        $transaction = new Transaction();
+        $transaction = new Transaction($createdBy, $contactId, $transDate, $transactionItemsArray, $amount,  $transType,  $checkNum, $ccType);
         $transaction->validateTransaction();
         $transaction->saveTransaction();
     }
