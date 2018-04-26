@@ -1,2 +1,27 @@
-INSERT INTO `category` (`name`) VALUES('class'),('donation'),('event');
-ALTER TABLE `category` ADD PRIMARY KEY (`name`);
+
+----Populates the Item Table-----
+INSERT INTO `item`
+VALUES (1,'Stories from Punjab',NULL,'A',5.00,1,'2018-04-18 16:57:19',NULL,'2018-04-18 16:57:19',NULL),
+(4,'Sikhs by Kushwant Singh',NULL,'A',10.00,1,'2018-04-18 17:00:36',NULL,'2018-04-18 17:00:36',NULL),
+(5,'Donation variable',NULL,'A',NULL,3,'2018-04-18 17:00:36',NULL,'2018-04-18 17:00:36',NULL),
+(6,'Donation 50',NULL,'A',50.00,3,'2018-04-18 17:00:36',NULL,'2018-04-18 17:00:36',NULL),
+(7,'Donation 100',NULL,'A',100.00,3,'2018-04-18 17:00:36',NULL,'2018-04-18 17:00:36',NULL),
+(8,'Donation 200',NULL,'A',200.00,3,'2018-04-18 17:00:36',NULL,'2018-04-18 17:00:36',NULL),
+(9,'Donation 500',NULL,'A',500.00,3,'2018-04-18 17:00:36',NULL,'2018-04-18 17:00:36',NULL),
+(10,'Tabla',NULL,'A',200.00,2,'2018-04-18 17:02:26',NULL,'2018-04-18 17:02:26',NULL),
+(11,'Harmonium',NULL,'A',250.00,2,'2018-04-18 17:02:54',NULL,'2018-04-18 17:02:54',NULL),
+(12,'Gurmukhi & Gurmat Class',NULL,'A',150.00,4,'2018-04-18 17:10:31',NULL,'2018-04-18 17:10:31',NULL),
+(13,'Mathematics',NULL,'A',100.00,4,'2018-04-18 17:10:31',NULL,'2018-04-18 17:10:31',NULL),
+(14,'Robotics camp',NULL,'A',50.00,5,'2018-04-18 17:10:31',NULL,'2018-04-18 17:10:31',NULL),
+(15,'Parenting workshop',NULL,'A',5.00,6,'2018-04-18 17:10:31',NULL,'2018-04-18 17:10:31',NULL),
+(16,'Chardi Kala Camp',NULL,'A',25.00,5,'2018-04-18 17:10:32',NULL,'2018-04-18 17:10:32',NULL);
+
+
+---Populates the Item Category Table----
+INSERT INTO `item_category`
+VALUES (1,'Books','Discount Books','2018-04-18 16:49:31',NULL,'2018-04-18 16:49:31',NULL,'A'),
+(2,'Instruments','Musical Instruments','2018-04-18 16:53:28',NULL,'2018-04-18 16:53:28',NULL,'A'),
+(3,'Discount','Discount','2018-04-18 16:53:28',NULL,'2018-04-18 16:53:28',NULL,'A'),
+(4,'Class Registration','Registration for the classes','2018-04-18 16:53:28',NULL,'2018-04-18 16:53:28',NULL,'A'),
+(5,'Summer Camps','Camps during summer vacation','2018-04-18 16:53:28',NULL,'2018-04-18 16:53:28',NULL,'A'),
+(6,'Workshops',NULL,'2018-04-18 16:53:28',NULL,'2018-04-18 16:53:28',NULL,'A');

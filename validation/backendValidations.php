@@ -119,6 +119,7 @@ function validatePrice($price)
 
 validatePrice();
 
+//validate integers
 function validateInteger($integer)
 {
     if (is_int($integer)) {

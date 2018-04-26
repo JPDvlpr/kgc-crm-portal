@@ -2,7 +2,7 @@
 //require '/home/jpappoeg/config.php';
 //require '/home/troemerg/config.php';
 //require '/home/kbarterg/config.php';
-require("/home/mfeltong/config_files/config.php");
+//require("/home/mfeltong/config_files/config.php");
 
 /**
  * Class DBObject uses the connection function to connect to the database.
