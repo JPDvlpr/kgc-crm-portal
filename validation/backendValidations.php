@@ -118,3 +118,16 @@ function validatePrice($price)
 }
 
 validatePrice();
+
+function validateInteger($integer)
+{
+    if (is_int($integer)) {
+        echo "integer is valid";
+        return true;
+    } else {
+        echo "integer is not valid";
+        return false;
+    }
+}
+
+validateInteger();
