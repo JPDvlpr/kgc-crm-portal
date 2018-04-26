@@ -12,15 +12,20 @@ td
 {
     margin-left: 5%;
 }
+button
+{
+    float: right;
+}
+#add
+{
+    margin-right: 5%;
+}
+
+
+/*Sub-category styles*/
 .subCategory
 {
     margin-left: 5%;
-}
-
-#itemDonation
-{
-    display: inline;
-    width: 40%;
 }
 div.subCategory div.input-group
 {
@@ -44,13 +49,50 @@ div.subCategory div.input-group
     width: 25%;
     margin-right: 2em;
 }
+#checkNum, #paypal, #square
+{
+    display: block;
+    margin-left: 5%;
+    width: 50%;
+}
+#itemDonation
+{
+    display: inline;
+    width: 40%;
+}
+
+
+
+/*Delete confirmation(dialog box) styles*/
+div.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix
+{
+    padding: 0px;
+}
+button.ui-dialog-titlebar-close
+{
+    display: none;
+}
+div.ui-dialog-buttonset
+{
+    width: 100%;
+}
+#confirm
+{
+    float: left;
+    margin-left: 0.5em;
+}
+#cancel
+{
+    float: right;
+}
+
+/*Removes arrow on dropdown list*/
 select {
     /*for firefox*/
     -moz-appearance: none;
     /*for chrome*/
     -webkit-appearance:none;
 }
-
 /*for IE10*/
 select::-ms-expand {
     display: none;

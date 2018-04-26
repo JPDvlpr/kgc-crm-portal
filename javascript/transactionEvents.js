@@ -1,12 +1,58 @@
+var total = 0.00; //total to diplay and add to @ bottom
+var rows = 0; //numbers of line items rows, when 0 header should disappear
+var valid = false; //check to see if form is valid on server before submitting to server
 var optionsString = "<option selected=\"selected\">0</option>";
-var total = 0.00;
 for(var i = 1; i <= 10; i++)
     optionsString += "<option>"+i+"</option>";
 
+//create initial dialog box
+$( function() {
+    $( "#dialog" ).dialog({
+        autoOpen: false,
+        resizable: false,
+        modal: true,
+        buttons: [
+            {
+                text: "Confirm",
+                "class": 'btn',
+                "id": 'confirm',
+                click: function() {
+                    //delete row from table and hide
+                    //table header if there's no rows left
+                    $('#delete').remove();
+                    rows--;
+                    if(rows == 0)
+                        $('#lineItems').addClass('hidden');
+
+                    //update total
+                    total = 0.00;
+                    $('.price').each(function() {
+                        if($(this).html() == 'N/A')
+                            total += parseInt(0);
+                        else
+                            total += parseInt($(this).html().slice(1));
+                    });
+                    $('#total').html('$'+total);
+
+                    $('#dialog').dialog('close');
+                }
+            },
+            {
+                text: "Cancel",
+                "class": 'btn',
+                "id": 'cancel',
+                click: function() {
+                    $('.delete').removeAttr('id')
+                    $('#dialog').dialog('close');
+                }
+            }
+        ]
+    });
+});
 
 //function to be used to default
 //the date to todays date
-function myFunction() {
+function defualtDate() {
     var currentDt = new Date();
     var mm =   ("0" + (currentDt.getMonth() + 1)).slice(-2);
     var dd = currentDt.getDate();
@@ -14,7 +60,7 @@ function myFunction() {
     var date = yyyy + "-" + mm + '-' + dd;
     $('#date').val(date);
 }
-myFunction();
+defualtDate();
 
 
 //add drop down to categories(reasons for deposit)
@@ -95,14 +141,14 @@ $(document).on('change', '#donation', function () {
 
 //add drop downs for check & credit card payment methods
 $(document).on('click', 'input.payMethod', function () {
-    $('.hidden').css("display", "none");
+    $('#checkNum, #paypal, #square').addClass('hidden');
 
     if($(this).val() == "check"){
-        $('#checkNum').css("display", "block");
+        $('#checkNum').removeClass('hidden');
     }
     else if($(this).val() == "credit"){
-        $('#paypal').css("display", "block");
-        $('#square').css("display", "block");
+        $('#paypal').removeClass('hidden');
+        $('#square').removeClass('hidden');
     }
 })
 
@@ -130,8 +176,10 @@ $(document).on('click', '#add', function (e) {
             desc = $('#itemDonation').val();
         }
 
-        else
+        else {
             price = '$' + $('#cashDonation').val();
+            desc = 'Cash'
+        }
 
         // alert(category + " : " + id + " : " + desc + " : " + quantity + " : " + price);
 
@@ -139,11 +187,11 @@ $(document).on('click', '#add', function (e) {
             $('#lineItems').after(
                 "<tr>"+
                     "<td>"+quantity+"</td>"+
-                    "<td>"+category+"</td>"+
+                    "<td>"+category.substr(0,1).toUpperCase() + category.substr(1)+"</td>"+
                     "<td>"+desc+"</td>"+
                     "<td>"+price+"</td>"+
                     "<td class='price'>"+price+"</td>"+
-                    "<td class='delete'>X</td>"+
+                    "<td><i class='delete far fa-times-circle'></i></td>"+
                 "</tr>"
             );
         }
@@ -156,19 +204,20 @@ $(document).on('click', '#add', function (e) {
             $('#lineItems').after(
                 "<tr>"+
                 "<td>"+quantity+"</td>"+
-                "<td>"+category+"</td>"+
+                "<td>"+category.substr(0,1).toUpperCase() + category.substr(1)+"</td>"+
                 "<td>"+desc+"</td>"+
                 "<td>$"+price+"</td>"+
                 "<td class='price'>$"+(quantity*price)+"</td>"+
-                "<td class='delete'>X</td>"+
+                "<td><i class='delete far fa-times-circle'></i></td>"+
                 "</tr>"
             );
         }
     }
 
+    rows++;
     $('#add').remove();
     $('select#quantity').val(0);
-    $('thead.hidden').removeClass('hidden');
+    $('thead#lineItems').removeClass('hidden');
     total = 0.00;
     $('.price').each(function() {
         if($(this).html() == 'N/A')
@@ -188,4 +237,21 @@ $(document).on('input', '#paid, #discount', function () {
         $('#paid').val(other);
     else
         $('#discount').val(other);
+});
+
+
+//Delete confirmation and functionality
+$(document).on('click', '.delete', function () {
+    $(this).parent().parent().attr('id', 'delete');
+    $('#dialog').dialog('open');
+});
+
+
+//validate input before submitting to server
+$(document).on('click', '#submit', function (e) {
+    e.preventDefault();
+
+    if(!valid){
+
+    }
 });
