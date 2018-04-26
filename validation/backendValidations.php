@@ -11,8 +11,8 @@
 
 include_once("./model/db-object.php");
 include_once("./model/db-categories.php");
-include_once ("./model/db-sku.php");
-include_once ("./model/db-transaction.php");
+include_once("./model/db-sku.php");
+include_once("./model/db-transaction.php");
 
 /**
  * Takes in the category the user chose, and the error messages array. It
@@ -23,22 +23,24 @@ include_once ("./model/db-transaction.php");
  * @param $errors - the array of errors
  * @return bool - whether or not the category was valid
  */
-function validateCategory($category,$errors){
+function validateCategory($category, $errors)
+{
     $table = "category";
 
     $dbItem = new DBCategories();
-    $categories = array_map('strtolower',$dbItem->getCategories(strtolower($table)));
+    $categories = array_map('strtolower', $dbItem->getCategories(strtolower($table)));
 
-    if (in_array(strtolower($category), $categories)){
+    if (in_array(strtolower($category), $categories)) {
         unset($errors['category']);
         return true;
     } else {
-        $errors['category']="Category not found.";
+        $errors['category'] = "Category not found.";
         return false;
     }
 }
 
-function validateSku($sku,$errors){
+function validateSku($sku, $errors)
+{
 
     //table name in database
     $table = "sku";
@@ -47,19 +49,20 @@ function validateSku($sku,$errors){
     $dbItem = new DBSku();
 
     //returning the item as lowercase to match the db column
-    $skus = array_map('strtolower',$dbItem->getSkus(strtolower($table)));
+    $skus = array_map('strtolower', $dbItem->getSkus(strtolower($table)));
 
     //if the sku is in the array (no error)
-    if (in_array(strtolower($sku), $skus)){
+    if (in_array(strtolower($sku), $skus)) {
         $errors['sku'] = "";
         return true;
     } else { //else the sku is not there display error
-        $errors['sku']= "Sku not found.";
+        $errors['sku'] = "Sku not found.";
         return false;
     }
 }
 
-function validateTransaction($dateOfTrans, $discount, $payAmount, $errors){
+function validateTransaction($dateOfTrans, $discount, $payAmount, $errors)
+{
 
     //table name in database
     $table = "transaction";
@@ -81,22 +84,37 @@ function validateTransaction($dateOfTrans, $discount, $payAmount, $errors){
 //    }
     $dbItem->addTransaction($table, $dateOfTrans, $payMethod, $discount, $payAmount);
 
-    if(!empty($dateOfTrans)){
+    if (!empty($dateOfTrans)) {
         $errors['transaction'] = "";
         return true;
-    }
-    else{
+    } else {
         $errors['transaction'] = "No date for the transaction selected";
     }
-    if($payMethod == "cash" || $payMethod == "check" || $payMethod == "paypal"
-        || $payMethod == "square"){
+    if ($payMethod == "cash" || $payMethod == "check" || $payMethod == "paypal"
+        || $payMethod == "square") {
         $errors['transaction'] = "";
         return true;
-    }
-
-    else {
+    } else {
         $errors['transaction'] = "No transaction type selected";
     }
 
     return false;
 }
+
+//validates the price input
+function validatePrice($price)
+{
+//  price has integer(s) (dollar amount)
+//  split by a decimal
+//  and follows with 2 integers (cents)
+    $test = "/^[0-9]+(\.[0-9]{2})?$/";
+    if (preg_match($test, $price)) {
+        echo "price is correct";
+        return true;
+    } else {
+        echo "enter a decimal";
+        return false;
+    }
+}
+
+validatePrice();
