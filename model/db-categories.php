@@ -23,14 +23,14 @@ class DBCategories extends DBObject
      * @param $numReturn - the number of results to return
      * @return mixed - the specified number of items from the database
      */
-    function getCategories($table = 'category', $numReturn = 0)
+    function getCategories($table = 'item_category', $numReturn = 0)
     {
         //gives access to the variable in index
         global $dbh;
         $dbh = Parent::connect();
 
         //1. Define the query
-        $sql = "SELECT name FROM " . $table;
+        $sql = "SELECT cat_name FROM " . $table;
 
         if ($numReturn != 0) {
             $sql = $sql . " LIMIT :number";

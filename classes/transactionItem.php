@@ -46,7 +46,7 @@ class TransactionItem
      * @param $errors
      * @param $new
      */
-    public function __construct($transItemId, $transId, $itemDesc, $amount, $itemId, $dateCreated, $createdBy, $dateModified, $modifiedBy, $transactionItems, $errors, $new)
+    public function __construct($transItemId, $transId, $itemDesc, $amount, $itemId, $dateCreated, $createdBy)
     {
         $this->transItemId = $transItemId;
         $this->transId = $transId;
@@ -55,9 +55,9 @@ class TransactionItem
         $this->itemId = $itemId;
         $this->dateCreated = $dateCreated;
         $this->createdBy = $createdBy;
-        $this->dateModified = $dateModified;
-        $this->modifiedBy = $modifiedBy;
-        $this->new = $new;
+        $this->dateModified = $dateCreated;
+        $this->modifiedBy = $createdBy;
+        $this->new = true;
     }
 
 

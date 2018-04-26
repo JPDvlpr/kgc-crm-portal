@@ -1,10 +1,10 @@
 <?php
 
-class DBTransactions extends DBObject
+class DBTransaction extends DBObject
 {
     function addTransaction($table = 'transaction', $dateOfTrans, $payMethod, $discount, $payAmount){
         global $dbh;
-        $dbh = Parent::conect();
+        $dbh = Parent::connect();
 
         //Define Query
         $sql = "INSERT INTO ". $table;
@@ -27,7 +27,7 @@ class DBTransactions extends DBObject
 
     function addLineItem($table = 'line_item', $skuTable = 'sku', $quantity, $sku){
         global $dbh;
-        $dbh = Parent::conect();
+        $dbh = Parent::connect();
 
         $skuID = "SELECT sku_id FROM " . $skuTable . " WHERE " . $sku . " = :sku_id";
 
@@ -51,7 +51,7 @@ class DBTransactions extends DBObject
     function addLinkingTable($table = 'transaction_line_item', $transTable = 'transaction',
                              $lineItemTable = 'line_item', $transId, $linItId){
         global $dbh;
-        $dbh = Parent::conect();
+        $dbh = Parent::connect();
 
         $trans = "SELECT transactionID FROM " . $transTable . " WHERE " . $transId . " = :transactioID";
         $lineItem = "SELECT lineItemID FROM " . $lineItemTable . " WHERE " . $linItId . " = : lineItemID";

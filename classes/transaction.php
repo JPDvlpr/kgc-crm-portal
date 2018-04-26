@@ -142,23 +142,29 @@ class Transaction
         }
 
 //        $this->checkNum = $checkNum;
+        //Todo if not a check then don't validate
         //validate that checkNum is an integer
         if(!validateInteger($this->checkNum)){
             $errors['checkNum'] = 'Check Number must be an integer.';
         }
 
 //        $this->depositById = $depositById;
+        // Todo - will need to check if exists
         // validate deposit_by - check if id exists in admin table
         if(!validateAdmin($this->depositBy)){
             $errors['depositBy'] = 'That admin does not exist.';
         }
 
 //        $this->bankDepositDate = $bankDepositDate;
+        // Todo - will need to check if exists
         // validate bankDepositDate - check if it is a valid date
-        if(!validateDate($this->dateModified)){
-            $errors['dateModified'] = 'Invalid Date';
+        if(!validateDate($this->bankDepositDate)){
+            $errors['bankDepositDate'] = 'Invalid Date';
         }
 
+        // P = Pending
+        // D = Deposited
+        // C = Cancelled
 //        $this->transStatus = $transStatus;
         //TODO - not sure what this is but need to validate
 
@@ -168,6 +174,9 @@ class Transaction
 //        $this->sourceId = $sourceId;
         //TODO - not sure what this is but need to validate
 
+        // A = C(A)sh
+        // H = C(H)eck
+        // R = C(R)edit
 //        $this->transType = $transType;
         //TODO - not sure what this is but need to validate
 
@@ -216,6 +225,14 @@ class Transaction
 
     public function saveTransaction()
     {
-
+        //validate transaction
+        //if valid, then save
+        $saveToLocation = new DBTransaction($this->amount, $this->transDate, $this->sourceType,
+            $this->sourceId, $this->transType, $this->contactId, $this->dateCreated, $this->createdBy,
+            $this->transactionItemsArray, $this->checkNum, $this->id);
+        $saveToLocation->addTransaction($table = 'transaction', $dateOfTrans, $payMethod, $discount, $payAmount);
+        foreach ($this->transactionItems as $item) {
+            if(!validateSku($item)) $transactionError[] = $item->getId;
+        }
     }
 }
