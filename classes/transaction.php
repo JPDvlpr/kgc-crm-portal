@@ -63,15 +63,13 @@ class Transaction
     public function __construct($amount, $transDate, $sourceType, $sourceId, $transType, $contactId, $dateCreated, $createdBy, $transactionItemsArray, $checkNum, $id = 0)
     {
         $this->new = true;
-        $this->id = $id;
+        $this->id = $id; // change to use random generator
         $this->amount = $amount;
         $this->transDate = $transDate;
         $this->checkNum = $checkNum;
-//        $this->depositById = $depositById;
-//        $this->bankDepositDate = $bankDepositDate;
 //        $this->transStatus = $transStatus;
-        $this->sourceType = $sourceType;
-        $this->sourceId = $sourceId;
+//        $this->sourceType = $sourceType;
+//        $this->sourceId = $sourceId;
         $this->transType = $transType;
         $this->contactId = $contactId;
         $this->dateCreated = $dateCreated;
@@ -122,40 +120,101 @@ class Transaction
 //        protected $transactionItems; // an array of transactionItem
 
 //        // this doesn't feel right... having the $new may correct this
-//        if (!is_null($this->id)) {
-//            if(!validateInteger($this->id)){
-//                $errors['id'] = 'Transaction ID was not valid';
-//            };
-//        } elseif (!$new){
-//
-//        }
-//
-//        if (is_null($this->amount)) {
-//            $errors['amount'] = 'Amount is required';
-//        } elseif (!validatePrice($this->amount)) {
-//            $errors['amount'] = 'Amount was not valid';
-//        };
-//
+        if ($new) {
+
+        } elseif(!validateInteger($this->id)){
+            //TODO - should this be a check for an integer or a check for existence in database
+                $errors['id'] = 'Transaction ID was not valid';
+        }
+
+//        protected $amount; // DECIMAL(8,2)
+        //validate amount payed
+        if (is_null($this->amount)) {
+            $errors['amount'] = 'Amount is required';
+        } elseif (!validatePrice($this->amount)) {
+            $errors['amount'] = 'Amount was not valid';
+        };
+
 //        $this->transDate = $transDate;
+        // validate bankDepositDate - check if it is a valid date
+        if(!validateDate($this->dateModified)){
+            $errors['dateModified'] = 'Invalid Date';
+        }
+
 //        $this->checkNum = $checkNum;
-////        $this->depositById = $depositById;
-////        $this->bankDepositDate = $bankDepositDate;
-////        $this->transStatus = $transStatus;
+        //validate that checkNum is an integer
+        if(!validateInteger($this->checkNum)){
+            $errors['checkNum'] = 'Check Number must be an integer.';
+        }
+
+//        $this->depositById = $depositById;
+        // validate deposit_by - check if id exists in admin table
+        if(!validateAdmin($this->depositBy)){
+            $errors['depositBy'] = 'That admin does not exist.';
+        }
+
+//        $this->bankDepositDate = $bankDepositDate;
+        // validate bankDepositDate - check if it is a valid date
+        if(!validateDate($this->dateModified)){
+            $errors['dateModified'] = 'Invalid Date';
+        }
+
+//        $this->transStatus = $transStatus;
+        //TODO - not sure what this is but need to validate
+
 //        $this->sourceType = $sourceType;
+        //TODO - not sure what this is but need to validate
+
 //        $this->sourceId = $sourceId;
+        //TODO - not sure what this is but need to validate
+
 //        $this->transType = $transType;
+        //TODO - not sure what this is but need to validate
+
 //        $this->contactId = $contactId;
+        // validate contact_id - check if id exists in contact table
+        if(!validateContact($this->contactId)){
+            $errors['contactId'] = 'That contact does not exist.';
+        }
+
 //        $this->dateCreated = $dateCreated;
+        // validate dateCreated - check if it is a valid date
+        if(!validateDateTime($this->dateCreated)){
+            $errors['dateCreated'] = 'Invalid Date';
+        }
+
 //        $this->createdBy = $createdBy;
+        // validate created_by - check if id exists in admin table
+        if(!validateAdmin($this->createdBy)){
+            $errors['createdBy'] = 'That admin does not exist.';
+        }
+
 //        $this->dateModified = $dateCreated;
+        // validate dateModified - check if it is a valid date
+        if(!validateDateTime($this->dateModified)){
+            $errors['dateModified'] = 'Invalid Date';
+        }
+
 //        $this->modifiedBy = $createdBy;
-//        foreach ($transactionItemsArray as $item) {
-//            $this->transactionItems[] = new TransactionItem($item['itemDesc'], $item['amount'], $item['itemId']);
-//        }
+        // validate modified_by - check if id exists in admin table
+        if(!validateAdmin($this->modifiedBy)){
+            $errors['modifiedBy'] = 'That admin does not exist.';
+        }
+
+        // validate each line item
+        // TODO make sure that number times itemCost == amount of this line_item
+        foreach ($this->transactionItems as $item) {
+            if(!validateSku($item)) $transactionError[] = $item->getId;
+        }
+        if(sizeof($transactionError) > 0) {
+            $errors['lineItem'] = "Line item doesn't exist";
+            $errors['invalidLineItems'] = $transactionError;
+        }
+
         return $errors;
     }
 
-    public function writeToDatabase()
+    public function saveTransaction()
     {
 
     }
