@@ -22,7 +22,7 @@ $(document).on('click', 'label.category', function (){
     var category = $(this).attr('id');
     $.ajax({
         type: "POST",
-        url: "/views/skus_temp.php",
+        url: "http://troemer.greenriverdev.com/355/kgc-crm-portal-team/views/skus_temp.php",
         dataType:"json",
         data: { category: category },
         success: function (data) {
@@ -47,22 +47,22 @@ $(document).on('click', 'label.category', function (){
             else if(category == 'donation'){
                 $('#'+category).after(
                     "<div class='subCategory'>"+
-                        "<select id='subCategory' name='subCategory' class='form-control'>"+
-                            "<option id='cash'"+
-                            "value='"+data[1]['sku_id']+"'> "+data[1]['name']+"</option>"+
+                        "<select id='donation' name='subCategory' class='form-control'>"+
                             "<option id='item'"+
-                            "value='"+data[0]['sku_id']+"'> "+data[0]['name']+"</option>"+
+                            "value='"+data[0]['sku_id']+"'>"+data[0]['name']+"</option>"+
+                            "<option id='cash'"+
+                            "value='"+data[1]['sku_id']+"'>"+data[1]['name']+"</option>"+
                         "</select>"+
+                        "<select id='quantity' name='quantity' class='form-control'>"+
+                            optionsString+
+                        "</select>"+
+                        "<input id='itemDonation' type='text' class='form-control' placeholder='Donated Item'>" +
                         "<div class='hidden input-group'>"+
                             "<div class='input-group-prepend'>"+
                                 "<span class='input-group-text'>$</span>"+
                             "</div>"+
                             "<input id='cashDonation' type='text' class='form-control'>"+
                         "</div>"+
-                        "<select id='quantity' name='quantity' class='form-control'>"+
-                            optionsString+
-                        "</select>"+
-                        "<input id='itemDonation' type='text' class='form-control' placeholder='Donated Item'> "+
                     "</div>");
             };
         },
@@ -75,9 +75,21 @@ $(document).on('click', 'label.category', function (){
 
 //when amount/description is typed in for item or cash donation it will
 //automatically click radio button(if it isn't already).
-$(document).on('input', '#itemDonation, #cashDonation', function () {
-    var radioButton = $(this).attr('id').substring(0,4);
-    $("#"+radioButton).prop("checked", true);
+$(document).on('change', '#donation', function () {
+    $('#add').remove();
+
+    if($(this).find('option:selected').text() == "Item"){
+        $('div.subCategory div.input-group').addClass("hidden");
+
+        $('div.subCategory select#quantity').removeClass("hidden");
+        $('input#itemDonation').removeClass("hidden");
+    }
+    else{
+        $('div.subCategory select#quantity').addClass("hidden");
+        $('input#itemDonation').addClass("hidden");
+
+        $('div.subCategory div.input-group').removeClass('hidden');
+    }
 });
 
 
@@ -96,11 +108,11 @@ $(document).on('click', 'input.payMethod', function () {
 
 
 //display add button after subcategory is selected
-$(document).on('change', '#quantity', function () {
-    if(parseInt($('#quantity').val()) > 0) {
-        $('#add').remove();
+$(document).on('change input', '#quantity, #cashDonation', function () {
+    $('#add').remove();
+
+    if(parseInt($('#quantity').val()) > 0 || $('#cashDonation').val())
         $('#categories').append("<button id='add' class='btn btn-success'>Add</button>");
-    }
 });
 
 
@@ -110,11 +122,10 @@ $(document).on('click', '#add', function (e) {
     var valid = true;
     var category = $('input[name=category]:checked', '#transactionForm').val();
     var desc = $( "select#subCategory option:selected" ).text().split(' - $');
-    alert(desc);
     var quantity = 1, price = 'N/A';
 
     if(category == 'donation'){
-        if(desc == 'Item'){
+        if($("select#donation option:selected").text() == 'Item'){
             quantity = $('select#quantity').val();
             desc = $('#itemDonation').val();
         }
@@ -156,7 +167,7 @@ $(document).on('click', '#add', function (e) {
     }
 
     $('#add').remove();
-    $('select#quatity').val(0);
+    $('select#quantity').val(0);
     $('thead.hidden').removeClass('hidden');
     total = 0.00;
     $('.price').each(function() {
