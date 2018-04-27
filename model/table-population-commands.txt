@@ -1,3 +1,7 @@
+-----Update Commands for database as of 4/27/2018------
+UPDATE item SET cat_id = 7 WHERE cat_id = 3
+
+
 
 ----Populates the Item Table-----
 INSERT INTO `item`
