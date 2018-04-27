@@ -9,16 +9,16 @@
  */
 
 include_once("./model/db-object.php");
-include_once("./model/db-sku.php");
-echo '<p>in sku file</p>';
+include_once("./model/db-item.php");
+echo '<p>in item file</p>';
 
-$table = "sku";
+$table = "item";
 
-$dbItem = new DBSku();
+$dbItem = new DBItem();
 $results = $dbItem->getItem(strtolower($table));
 
 foreach ($results as $result){
     echo '<br>';
-    echo '<input type="radio" name="items" value="'.$result['name'].'" checked> '.$result['name'].'<br>';
+    echo '<input type="radio" name="items" value="'.$result['item_name'].'" checked> '.$result['item_name'].'<br>';
 }
 ?>

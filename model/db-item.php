@@ -5,6 +5,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once("db-object.php");
+
 /**
  * Class DBObject uses the connection function to connect to the database.
  *
@@ -54,12 +55,13 @@ class DBItem extends DBObject
         //print_r($result);
 
         Parent::disconnect();
-        return $result;
 
         if (empty($result)) {
             return -1;
-        } else {
-            return $result['access'];
         }
+
+        return $result;
+
+
     }
 }

@@ -5,12 +5,14 @@ standard_header("sample", "");
 
 echo "hello 3";
 $errors;
-require_once("views/categories.php");
-if (validateCategory('Class', $errors)) {
-    echo "Class was valid";
-}
+//require_once("views/categories.php");
+//if (validateCategory('Class', $errors)) {
+//    echo "Class was valid";
+//}
+//echo "hi";
 
-//    require_once("views/skus.php");
+require_once("views/items.php");
+
 ?>
     <script src="validation/frontendValidations.js"></script>
     <div id="results">Nothing</div>

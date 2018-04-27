@@ -39,24 +39,24 @@ function validateCategory($category, $errors)
     }
 }
 
-function validateSku($sku, $errors)
+function validateItem($item, $errors)
 {
 
     //table name in database
-    $table = "sku";
+    $table = "item";
 
     //setting item to referenced db function
-    $dbItem = new DBSku();
+    $dbItem = new DBItem();
 
     //returning the item as lowercase to match the db column
-    $skus = array_map('strtolower', $dbItem->getSkus(strtolower($table)));
+    $items = array_map('strtolower', $dbItem->getItems(strtolower($table)));
 
     //if the sku is in the array (no error)
-    if (in_array(strtolower($sku), $skus)) {
-        $errors['sku'] = "";
+    if (in_array(strtolower($item), $items)) {
+        $errors['item'] = "";
         return true;
     } else { //else the sku is not there display error
-        $errors['sku'] = "Sku not found.";
+        $errors['item'] = "Item not found.";
         return false;
     }
 }

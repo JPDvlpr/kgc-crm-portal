@@ -1,5 +1,5 @@
 <?php
-//require '/home/jpappoeg/config.php';
+require '/home/jpappoeg/config.php';
 //require '/home/troemerg/config.php';
 //require '/home/kbarterg/config.php';
 //require("/home/mfeltong/config_files/config.php");
