@@ -53,7 +53,7 @@ class DBCategories extends DBObject
         Parent::disconnect();
 
         foreach ($results as $result){
-            $categories[] = $result['name'];
+            $categories[] = $result['cat_name'];
         }
         return $categories;
     }
