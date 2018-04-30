@@ -9,6 +9,7 @@
  */
 
 include_once("../validation/backendValidations.php");
+include_once("transaction.php");
 
 /**
  * Class "TransactionItem" represents a transaction_item on the CRM Portal.
@@ -83,7 +84,7 @@ class TransactionItem
     public function validateTransactionItem($errors, $new = true)
     {
 //        protected $transItemId; // INT(11)
-        if(!validateInteger($this->transItemId)){
+        if (!validateInteger($this->transItemId)) {
             //TODO - should this be a check for an integer or a check for existence in database
             // here (ie whether new or old check for integer - add a check in !$new for existence
             // in database
@@ -94,19 +95,19 @@ class TransactionItem
         // TODO - change to validating by checking if ID exists in database or ???
         // here (ie whether new or old check for integer - add a check in !$new for existence
         // in database
-        if(!validateInteger($this->transId)){
+        if (!validateInteger($this->transId)) {
             //TODO - should this be a check for an integer or a check for existence in database
             $errors['id'] = 'Transaction ID was not valid';
         }
 
         //        protected $itemDesc; // VARCHAR(100) - I think this is where the user entered note would go
-        if(!validateString($this->itemDesc)){
+        if (!validateString($this->itemDesc)) {
             $errors['itemDesc'] = 'Amount is required';
         }
 
         // protected $itemQuantity; // INT(11)
         // Todo add to database
-        if(!validateInteger($this->itemQuantity)){
+        if (!validateInteger($this->itemQuantity)) {
             $errors['itemQuantity'] = "Quantity is required.";
         }
 
@@ -119,7 +120,7 @@ class TransactionItem
         };
 
 //        protected $itemId; // INT(11)
-        if(!validateInteger($this->itemId)){
+        if (!validateInteger($this->itemId)) {
             //TODO - should this be a check for an integer and a check for existence in database
             // here (ie whether new or old check for integer - add a check in !$new for existence
             // in database
@@ -128,34 +129,70 @@ class TransactionItem
 
 //        $this->dateCreated = $dateCreated;
         // validate dateCreated - check if it is a valid date
-        if(!validateDateTime($this->dateCreated)){
+        if (!validateDateTime($this->dateCreated)) {
             $errors['dateCreated'] = 'Invalid Date';
         }
 
 //        $this->createdBy = $createdBy;
         // validate created_by - check if id exists in admin table
-        if(!validateAdmin($this->createdBy)){
+        if (!validateAdmin($this->createdBy)) {
             $errors['createdBy'] = 'That admin does not exist.';
         }
-        
+
 //        $this->dateModified = $dateCreated;
-            // validate dateModified - check if it is a valid date
-            if (!validateDateTime($this->dateModified)) {
-                $errors['dateModified'] = 'Invalid Date';
-            }
+        // validate dateModified - check if it is a valid date
+        if (!validateDateTime($this->dateModified)) {
+            $errors['dateModified'] = 'Invalid Date';
+        }
 
 //        $this->modifiedBy = $createdBy;
-            // validate modified_by - check if id exists in admin table
-            if (!validateAdmin($this->modifiedBy)) {
-                $errors['modifiedBy'] = 'That admin does not exist.';
-            }
+        // validate modified_by - check if id exists in admin table
+        if (!validateAdmin($this->modifiedBy)) {
+            $errors['modifiedBy'] = 'That admin does not exist.';
+        }
 
 
         return $errors;
     }
 
-    public function saveTransactionItem()
+    //get list of items transaction_item table
+    //write to database use method in db_transaction
+    //***need to get item from transaction.php and insert into transactions table
+    public function saveTransactionItem($table = 'transaction', $numReturn = 0)
     {
+        //gives access to the variable in index
+        global $dbh;
+
+        $dbh = Parent::connect();
+
+        //1. Define the query
+        $sql = "INSERT INTO " . $table;
+
+        if ($numReturn != 0) {
+            $sql = $sql . " LIMIT :number";
+        }
+
+        //2. Prepare the statement
+        $statement = $dbh->prepare($sql);
+
+        //3. Bind parameters
+        if ($numReturn != 0) {
+            $statement->bindParam(':number', $numReturn, PDO::PARAM_INT);
+        }
+
+        //4.Execute statement
+        $statement->execute();
+
+        //5. Return the results
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        Parent::disconnect();
+
+        if (empty($result)) {
+            return -1;
+        }
+
+        return $result;
         //Todo write to database
         $this->new = false;
     }
