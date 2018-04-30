@@ -139,9 +139,21 @@ function validateContact($contactID){
     return true;
 }
 
+function validateTime($time){
+    $regex = preg_match("/^(?:1[012]|0[0-9]):[0-5][0-9]$/", $time);
+    if ($regex == true){
+        echo "correctnessss";
+    }else{
+        echo "incorrectnessss";
+    }
+return $time;
+}
+
+validateTime("13:30");
+
 function validateDateTime($dateTime){
     $date = date_parse($dateTime);
-    if(!checkdate($date['month'],$date['day'],$date['year'])){
+    if(!checkdate($date['month'],$date['day'],$date['year'])) {
         return false;
     };
     return true;
