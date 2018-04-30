@@ -130,37 +130,40 @@ function validateInteger($integer)
 }
 
 //validate admin by pulling from admin file
-function validateAdmin($adminID){
+function validateAdmin($adminID)
+{
     return true;
 }
 
 //validate contact by pulling from admin file
-function validateContact($contactID){
+function validateContact($contactID)
+{
     return true;
 }
 
-function validateTime($time){
+function validateTime($time)
+{
     $regex = preg_match("/^(?:1[012]|0[0-9]):[0-5][0-9]$/", $time);
-    if ($regex == true){
-        echo "correctnessss";
-    }else{
-        echo "incorrectnessss";
-    }
-return $time;
+//    if ($regex == true) {
+//        echo "correctnessss";
+//    } else {
+//        echo "incorrectnessss";
+//    }
+    return $regex;
 }
 
-validateTime("13:30");
-
-function validateDateTime($dateTime){
-    $date = date_parse($dateTime);
-    if(!checkdate($date['month'],$date['day'],$date['year'])) {
+function validateDateTime($date, $time)
+{
+    if (!checkdate($date['month'], $date['day'], $date['year']) && !validateTime($time)) {
         return false;
-    };
-    return true;
+    } else {
+        return true;
+    }
 }
 
 // used for validating this like the description of
 // an item donation
-function validateString($string){
+function validateString($string)
+{
 
 }
