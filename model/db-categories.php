@@ -57,5 +57,35 @@ class DBCategories extends DBObject
         }
         return $categories;
     }
+
+    function getCatId($category, $table = 'item_category')
+    {
+        //gives access to the variable in index
+        global $dbh;
+        $dbh = Parent::connect();
+
+        //1. Define the query
+        $sql = "SELECT cat_id FROM " . $table . "WHERE cat_name = :category";
+
+        //2. Prepare the statement
+        $statement = $dbh->prepare($sql);
+
+        //3. Bind parameters
+        $statement->bindParam(':category', $category, PDO::PARAM_STR);
+
+
+        //4.Execute statement
+        $statement->execute();
+
+        //5. Return the results
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        Parent::disconnect();
+
+        foreach ($results as $result){
+            $catId = $result['cat_id'];
+        }
+        return $catId;
+    }
 }
 ?>
