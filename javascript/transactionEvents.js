@@ -66,34 +66,19 @@ defualtDate();
 //add drop down to categories(reasons for deposit)
 $(document).on('click', 'label.category', function (){
     var category = $(this).attr('id');
-    alert(category);
+    var me = $(this);
     $.ajax({
         type: "POST",
         url: "views/items_temp.php",
         dataType:"json",
         data: { category: category },
         success: function (data) {
-            alert(data);
             $('.subCategory').remove();
             $('#add').remove();
-            if(category == 'class' || category == 'event'){
-                $('#' + category).after(
-                    "<div class='subCategory'>"+
-                        "<select id='quantity' name='quantity' class='form-control'>" +
-                            optionsString +
-                        "</select>"+
-                        "<select id='subCategory' name='subCategory' class='form-control'></select>"+
-                    "</div>");
-                for(var i = 0; i < data.length; i++) {
-                    $('#subCategory').append(
-                        "<option value='" + data[i]['item_id'] + "'> " +
-                            data[i]['item_name'] + " - $" + data[i]['item_price'] +
-                        "  </option>"
-                    );
-                }
-            }
-            else if(category == 'donation'){
-                $('#'+category).after(
+            alert($(this));
+
+            if(category == 'donation'){
+                me.after(
                     "<div class='subCategory'>"+
                         "<select id='donation' name='subCategory' class='form-control'>"+
                             "<option id='item'"+
@@ -112,7 +97,23 @@ $(document).on('click', 'label.category', function (){
                             "<input id='cashDonation' type='text' class='form-control'>"+
                         "</div>"+
                     "</div>");
-            };
+            }
+            else {
+                me.after(
+                    "<div class='subCategory'>" +
+                        "<select id='quantity' name='quantity' class='form-control'>" +
+                            optionsString +
+                        "</select>" +
+                        "<select id='subCategory' name='subCategory' class='form-control'></select>" +
+                    "</div>");
+                for (var i = 0; i < data.length; i++) {
+                    $('#subCategory').append(
+                        "<option value='" + data[i]['item_id'] + "'> " +
+                        data[i]['item_name'] + " - $" + data[i]['item_price'] +
+                        "  </option>"
+                    );
+                }
+            }
         },
         error: function(xhr, textStatus, thrownError, data) {
             alert("Error: " + thrownError);
@@ -232,7 +233,7 @@ $(document).on('input', '#paid, #discount', function () {
         //     $('#discount').val(difference);
     }
     else{
-        $(this).after(
+        $(this).parent().after(
             "<ul id='priceError' class='error'>" +
                 "<li>Input must be a number with no more then 2 decimals</li>" +
             "</ul>"
@@ -249,11 +250,45 @@ $(document).on('click', '.delete', function () {
 });
 
 
+// Change text boxes based on if cash or item is selected within donation
+$(document).on('change', '#donation', function () {
+    $('#add').remove();
+
+    if($(this).find('option:selected').text() == "Item"){
+        $('div.subCategory div.input-group').addClass("hidden");
+
+        $('div.subCategory select#quantity').removeClass("hidden");
+        $('input#itemDonation').removeClass("hidden");
+    }
+    else{
+        $('div.subCategory select#quantity').addClass("hidden");
+        $('input#itemDonation').addClass("hidden");
+
+        $('div.subCategory div.input-group').removeClass('hidden');
+    }
+});
+
+
+//validate check number
+$(document).on('input', '#checkNum', function () {
+    $('#checkError').remove();
+
+    if(!$(this).val().match(/^\d+$/) && $(this).val().length > 0){
+        $(this).after(
+            "<ul id='checkError' class='error'>" +
+                "<li>Input must be a number with no special characters</li>" +
+            "</ul>"
+        );
+    }
+});
+
+
 //validate input before submitting to server
 $(document).on('click', '#submit', function (e) {
     e.preventDefault();
 
     //call validation functions
+
 
     if(valid){
         $.ajax({
@@ -262,10 +297,17 @@ $(document).on('click', '#submit', function (e) {
             dataType:"json",
             data: { category: category },
             success: function (data) {
-                //refresh page OR clear all selected fields
+                //check if any error messages were returned
 
 
-                //display success message
+                //if(valid)
+                    //refresh page OR clear all selected fields
+
+
+                    //display success message
+
+                //else
+                    //display errors
             },
             error: function(xhr, textStatus, thrownError, data) {
                 alert("Error: " + thrownError);
@@ -273,22 +315,3 @@ $(document).on('click', '#submit', function (e) {
         });
     }
 });
-
-
-//Change text boxes based on if cash or item is selected within donation
-// $(document).on('change', '#donation', function () {
-//     $('#add').remove();
-//
-//     if($(this).find('option:selected').text() == "Item"){
-//         $('div.subCategory div.input-group').addClass("hidden");
-//
-//         $('div.subCategory select#quantity').removeClass("hidden");
-//         $('input#itemDonation').removeClass("hidden");
-//     }
-//     else{
-//         $('div.subCategory select#quantity').addClass("hidden");
-//         $('input#itemDonation').addClass("hidden");
-//
-//         $('div.subCategory div.input-group').removeClass('hidden');
-//     }
-// });

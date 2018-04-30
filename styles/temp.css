@@ -86,11 +86,10 @@ div.ui-dialog-buttonset
     float: right;
 }
 
-ul.error li
+ul.error
 {
     margin-left: 5%;
     color: red;
-    display: block;
 }
 
 /*Removes arrow on dropdown list*/
