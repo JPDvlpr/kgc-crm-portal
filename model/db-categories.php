@@ -58,7 +58,7 @@ class DBCategories extends DBObject
         return $categories;
     }
 
-    function getCatId($category, $table = 'item_category')
+    function getId($category, $table = 'item_category')
     {
         //gives access to the variable in index
         global $dbh;

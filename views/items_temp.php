@@ -17,11 +17,13 @@ $getItems = function ($table, $category)
     $dbItem = new DBItem();
     $results = $dbItem->getItem(strtolower($table));
 
+    $dbCategory = new DBCategories();
+    $catId = $dbCategory->getId($category);
+
     $items = array();
 
-
     foreach ($results as $result) {
-        if (strtolower($result['category']) === strtolower($category)) {
+        if (($result['cat_id']) === $catId) {
             array_push($items, $result);
         }
     }
