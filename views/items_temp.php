@@ -28,6 +28,6 @@ $getItems = function ($table, $category)
     echo json_encode($items);
 
 };
-$getItems("sku", $_POST['category']);
+$getItems("item", $_POST['category']);
 
 ?>
