@@ -68,10 +68,11 @@ $(document).on('click', 'label.category', function (){
     var category = $(this).attr('id');
     $.ajax({
         type: "POST",
-        url: "http://troemer.greenriverdev.com/355/kgc-crm-portal-team/views/skus_temp.php",
+        url: "views/items_temp.php",
         dataType:"json",
         data: { category: category },
         success: function (data) {
+            alert(data);
             $('.subCategory').remove();
             $('#add').remove();
             if(category == 'class' || category == 'event'){
@@ -116,26 +117,6 @@ $(document).on('click', 'label.category', function (){
             alert("Error: " + thrownError);
         }
     });
-});
-
-
-//when amount/description is typed in for item or cash donation it will
-//automatically click radio button(if it isn't already).
-$(document).on('change', '#donation', function () {
-    $('#add').remove();
-
-    if($(this).find('option:selected').text() == "Item"){
-        $('div.subCategory div.input-group').addClass("hidden");
-
-        $('div.subCategory select#quantity').removeClass("hidden");
-        $('input#itemDonation').removeClass("hidden");
-    }
-    else{
-        $('div.subCategory select#quantity').addClass("hidden");
-        $('input#itemDonation').addClass("hidden");
-
-        $('div.subCategory div.input-group').removeClass('hidden');
-    }
 });
 
 
@@ -231,12 +212,30 @@ $(document).on('click', '#add', function (e) {
 
 //auto generate discount/amount paid based on the others input
 $(document).on('input', '#paid, #discount', function () {
-    var value = $(this).val();
-    var other = parseInt($('#total').html().slice(1)) - parseInt(value);
+    var value = $(this).val(), other;
     if($(this).attr('id') == 'discount')
-        $('#paid').val(other);
+        other = $('#paid');
     else
-        $('#discount').val(other);
+        other = $('#discount');
+
+
+    if(isPrice(value)) {
+        if (isPrice(other.val()) || other.length <= 0) {
+            var value = $(this).val();
+            var difference = parseInt($('#total').html().slice(1)) - parseInt(value);
+            if ($(this).attr('id') == 'discount'){}
+                // .val(difference);
+            else
+                $('#discount').val(difference);
+        }
+        else {
+
+        }
+    }
+    else{
+
+    }
+
 });
 
 
@@ -251,7 +250,42 @@ $(document).on('click', '.delete', function () {
 $(document).on('click', '#submit', function (e) {
     e.preventDefault();
 
-    if(!valid){
+    //call validation functions
 
+    if(valid){
+        $.ajax({
+            type: "POST",
+            url: "../index.php",
+            dataType:"json",
+            data: { category: category },
+            success: function (data) {
+                //refresh page OR clear all selected fields
+
+
+                //display success message
+            },
+            error: function(xhr, textStatus, thrownError, data) {
+                alert("Error: " + thrownError);
+            }
+        });
     }
 });
+
+
+//Change text boxes based on if cash or item is selected within donation
+// $(document).on('change', '#donation', function () {
+//     $('#add').remove();
+//
+//     if($(this).find('option:selected').text() == "Item"){
+//         $('div.subCategory div.input-group').addClass("hidden");
+//
+//         $('div.subCategory select#quantity').removeClass("hidden");
+//         $('input#itemDonation').removeClass("hidden");
+//     }
+//     else{
+//         $('div.subCategory select#quantity').addClass("hidden");
+//         $('input#itemDonation').addClass("hidden");
+//
+//         $('div.subCategory div.input-group').removeClass('hidden');
+//     }
+// });
