@@ -137,7 +137,7 @@ class TransactionItem
         if(!validateAdmin($this->createdBy)){
             $errors['createdBy'] = 'That admin does not exist.';
         }
-        
+
 //        $this->dateModified = $dateCreated;
             // validate dateModified - check if it is a valid date
             if (!validateDateTime($this->dateModified)) {
