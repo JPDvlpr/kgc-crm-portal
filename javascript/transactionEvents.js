@@ -66,6 +66,7 @@ defualtDate();
 //add drop down to categories(reasons for deposit)
 $(document).on('click', 'label.category', function (){
     var category = $(this).attr('id');
+    alert(category);
     $.ajax({
         type: "POST",
         url: "views/items_temp.php",
@@ -85,8 +86,8 @@ $(document).on('click', 'label.category', function (){
                     "</div>");
                 for(var i = 0; i < data.length; i++) {
                     $('#subCategory').append(
-                        "<option value='" + data[i]['sku_id'] + "'> " +
-                            data[i]['name'] + " - $" + data[i]['price'] +
+                        "<option value='" + data[i]['item_id'] + "'> " +
+                            data[i]['item_name'] + " - $" + data[i]['item_price'] +
                         "  </option>"
                     );
                 }
@@ -96,9 +97,9 @@ $(document).on('click', 'label.category', function (){
                     "<div class='subCategory'>"+
                         "<select id='donation' name='subCategory' class='form-control'>"+
                             "<option id='item'"+
-                            "value='"+data[0]['sku_id']+"'>"+data[0]['name']+"</option>"+
+                            "value='"+data[0]['item_id']+"'>"+data[0]['item_name']+"</option>"+
                             "<option id='cash'"+
-                            "value='"+data[1]['sku_id']+"'>"+data[1]['name']+"</option>"+
+                            "value='"+data[1]['item_id']+"'>"+data[1]['item_name']+"</option>"+
                         "</select>"+
                         "<select id='quantity' name='quantity' class='form-control'>"+
                             optionsString+
@@ -167,12 +168,12 @@ $(document).on('click', '#add', function (e) {
         if(valid){
             $('#lineItems').after(
                 "<tr>"+
-                    "<td>"+quantity+"</td>"+
-                    "<td>"+category.substr(0,1).toUpperCase() + category.substr(1)+"</td>"+
-                    "<td>"+desc+"</td>"+
-                    "<td>"+price+"</td>"+
-                    "<td class='price'>"+price+"</td>"+
-                    "<td><i class='delete far fa-times-circle'></i></td>"+
+                "<td>"+quantity+"</td>"+
+                "<td>"+category.substr(0,1).toUpperCase() + category.substr(1)+"</td>"+
+                "<td>"+desc+"</td>"+
+                "<td>"+price+"</td>"+
+                "<td class='price'>"+price+"</td>"+
+                "<td><i class='delete far fa-times-circle'></i></td>"+
                 "</tr>"
             );
         }
@@ -212,6 +213,8 @@ $(document).on('click', '#add', function (e) {
 
 //auto generate discount/amount paid based on the others input
 $(document).on('input', '#paid, #discount', function () {
+    $('#priceError').remove();
+
     var value = $(this).val(), other;
     if($(this).attr('id') == 'discount')
         other = $('#paid');
@@ -219,21 +222,21 @@ $(document).on('input', '#paid, #discount', function () {
         other = $('#discount');
 
 
-    if(isPrice(value)) {
-        if (isPrice(other.val()) || other.length <= 0) {
-            var value = $(this).val();
-            var difference = parseInt($('#total').html().slice(1)) - parseInt(value);
-            if ($(this).attr('id') == 'discount'){}
-                // .val(difference);
-            else
-                $('#discount').val(difference);
-        }
-        else {
-
-        }
+    if(isPrice(value) || $(this).val().length == 0) {
+        var value = $(this).val();
+        var difference = parseInt($('#total').html().slice(1)) - parseInt(value);
+        other.val(difference);
+        // if ($(this).attr('id') == 'discount'){}
+        //     $('#paid').val(difference);
+        // else
+        //     $('#discount').val(difference);
     }
     else{
-
+        $(this).after(
+            "<ul id='priceError' class='error'>" +
+                "<li>Input must be a number with no more then 2 decimals</li>" +
+            "</ul>"
+        );
     }
 
 });

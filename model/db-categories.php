@@ -65,7 +65,7 @@ class DBCategories extends DBObject
         $dbh = Parent::connect();
 
         //1. Define the query
-        $sql = "SELECT cat_id FROM " . $table . "WHERE cat_name = ':category'";
+        $sql = "SELECT cat_id FROM " . $table . " WHERE cat_name = :category";
 
         //2. Prepare the statement
         $statement = $dbh->prepare($sql);

@@ -90,6 +90,7 @@ function standard_footer()
             crossorigin="anonymous"></script>
 
     <!-- custom javascript -->
+    <script src="./validation/frontendValidations.js"></script>
     <script src="./javascript/transactionEvents.js"></script>
 
 
