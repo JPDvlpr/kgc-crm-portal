@@ -58,14 +58,14 @@ class DBCategories extends DBObject
         return $categories;
     }
 
-    function getCatId($category, $table = 'item_category')
+    function getId($category, $table = 'item_category')
     {
         //gives access to the variable in index
         global $dbh;
         $dbh = Parent::connect();
 
         //1. Define the query
-        $sql = "SELECT cat_id FROM " . $table . "WHERE cat_name = :category";
+        $sql = "SELECT cat_id FROM " . $table . "WHERE cat_name = ':category'";
 
         //2. Prepare the statement
         $statement = $dbh->prepare($sql);
