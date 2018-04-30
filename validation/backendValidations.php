@@ -130,12 +130,16 @@ function validateInteger($integer)
 }
 
 //validate admin by pulling from admin file
+//admin id exists in admins table
+//need to create a db-admin.php file
 function validateAdmin($adminID)
 {
     return true;
 }
 
 //validate contact by pulling from admin file
+//contact id exists in contact table
+//needs to create a db-contact.php file
 function validateContact($contactID)
 {
     return true;
@@ -165,5 +169,5 @@ function validateDateTime($date, $time)
 // an item donation
 function validateString($string)
 {
-
+    return ctype_alpha($string);
 }
