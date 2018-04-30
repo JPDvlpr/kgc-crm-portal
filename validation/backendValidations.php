@@ -117,8 +117,6 @@ function validatePrice($price)
     }
 }
 
-validatePrice();
-
 //validate integers
 function validateInteger($integer)
 {
@@ -131,4 +129,26 @@ function validateInteger($integer)
     }
 }
 
-validateInteger();
+//validate admin by pulling from admin file
+function validateAdmin($adminID){
+    return true;
+}
+
+//validate contact by pulling from admin file
+function validateContact($contactID){
+    return true;
+}
+
+function validateDateTime($dateTime){
+    $date = date_parse($dateTime);
+    if(!checkdate($date['month'],$date['day'],$date['year'])){
+        return false;
+    };
+    return true;
+}
+
+// used for validating this like the description of
+// an item donation
+function validateString($string){
+
+}

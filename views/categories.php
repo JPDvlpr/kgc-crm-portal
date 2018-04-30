@@ -15,8 +15,10 @@ $dbItem = new DBCategories();
 $results = $dbItem->getCategories();
 
 foreach ($results as $result){
-    echo "<div class='radio'>";
-        echo "<label class='category' id='".$result."'><input type='radio' name='category' value='".$result."'> ".ucfirst($result)."</label>";
-    echo "</div>";
+    if($result != 'Discount'){
+        echo "<div class='radio'>";
+            echo "<label class='category' id='".$result."'><input type='radio' name='category' value='".$result."'> ".ucfirst($result)."</label>";
+        echo "</div>";
+    }
 }
 ?>
