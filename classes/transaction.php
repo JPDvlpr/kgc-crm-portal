@@ -67,20 +67,32 @@ class Transaction
         $this->amount = $amount;
         $this->transDate = $transDate;
         $this->checkNum = $checkNum;
-//        $this->transStatus = $transStatus;
+        if($this->new) {
+            $this->transStatus = 'Pending';
+        }
 //        $this->sourceType = $sourceType;
 //        $this->sourceId = $sourceId;
         $this->transType = $transType;
         $this->contactId = $contactId;
-        $this->dateCreated = $dateCreated;
+        $this->dateCreated = $transDate;
         $this->createdBy = $createdBy;
-        $this->dateModified = $dateCreated;
+        $this->dateModified = $transDate;
         $this->modifiedBy = $createdBy;
+        $lineNumber=1;
         foreach ($transactionItemsArray as $item) {
-            $this->transactionItems[] = new TransactionItem($item['itemDesc'], $item['amount'], $item['itemId']);
+            $transItemId = "".$this->id.$lineNumber;
+            $transId=$id;
+            $itemDesc = $item[3];
+            $itemQuantity = $item[1];
+            $amount = $item[2];
+            $itemId = $item[0];
+            $dateCreated = $this->dateCreated;
+            $createdBy = $this->createdBy;
+            $this->transactionItems[] = new TransactionItem($transItemId, $transId, $itemDesc, $itemQuantity,
+                $amount, $itemId, $dateCreated, $createdBy);
+            $lineNumber++;
         }
     }
-
 
     // creates and returns an array of transactions from the database
     // may return only a single Transaction, e.g if filter is id
@@ -120,11 +132,34 @@ class Transaction
 //        protected $transactionItems; // an array of transactionItem
 
 //        // this doesn't feel right... having the $new may correct this
-        if ($new) {
 
-        } elseif(!validateInteger($this->id)){
-            //TODO - should this be a check for an integer or a check for existence in database
+        if(!$new) {
+            if(!validateInteger($this->id)){
+                //TODO - should this be a check for an integer or a check for existence in database
                 $errors['id'] = 'Transaction ID was not valid';
+            }
+
+            //        $this->depositById = $depositById;
+            // Todo - will need to check if exists
+            // validate deposit_by - check if id exists in admin table
+            if(!validateAdmin($this->depositBy)){
+                $errors['depositBy'] = 'That admin does not exist.';
+            }
+
+            //        $this->bankDepositDate = $bankDepositDate;
+            // Todo - will need to check if exists
+            // validate bankDepositDate - check if it is a valid date
+            if(!validateDate($this->bankDepositDate)){
+                $errors['bankDepositDate'] = 'Invalid Date';
+            }
+
+            //        $this->sourceType = $sourceType;
+            //TODO - not sure what this is but need to validate
+
+            //        $this->sourceId = $sourceId;
+            //TODO - not sure what this is but need to validate
+
+
         }
 
 //        protected $amount; // DECIMAL(8,2)
@@ -144,41 +179,29 @@ class Transaction
 //        $this->checkNum = $checkNum;
         //Todo if not a check then don't validate
         //validate that checkNum is an integer
-        if(!validateInteger($this->checkNum)){
-            $errors['checkNum'] = 'Check Number must be an integer.';
-        }
-
-//        $this->depositById = $depositById;
-        // Todo - will need to check if exists
-        // validate deposit_by - check if id exists in admin table
-        if(!validateAdmin($this->depositBy)){
-            $errors['depositBy'] = 'That admin does not exist.';
-        }
-
-//        $this->bankDepositDate = $bankDepositDate;
-        // Todo - will need to check if exists
-        // validate bankDepositDate - check if it is a valid date
-        if(!validateDate($this->bankDepositDate)){
-            $errors['bankDepositDate'] = 'Invalid Date';
+        if($this->transType == "H") {
+            if (!validateInteger($this->checkNum) || $this->checkNum <= 0) {
+                $errors['checkNum'] = 'Check Number must be an integer.';
+            }
         }
 
         // P = Pending
         // D = Deposited
         // C = Cancelled
 //        $this->transStatus = $transStatus;
-        //TODO - not sure what this is but need to validate
-
-//        $this->sourceType = $sourceType;
-        //TODO - not sure what this is but need to validate
-
-//        $this->sourceId = $sourceId;
-        //TODO - not sure what this is but need to validate
+        $status = array('P','D','C');
+        if(!in_array($this->transStatus,$status)){
+            $errors['transStatus'] = 'Incorrect transaction status.';
+        };
 
         // A = C(A)sh
         // H = C(H)eck
         // R = C(R)edit
 //        $this->transType = $transType;
-        //TODO - not sure what this is but need to validate
+        $type = array('A','H','R');
+        if(!in_array($this->transType,$type)){
+            $errors['transType'] = 'Incorrect transaction status.';
+        };
 
 //        $this->contactId = $contactId;
         // validate contact_id - check if id exists in contact table
@@ -213,7 +236,7 @@ class Transaction
         // validate each line item
         // TODO make sure that number times itemCost == amount of this line_item
         foreach ($this->transactionItems as $item) {
-            if(!validateSku($item)) $transactionError[] = $item->getId;
+            if(!validateItem($item)) $transactionError[] = $item->getId;
         }
         if(sizeof($transactionError) > 0) {
             $errors['lineItem'] = "Line item doesn't exist";
@@ -225,14 +248,20 @@ class Transaction
 
     public function saveTransaction()
     {
-        //validate transaction
-        //if valid, then save
-        $saveToLocation = new DBTransaction($this->amount, $this->transDate, $this->sourceType,
-            $this->sourceId, $this->transType, $this->contactId, $this->dateCreated, $this->createdBy,
-            $this->transactionItemsArray, $this->checkNum, $this->id);
-        $saveToLocation->addTransaction($table = 'transaction', $dateOfTrans, $payMethod, $discount, $payAmount);
-        foreach ($this->transactionItems as $item) {
-            if(!validateSku($item)) $transactionError[] = $item->getId;
+        $errors = array();
+        validateTransaction($errors);
+        if(sizeof($errors) > 0) {
+            //if valid, then save
+            $saveToLocation = new DBTransaction($this->amount, $this->transDate, $this->sourceType,
+                $this->sourceId, $this->transType, $this->contactId, $this->dateCreated, $this->createdBy,
+                $this->transactionItemsArray, $this->checkNum, $this->id);
+
+            $saveToLocation->addTransaction($table = 'transaction', $this->amount, $this->transDate, $this->sourceType,
+                $this->sourceId, $this->transType, $this->contactId, $this->dateCreated, $this->createdBy,
+                $this->transactionItemsArray, $this->checkNum, $this->id);
+            foreach ($this->transactionItems as $item) {
+                $item->saveTransactionItem();
+            }
         }
     }
 }
