@@ -1,4 +1,10 @@
 <?php
+    //php error reporting
+    ini_set("display_errors", 1);
+    error_reporting(E_ALL);
+
+    //include class object
+    include_once "classes/transaction.php";
 
     //store data from $_POST array to individual vars
     $errors = array();
@@ -13,7 +19,7 @@
     $transDesc = $_POST['transDesc'];
 
     //create object
-    $transaction = new Transaction($createdBy, $contactId, $transDate, $transactionItemsArray, $amount,  $transType,  $checkNum, $ccType);
+    $transaction = new Transaction($createdBy, $contactId, $transDate, $transactionItemsArray, $amount,  $transDesc, $transType,  $checkNum, $ccType);
     $errors = $transaction->validateTransaction($errors);
     if(empty($errors)){
         $transaction->saveTransaction();

@@ -8,7 +8,7 @@
  * @version 0.1
  */
 
-include_once("../validation/backendValidations.php");
+include_once("./validation/backendValidations.php");
 include_once("transaction.php");
 
 /**
