@@ -20,11 +20,11 @@
                 <tbody>
                     <tr>
                         <td colspan="2">Created By: </td>
-                        <td colspan="4"><input type="text" name="depositby" class="form-control"></td>
+                        <td colspan="4"><input id="adminId" type="text" name="depositby" class="form-control"></td>
                     </tr>
                     <tr>
                         <td colspan="2">Contact: </td>
-                        <td colspan="4"><input type="text" name="depositby" class="form-control"></td>
+                        <td colspan="4"><input id="contactId" type="text" name="depositby" class="form-control"></td>
                     </tr>
                     <tr>
                         <td colspan="2">Date: </td>
@@ -48,12 +48,12 @@
                         <th>Delete</th>
                     </thead>
                     <tr>
-                        <td colspan="4">Total: </td>
-                        <td id="total" colspan="2">$0.00</td>
+                        <td colspan="2">Total: </td>
+                        <td id="total" colspan="4">$0.00</td>
                     </tr>
                     <tr>
-                        <td colspan="4">Discount: </td>
-                        <td colspan="2">
+                        <td colspan="2">Discount: </td>
+                        <td colspan="4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
@@ -63,8 +63,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4">Amount Paid: </td>
-                        <td colspan="2">
+                        <td colspan="2">Amount Paid: </td>
+                        <td colspan="4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">$</span>
@@ -77,16 +77,16 @@
                         <td colspan="2">Deposit Type: </td>
                         <td colspan="4">
                             <div class="radio">
-                                <label><input class="payMethod" type="radio" name="payMethod" value="cash"> Cash</label>
+                                <label><input class="payMethod" type="radio" name="payMethod" value="A"> Cash</label>
                             </div>
 
                             <div class="radio">
-                                <label><input class="payMethod" type="radio" name="payMethod" value="check"> Check</label>
+                                <label><input class="payMethod" type="radio" name="payMethod" value="H"> Check</label>
                             </div>
                             <input id="checkNum" class="hidden form-control" type="text" name="checkNum" placeholder="Check Number">
 
                             <div class="radio">
-                                <label><input class="payMethod" type="radio" name="payMethod" value="credit"> Credit Card</label>
+                                <label><input class="payMethod" type="radio" name="payMethod" value="R"> Credit Card</label>
                                 <label id="paypal" class="hidden"><input type="radio" name="credit" value="paypal"> Paypal</label>
                                 <label id="square" class="hidden"><input type="radio" name="credit" value="square"> Square</label>
                             </div>
@@ -104,7 +104,7 @@
                 </tbody>
             </table>
 
-            <button type="submit" class="btn" name="submit">Submit Transaction</button>
+            <button id="submit" type="submit" class="btn" name="submit">Submit Transaction</button>
         </form>
 
         <div id='dialog' title='Delete Confirmation'>
