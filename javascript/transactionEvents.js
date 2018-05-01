@@ -153,7 +153,8 @@ $(document).on('click', '#add', function (e) {
     var selectedId = $( "select#subCategory option:selected" ).val();
     var quantity = 1, price = 'N/A';
 
-    if(category == 'donation'){
+    if(category == 'Donation'){
+        selectedId = $( "select#donation option:selected" ).val();
         if($("select#donation option:selected").text() == 'Item'){
             quantity = $('select#quantity').val();
             desc = $('#itemDonation').val();
@@ -285,12 +286,13 @@ $(document).on('click', '#submit', function (e) {
 
 
     //store data in variables
-    var adminId, contactId, transDate, transactionItems, transType,
-        checkNum, ccType, transDesc, size = 1;
+    var adminId, contactId, transDate, transactionItems, amountPaid,
+        transType, checkNum, ccType, transDesc, size = 1;
 
     adminId = $('#adminId').val();
     contactId = $('#contactId').val();
     transDate = $('#date').val();
+    amountPaid = $('#paid').val();
     transType = $('input[name="payMethod"]:checked').val();
     checkNum = $('#checkNum').val();
     ccType = $('input[name="credit"]:checked').val();
@@ -305,7 +307,7 @@ $(document).on('click', '#submit', function (e) {
     //initialize 2D array
     transactionItems = new Array(size);
     for (var i = 0; i < size; i++) {
-        transactionItems[i] = new Array(2);
+        transactionItems[i] = new Array(4);
     }
 
     //loop over and retrieve transaction item values
@@ -314,8 +316,12 @@ $(document).on('click', '#submit', function (e) {
         $(this).children('td').each(function () {
             if($(this).attr("class") == 'quantity')
                 transactionItems[size][0] = $(this).html();
-            else if($(this).attr("class") == 'selectedId')
+            else if($(this).attr("class") == 'selectedId') {
                 transactionItems[size][1] = $(this).attr("id");
+                transactionItems[size][3] = $(this).html();
+            }
+            else if($(this).attr("class") == 'price')
+                transactionItems[size][2] = $(this).html().slice(1);
         });
         size++;
     });
@@ -337,29 +343,25 @@ $(document).on('click', '#submit', function (e) {
                     contactId: contactId,
                     transDate: transDate,
                     transactionItems: transactionItems,
+                    amountPaid: amountPaid,
                     transType: transType,
                     checkNum: checkNum,
                     ccType: ccType,
                     transDesc: transDesc},
             success: function (data) {
-                $.each( data, function( i, element ){
-                    console.log( element ); // you can see this in the console.
-                    // your code here
-                });
+                alert(data);
 
-
-
-                //check if any error messages were returned
-
-
-                //if(valid)
+                if(data === 1){
                     //refresh page OR clear all selected fields
 
 
                     //display success message
 
-                //else
+                }
+                else{
                     //display errors
+
+                }
             },
             error: function(xhr, textStatus, thrownError, data) {
                 alert("Error: " + thrownError);
