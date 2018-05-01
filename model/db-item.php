@@ -25,6 +25,8 @@ class DBItem extends DBObject
      * @param category -
      * @param item_id -
      * @return int
+     *
+     * This should be changed to getItems since it gets all. getItem would get only one item.
      */
     function getItem($table = 'item', $numReturn = 0, $category = 'category')
     {

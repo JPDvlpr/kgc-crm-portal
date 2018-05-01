@@ -150,8 +150,7 @@ class TransactionItem
         if (!validateAdmin($this->modifiedBy)) {
             $errors['modifiedBy'] = 'That admin does not exist.';
         }
-
-
+        
         return $errors;
     }
 
@@ -160,40 +159,59 @@ class TransactionItem
     //***need to get item from transaction.php and insert into transactions table
     public function saveTransactionItem($table = 'transaction', $numReturn = 0)
     {
-        //gives access to the variable in index
-        global $dbh;
+        $errors = array();
+        $this->validateTransactionItem($errors);
+        if (sizeof($errors) <= 0) {
+            //if valid, then save
+            $saveToLocation = new DBTransaction();
 
-        $dbh = Parent::connect();
-
-        //1. Define the query
-        $sql = "INSERT INTO " . $table;
-
-        if ($numReturn != 0) {
-            $sql = $sql . " LIMIT :number";
+            $saveToLocation->addLineItem($this->transItemId, $this->transId,
+                $this->itemDesc, $this->amount, $this->itemId,
+                $this->dateCreated, $this->createdBy, $this->dateModified, $this->modifiedBy,$table = 'transaction_item');
         }
+    }
+//        //gives access to the variable in index
+//        global $dbh;
+//
+//        $dbh = Parent::connect();
+//
+//        //1. Define the query
+//        $sql = "INSERT INTO " . $table;
+//
+//        if ($numReturn != 0) {
+//            $sql = $sql . " LIMIT :number";
+//        }
+//
+//        //2. Prepare the statement
+//        $statement = $dbh->prepare($sql);
+//
+//        //3. Bind parameters
+//        if ($numReturn != 0) {
+//            $statement->bindParam(':number', $numReturn, PDO::PARAM_INT);
+//        }
+//
+//        //4.Execute statement
+//        $statement->execute();
+//
+//        //5. Return the results
+//        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+//
+//        Parent::disconnect();
+//
+//        if (empty($result)) {
+//            return -1;
+//        }
+//
+//        return $result;
+//        //Todo write to database
+//        $this->new = false;
+//    }
 
-        //2. Prepare the statement
-        $statement = $dbh->prepare($sql);
+    public function getItemId(){
+        return $this->itemId;
+    }
 
-        //3. Bind parameters
-        if ($numReturn != 0) {
-            $statement->bindParam(':number', $numReturn, PDO::PARAM_INT);
-        }
-
-        //4.Execute statement
-        $statement->execute();
-
-        //5. Return the results
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-        Parent::disconnect();
-
-        if (empty($result)) {
-            return -1;
-        }
-
-        return $result;
-        //Todo write to database
-        $this->new = false;
+    public function getTransactionItemId(){
+        return $this->transItemId;
     }
 }
