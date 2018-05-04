@@ -8,7 +8,7 @@
  * @version 0.1
  */
 
-include_once("../validation/backendValidations.php");
+include_once("./validation/backendValidations.php");
 include_once("transactionItem.php");
 
 /**
@@ -84,7 +84,7 @@ class Transaction
         $lineNumber = 1;
         foreach ($transactionItemsArray as $item) {
             $transItemId = "" . $this->id . $lineNumber;
-            $transId = $id;
+            $transId = $this->id;
             $itemDesc = $item[3];
             $itemQuantity = $item[1];
             $amount = $item[2];

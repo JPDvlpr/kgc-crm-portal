@@ -298,6 +298,16 @@ $(document).on('click', '#submit', function (e) {
     ccType = $('input[name="credit"]:checked').val();
     transDesc = $('#notes').val();
 
+    //get info for check #
+    if(transType == 'H')
+        checkNum = $('#checkNum').val();
+    else
+        checkNum = 'N/A';
+    //get info for credit
+    if(transType == 'R')
+        ccType = $('input[name="credit"]:checked').val();
+    else
+        ccType = 'N/A';
 
     //get number of transaction items
     $('.item').each(function () {
@@ -315,19 +325,25 @@ $(document).on('click', '#submit', function (e) {
     $('.item').each(function () {
         $(this).children('td').each(function () {
             if($(this).attr("class") == 'quantity')
-                transactionItems[size][0] = $(this).html();
+                transactionItems[size][1] = $(this).html();
             else if($(this).attr("class") == 'selectedId') {
-                transactionItems[size][1] = $(this).attr("id");
+                transactionItems[size][0] = $(this).attr("id");
                 transactionItems[size][3] = $(this).html();
             }
-            else if($(this).attr("class") == 'price')
-                transactionItems[size][2] = $(this).html().slice(1);
+            else if($(this).attr("class") == 'price'){
+                if($(this).html() == 'N/A')
+                    transactionItems[size][2] = 0;
+                else
+                    transactionItems[size][2] = $(this).html().slice(1);
+            }
         });
         size++;
     });
     //add discount to end of array
-    transactionItems[transactionItems.length-1][0] = $('#discount').val();
+    transactionItems[transactionItems.length-1][0] = 1;
     transactionItems[transactionItems.length-1][1] = 'discount';
+    transactionItems[transactionItems.length-1][2] = $('#discount').val();
+    transactionItems[transactionItems.length-1][3] = 'discount';
 
 
     //call validation functions

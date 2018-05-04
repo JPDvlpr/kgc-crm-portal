@@ -85,7 +85,9 @@ function validatePrice($price)
 //validate integers
 function validateInteger($integer)
 {
-    if (is_int($integer)) {
+    $test = "/^[0-9]+$/";
+
+    if (preg_match($test, $integer)) {
 //        echo "integer is valid";
         return true;
     } else {
