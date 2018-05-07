@@ -158,3 +158,29 @@ function validateString($string)
 {
     return ctype_alpha($string);
 }
+
+// Need to improve for allowed characters in names
+function validateName($name){
+    return validateString($name);
+}
+//        Need to change to validate address
+function validateAddress($address){
+    return validateString($address);
+}
+
+$states = array('AK','AR', 'AZ', 'ID', "OR", "WA");
+$provinces = array('BC');
+//        protected $state; // VARCHAR(2)
+if(!validateState($state)) {
+    if (in_array($state, $states)) return true;
+    return false;
+}
+
+function validateZip($zip){
+    return true;
+}
+
+//        protected $phone; // VARCHAR(15)
+function validatePhone($phone){
+    return true;
+}

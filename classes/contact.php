@@ -127,15 +127,46 @@ class Contact
         }
 
 //        protected $contactName; // VARCHAR(200)
+        if(!validateName($this->contactName)){
+            $errors['contactName'] = 'Invalid contact name';
+        }
 //        protected $address; // VARCHAR(200)
+        if(!validateAddress($this->address)){
+            $errors['address'] = 'Invalid address';
+        }
 //        protected $city; // VARCHAR(45)
+        if(!validateName($this->city)){
+            $errors['city'] = 'Invalid city';
+        }
 //        protected $state; // VARCHAR(2)
+        if(!validateState($this->state)){
+            $errors['state'] = 'Invalid state';
+        }
 //        protected $zip; // VARCHAR(10)
+        if(!validateZip($this->zip)){
+            $errors['zip'] = 'Invalid zip';
+        }
 //        protected $phone; // VARCHAR(15)
+        if(!validatePhone($this->phone)){
+            $errors['phone'] = 'Invalid phone number';
+        }
 //        protected $cell; // VARCHAR(15)
+        if(!validatePhone($this->cell)){
+            $errors['cell'] = 'Invalid cell phone number';
+        }
 //        protected $emailAddress; // VARCHAR(45)
+        if(!validateEmail($this->emailAddress)){
+            $errors['emailAddress'] = 'Invalid email address';
+        }
+
 //        protected $altContactName; // VARCHAR(45)
+        if(!validateName($this->altContactName)){
+            $errors['altContactName'] = 'Invalid alternate Contact Name';
+        }
 //        protected $altContactPhone; // VARCHAR(45)
+        if(!validatePhone($this->altContactPhone)){
+            $errors['altContactPhone'] = 'Invalid alternate contact phone number';
+        }
 
 
 
