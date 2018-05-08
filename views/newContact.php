@@ -33,8 +33,10 @@
                         <td colspan="4"><input id="contactAddress" type="text" name="address" class="form-control"></td>
                     </tr>
                     <tr>
-                        <td colspan="2">City:<input id="contactCity" type="text" name="city" class="form-control"></td>
-                        <td colspan="2">State:
+                        <td colspan="1">City:</td>
+                        <td colspan="1"><input id="contactCity" type="text" name="city" class="form-control"></td>
+                        <td colspan="1">State:</td>
+                        <td colspan="1">
                             <select name="state">
                                 <?php
                                     foreach ($states as $state){
@@ -43,7 +45,8 @@
                                 ?>
                             </select>
                         </td>
-                        <td colspan="2">Zip:<input id="contactZipCode" type="text" name="city" class="form-control"></td>
+                        <td colspan="1">Zip:</td>
+                        <td colspan="1"><input id="contactZipCode" type="text" name="city" class="form-control"></td>
                     </tr>
                     <tr>
                         <td colspan="2">Phone #:<input id="contactPhone" type="text" name="phone" class="form-control"></td>
@@ -60,6 +63,7 @@
                     </tr>
                 </tbody>
             </table>
+            <button id="submit" type="submit" class="btn" name="contactSubmit">Submit Contact</button>
         </form>
     </div>
 </body>
