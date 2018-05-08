@@ -4,13 +4,6 @@
     error_reporting(E_ALL);
 ?>
 
-<head>
-    <title>New Transaction</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <link rel="stylesheet" href="./styles/temp.css">
-</head>
-<body>
     <div class="container">
         <form id="transactionForm" name="transactionForm" action="#" method="post">
             <table id="deposit" class="table table-bordered">

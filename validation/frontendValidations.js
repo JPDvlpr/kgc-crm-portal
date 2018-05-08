@@ -55,6 +55,23 @@
 //     return false
 // }
 //
+function isInt(integer) {
+    if(Math.floor(integer) == integer && $.isNumeric(integer))
+        return true;
+    else
+        return false;
+}
+
+function validYear(year) {
+    var currentYear = parseInt((new Date).getFullYear());
+    year = parseInt(year);
+
+    if(year < 2006 || year > (currentYear+1))
+        return false;
+    else
+        return true;
+}
+
 function isPrice(price){
 
         if(price.match(/^\d+\.?\d{0,2}$/) ){
