@@ -13,7 +13,11 @@
                 <tbody>
                     <tr>
                         <td colspan="2">Created By: </td>
-                        <td colspan="4"><input id="adminId" type="text" name="depositby" class="form-control"></td>
+                        <td colspan="4">
+                            <input id="chosenContact" type=text list=browsers class="form-control">
+                            <datalist id="contacts">
+                            </datalist>
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="2">Contact: </td>

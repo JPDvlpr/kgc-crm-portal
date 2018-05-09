@@ -63,6 +63,10 @@ function defualtDate() {
 }
 defualtDate();
 
+//Get initial contacts and add
+//them to datalist
+
+
 
 //add drop down to categories(reasons for deposit)
 $(document).on('click', 'label.category', function (){

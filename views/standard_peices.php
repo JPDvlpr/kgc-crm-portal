@@ -94,7 +94,7 @@ function standard_footer($pagejs)
 
     <!-- custom javascript -->
     <script src="./validation/frontendValidations.js"></script>
-    <script src='<php? echo "./javascript/"."pagejs"?>'></script>
+    <script src='<?php echo $pagejs ?>'></script>
 
 
     </body>

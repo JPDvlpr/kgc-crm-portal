@@ -6,5 +6,5 @@
 
     require_once("views/newTransaction.php");
 
-    standard_footer();
+    standard_footer("./javascript/transactionEvents.js");
 ?>
