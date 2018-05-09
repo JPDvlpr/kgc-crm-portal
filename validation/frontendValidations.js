@@ -100,3 +100,35 @@ function isAlphString(anyString){
 function sayHelloscript(){
     alert("Hello");
 }
+
+function validName(name) {
+    if(isEmptyString(name)) return false;
+    if(name.match(/^\D(\w|\s|(?:[' -])){0,200}$/)){
+        return true;
+    }
+    return false;
+}
+
+function validAddress(address) {
+    if(isEmptyString(address)) return false;
+    if(address.match(/^(\w|\d|\s){0,200}$/)){
+        return true;
+    }
+    return false;
+}
+
+function validCity(city) {
+    if(isEmptyString(city)) return false;
+    if(city.match(/^\D(\w|\s){0,45}$/)){
+        return true;
+    }
+    return false;
+}
+
+function validZip(zip) {
+    if(isEmptyString(zip))return false;
+    if(zip.match(/^\d{5,9}$/)){
+        return true;
+    }
+    return false;
+}
