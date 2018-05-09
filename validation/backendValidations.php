@@ -1,5 +1,4 @@
 <?php
-
 /*
     *  backendValidations.php
     *  KGC CRM Portal
@@ -13,6 +12,27 @@ include_once("./model/db-object.php");
 include_once("./model/db-categories.php");
 include_once("./model/db-item.php");
 include_once("./model/db-transaction.php");
+echo 'hey';
+
+function validateDate($date)
+{
+    $date_regex = '/(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\d\d/';
+
+    //$date = '03/22/2010';
+    if(preg_match($date_regex, $date)) {
+        echo 'this date is formatted correctly';
+    } else {
+        echo 'this date is not formatted correctly';
+    }
+    //Maybe I created my date wrong, but this is failing so returning true for now
+    return true;
+//    if (!checkdate($date['month'], $date['day'], $date['year'])) {
+//        return false;
+//    } else {
+//        return true;
+//    }
+}
+validateDate('04/11/2015');
 
 /**
  * Takes in the category the user chose, and the error messages array. It
@@ -115,24 +135,12 @@ function validateContact($contactID)
 function validateTime($time)
 {
     $regex = preg_match("/^(?:1[012]|0[0-9]):[0-5][0-9]$/", $time);
-//    if ($regex == true) {
-//        echo "correctnessss";
-//    } else {
-//        echo "incorrectnessss";
-//    }
     return $regex;
 }
 
-function validateDate($date)
-{
-    //Maybe I created my date wrong, but this is failing so returning true for now
-    return true;
-//    if (!checkdate($date['month'], $date['day'], $date['year'])) {
-//        return false;
-//    } else {
-//        return true;
-//    }
-}
+
+
+//validateDate();
 
 // need to pass in one variable that is of type DateTime
 // haven't been able to get to work  - thought there was something to
@@ -160,27 +168,34 @@ function validateString($string)
 }
 
 // Need to improve for allowed characters in names
-function validateName($name){
+function validateName($name)
+{
     return validateString($name);
 }
+
 //        Need to change to validate address
-function validateAddress($address){
+function validateAddress($address)
+{
     return validateString($address);
 }
 
-$states = array('AK','AR', 'AZ', 'ID', "OR", "WA");
+$states = array('AK', 'AR', 'AZ', 'ID', "OR", "WA");
 $provinces = array('BC');
 //        protected $state; // VARCHAR(2)
-if(!validateState($state)) {
+
+function validateState($state) {
+    global $states;
     if (in_array($state, $states)) return true;
     return false;
 }
 
-function validateZip($zip){
+function validateZip($zip)
+{
     return true;
 }
 
 //        protected $phone; // VARCHAR(15)
-function validatePhone($phone){
+function validatePhone($phone)
+{
     return true;
 }
