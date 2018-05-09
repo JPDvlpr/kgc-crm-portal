@@ -8,18 +8,17 @@
     *  This file contains the backend validations that use PHP.
     */
 
-include_once("./model/db-object.php");
-include_once("./model/db-categories.php");
-include_once("./model/db-item.php");
-include_once("./model/db-transaction.php");
-echo 'hey';
+include_once("../model/db-object.php");
+include_once("../model/db-categories.php");
+include_once("../model/db-item.php");
+include_once("../model/db-transaction.php");
 
 function validateDate($date)
 {
     $date_regex = '/(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\d\d/';
 
     //$date = '03/22/2010';
-    if(preg_match($date_regex, $date)) {
+    if (preg_match($date_regex, $date)) {
         echo 'this date is formatted correctly';
     } else {
         echo 'this date is not formatted correctly';
@@ -32,7 +31,6 @@ function validateDate($date)
 //        return true;
 //    }
 }
-validateDate('04/11/2015');
 
 /**
  * Takes in the category the user chose, and the error messages array. It
@@ -94,10 +92,8 @@ function validatePrice($price)
 //  and follows with 2 integers (cents)
     $test = "/^[0-9]+(\.[0-9]{2})?$/";
     if (preg_match($test, $price)) {
-//        echo "price is correct";
         return true;
     } else {
-//        echo "enter a decimal";
         return false;
     }
 }
@@ -108,10 +104,10 @@ function validateInteger($integer)
     $test = "/^[0-9]+$/";
 
     if (preg_match($test, $integer)) {
-//        echo "integer is valid";
+        echo "integer is valid";
         return true;
     } else {
-//        echo "integer is not valid";
+        echo "integer is not valid";
         return false;
     }
 }
@@ -137,7 +133,6 @@ function validateTime($time)
     $regex = preg_match("/^(?:1[012]|0[0-9]):[0-5][0-9]$/", $time);
     return $regex;
 }
-
 
 
 //validateDate();
@@ -183,7 +178,8 @@ $states = array('AK', 'AR', 'AZ', 'ID', "OR", "WA");
 $provinces = array('BC');
 //        protected $state; // VARCHAR(2)
 
-function validateState($state) {
+function validateState($state)
+{
     global $states;
     if (in_array($state, $states)) return true;
     return false;
@@ -197,5 +193,18 @@ function validateZip($zip)
 //        protected $phone; // VARCHAR(15)
 function validatePhone($phone)
 {
+    return true;
+}
+
+function validateEmail($email)
+{
+//    $regex_email = '^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$';
+//    if (preg_match($regex_email, $email)) {
+//        echo 'accepted email';
+//        return true;
+//    } else {
+//        echo 'unaccepted email';
+//        return false;
+//    }
     return true;
 }
