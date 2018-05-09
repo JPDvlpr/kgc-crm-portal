@@ -108,9 +108,11 @@ class DBContact extends DBObject
 
         //Execute Statement
         $statement->execute();
+
+        Parent::disconnect();
     }
 
-    function getTransactions($table = 'contact')
+    public static function getContacts($table = 'contact')
     {
         global $dbh;
         $dbh = Parent::connect();
@@ -120,5 +122,7 @@ class DBContact extends DBObject
 
         //prepare statement
         $statement = $dbh->prepare($sql);
+
+        Parent::disconnect();
     }
 }

@@ -5,7 +5,11 @@ include_once("classes/transaction.php");
 standard_header("sample", "");
 
 echo "hello 3";
+
 $errors;
+?>
+
+<php?
 //require_once("views/categories.php");
 //if (validateCategory('Class', $errors)) {
 //    echo "Class was valid";

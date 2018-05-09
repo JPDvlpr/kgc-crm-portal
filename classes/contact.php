@@ -1,15 +1,15 @@
 <?php
 /**
- * Contains the Transaction Class
+ * Contains the Contact Class
  *
- * This class handles new and existing transactions
+ * This class handles new and existing contacts
  *
  * @author JustoKTeaM (mfelton@mail.greenriver.edu)
  * @version 0.1
  */
 
 include_once("../validation/backendValidations.php");
-include_once("transactionItem.php");
+include_once("../model/db-contact.php");
 
 /**
  * Class "Contact" represents a contact on the CRM Portal. A contact may be
@@ -82,16 +82,25 @@ class Contact
     // may return only a single Transaction, e.g if filter is id
     public static function getContacts($filters, $filterValues)
     {
-        //get transactions
+        $contacts = DBContact::getContacts();
+        $contactList = array();
 
         //loop through transactions
+        foreach ($contacts as $contact) {
         // construct transaction
+            var $contactTemp = new Contact($contact['created_date'], $contact['createdBy'],
+                $contact['contactName'], $contact['address'], $contact['city'],
+                $contact['state'], $contact['zip'], $contact['phone'], $contact['cell'],
+                $contact['emailAddress'], $contact['altContactName'],
+                                $contact['altContactPhone']);
+            var $errors = array();
+            $contactTemp->validateContact($errors, false);
         // set additional retrieved values
         // retrieve and create array of transaction items based on id
         // set $new to false
         // validate transaction
         // if valid, add to transactions array
-
+        }
         //return array of Transactions
     }
 
