@@ -1,6 +1,7 @@
 var total = 0.00; //total to diplay and add to @ bottom
 var rows = 0; //numbers of line items rows, when 0 header should disappear
 var valid = false; //check to see if form is valid on server before submitting to server
+var currentYear = parseInt((new Date).getFullYear()); //get current year for future display
 var optionsString = "<option selected=\"selected\">0</option>";
 for(var i = 1; i <= 10; i++)
     optionsString += "<option>"+i+"</option>";
@@ -225,8 +226,11 @@ $(document).on('input', '#paid, #discount', function () {
 
     if(isPrice(value) || $(this).val().length == 0) {
         var value = $(this).val();
-        var difference = parseInt($('#total').html().slice(1)) - parseInt(value);
-        other.val(difference);
+        var difference = parseFloat($('#total').html().slice(1)) - parseFloat(value);
+        if(isNaN(difference) && !value.length)
+            other.val('');
+        else if(!isNaN(difference))
+            other.val(difference);
     }
     else{
         $(this).parent().after(
@@ -243,6 +247,39 @@ $(document).on('input', '#paid, #discount', function () {
 $(document).on('click', '.delete', function () {
     $(this).parent().parent().attr('id', 'delete');
     $('#dialog').dialog('open');
+});
+
+
+//Date validation on input
+$(document).on('change', '#date', function () {
+    //remove existing error message
+    $('#dateError').remove();
+
+    //get date from element
+    var date = $(this).val().split("-", 3);
+    valid = true
+
+    //check that day, month, and year are integers
+    for(var i = 0; i < 3; i++){
+        if(!isInt(date[i])){
+            valid = false;
+            break;
+        }
+    }
+
+    //check that year is resonable
+    if(valid && !validYear(date[0]))
+        valid = false;
+
+
+    //if invalid date, display error
+    if(!valid){
+        $(this).after(
+            "<ul id='dateError' class='error'>" +
+                "<li>Date must be valid with a year between 2006 and "+(currentYear+1)+"</li>" +
+            "</ul>"
+        );
+    }
 });
 
 
@@ -283,6 +320,7 @@ $(document).on('input', '#checkNum', function () {
 $(document).on('click', '#submit', function (e) {
     //prevent submittion of form
     e.preventDefault()
+    valid = true;
 
 
     //store data in variables
@@ -346,11 +384,13 @@ $(document).on('click', '#submit', function (e) {
     transactionItems[transactionItems.length-1][3] = 'discount';
 
 
-    //call validation functions
+    //check to see if any error messages are displaying
+    if($('.error').length)
+        valid = false;
 
 
-
-    if(true){
+    //submit to database if passed validation
+    if(valid){
         $.ajax({
             type: "POST",
             url: "process.php",

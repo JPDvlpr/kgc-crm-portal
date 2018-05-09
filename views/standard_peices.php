@@ -20,7 +20,10 @@ function standard_header($title, $stylesheet)
         <meta name="author" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title><?php $title ?></title>
+        <title><?php echo $title ?></title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <link rel="stylesheet" href='<?php echo $stylesheet ?>'>
 
         <!-- bootstrap css -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
