@@ -1,0 +1,23 @@
+function validCity($city)
+{
+    $regexp = "/^\D(\w|\s){3,50}$/i";
+    return preg_match($regexp, $city);
+}
+
+function validEmail($email)
+{
+    $regexp = "/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/i";
+    return preg_match($regexp, $email);
+}
+
+function validZip($zip)
+{
+    $regexp = "/^\d{5,9}$/i";
+    return preg_match($regexp, $zip);
+}
+
+function validPhone($phone)
+{
+    $regexp = "/^\d{10}$/i";
+    return preg_match($regexp, $phone);
+}
