@@ -2,6 +2,7 @@
 require_once("views/standard_peices.php");
 require_once("validation/backendValidations.php");
 include_once("classes/transaction.php");
+include_once("classes/contact.php");
 standard_header("sample", "");
 
 echo "hello 3";
@@ -72,5 +73,11 @@ require_once("views/items.php");
    $errors = $test->validateTransaction($errors);
 //   print_r($errors);
    $test->saveTransaction();
+   $errors="";
+   $test= new Contact($transDate, 1, "New Person", "123 4th Street", "Renton", "WA", "98023", "(253) 431-6969",
+       "(253) 431-6969", "not@none.com", "Grandmother Person", "(253) 431-6969");
+   if($test->validateContact($errors)){
+       $test->saveContact();
+   }
 standard_footer();
 ?>

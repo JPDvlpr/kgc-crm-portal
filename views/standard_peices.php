@@ -69,7 +69,7 @@ function standard_header($title, $stylesheet)
     <?php
 }
 
-function standard_footer()
+function standard_footer($pagejs)
 {
     ?>
     <!-- jQuery -->
@@ -94,7 +94,7 @@ function standard_footer()
 
     <!-- custom javascript -->
     <script src="./validation/frontendValidations.js"></script>
-    <script src="./javascript/transactionEvents.js"></script>
+    <script src='<php? echo "./javascript/"."pagejs"?>'></script>
 
 
     </body>
