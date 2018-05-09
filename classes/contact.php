@@ -66,7 +66,7 @@ class Contact
         $this->address = $address;
         $this->city = $city;
         $this->state = $state;
-        $this->zip = zip;
+        $this->zip = $zip;
         $this->phone = $phone;
         $this->cell = $cell;
         $this->emailAddress = $emailAddress;
@@ -86,22 +86,24 @@ class Contact
         $contactList = array();
 
         //loop through transactions
-        foreach ($contacts as $contact) {
+        foreach ($contacts as $contact){
+
         // construct transaction
-            var $contactTemp = new Contact($contact['created_date'], $contact['createdBy'],
+            $contactTemp = new Contact($contact['created_date'], $contact['createdBy'],
                 $contact['contactName'], $contact['address'], $contact['city'],
                 $contact['state'], $contact['zip'], $contact['phone'], $contact['cell'],
                 $contact['emailAddress'], $contact['altContactName'],
                                 $contact['altContactPhone']);
-            var $errors = array();
-            $contactTemp->validateContact($errors, false);
-        // set additional retrieved values
-        // retrieve and create array of transaction items based on id
-        // set $new to false
-        // validate transaction
-        // if valid, add to transactions array
+
+            // validate transaction
+            // if valid, add to transactions array
+            $errors = array();
+            if($contactTemp->validateContact($errors, false)){
+               $contactTemp->new = false;
+               $contactList[]=$contactTemp;
+            }
         }
-        //return array of Transactions
+        return $contactList;
     }
 
     // TODO figure out where to do all of this and what needs to be validated.

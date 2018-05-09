@@ -108,5 +108,14 @@ class DBTransaction extends DBObject
 
         //prepare statement
         $statement = $dbh->prepare($sql);
+
+        //execute query
+        $statement->exexute();
+
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        Parent::disconnect();
+
+        return $results;
     }
 }
