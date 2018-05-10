@@ -63,11 +63,11 @@
                         <td colspan="4"><input id="contactEmail" type="email" name="email" class="form-control"></td>
                     </tr>
                     <tr>
-                        <td colspan="2">Alternate Name:</td>
+                        <td colspan="2">Alternate Contact Name:</td>
                         <td colspan="4"><input id="contactAltName" type="text" name="altName" class="form-control"></td>
                     </tr>
                     <tr>
-                        <td colspan="2">Alternate Phone #:</td>
+                        <td colspan="2">Alternate Contact Phone:</td>
                         <td colspan="4"><input id="altPhone" type="text" name="altPhone" class="form-control"></td>
                     </tr>
                 </tbody>
