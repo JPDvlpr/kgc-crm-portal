@@ -5,5 +5,5 @@
 
     require_once("views/newContact.php");
 
-    standard_footer();
+    standard_footer("./javascript/newContact.js");
 ?>

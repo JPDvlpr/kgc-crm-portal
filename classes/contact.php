@@ -80,7 +80,7 @@ class Contact
 
     // creates and returns an array of transactions from the database
     // may return only a single Transaction, e.g if filter is id
-    public static function getContacts($filters, $filterValues)
+    public static function getContacts($filterValues=null)
     {
         $contacts = DBContact::getContacts();
         $contactList = array();

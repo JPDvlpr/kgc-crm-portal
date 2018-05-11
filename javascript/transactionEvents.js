@@ -2,7 +2,9 @@ var total = 0.00; //total to diplay and add to @ bottom
 var rows = 0; //numbers of line items rows, when 0 header should disappear
 var valid = false; //check to see if form is valid on server before submitting to server
 var currentYear = parseInt((new Date).getFullYear()); //get current year for future display
-var optionsString = "<option selected=\"selected\">0</option>";
+var contacts; //variable to
+//create string to generate options for quantity select tags
+var optionsString = "<option selected=\"selected\">Qty</option>";
 for(var i = 1; i <= 10; i++)
     optionsString += "<option>"+i+"</option>";
 
@@ -63,9 +65,18 @@ function defualtDate() {
 }
 defualtDate();
 
-//Get initial contacts and add
-//them to datalist
-
+//Get initial contacts and add them to datalist
+// $.ajax({
+//     type: "POST",
+//     url: "",
+//     dataType: "json",
+//     success: function (data) {
+//
+//     },
+//     error: function (xhr, textStatus, thrownError, data) {
+//         alert("Error: " + thrownError);
+//     }
+// });
 
 
 //add drop down to categories(reasons for deposit)
@@ -187,7 +198,7 @@ $(document).on('click', '#add', function (e) {
     else{
         price = desc[1];
         desc = desc[0];
-        quantity = $('select#quantity').val();
+        quantity = $('select#quantity').val('Qty');
         if(valid){
             $('#lineItems').after(
                 "<tr class='item'>"+
@@ -219,7 +230,7 @@ $(document).on('click', '#add', function (e) {
 
 //auto generate discount/amount paid based on the others input
 $(document).on('input', '#paid, #discount', function () {
-    $('#priceError').remove();
+    $('#'+$(this).attr('id')+'Error').remove();
 
     var value = $(this).val(), other;
     if($(this).attr('id') == 'discount')
@@ -231,14 +242,16 @@ $(document).on('input', '#paid, #discount', function () {
     if(isPrice(value) || $(this).val().length == 0) {
         var value = $(this).val();
         var difference = parseFloat($('#total').html().slice(1)) - parseFloat(value);
-        if(isNaN(difference) && !value.length)
+        if(isNaN(difference) && !value.length){
             other.val('');
+            $('#'+other.attr('id')+'Error').remove();
+        }
         else if(!isNaN(difference))
             other.val(difference);
     }
     else{
         $(this).parent().after(
-            "<ul id='priceError' class='error'>" +
+            "<ul id='"+$(this).attr('id')+"Error' class='error'>" +
                 "<li>Input must be a number with no more then 2 decimals</li>" +
             "</ul>"
         );

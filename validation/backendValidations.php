@@ -57,10 +57,10 @@ function validateCategory($category, $errors)
     }
 }
 
-function validateItemId($item)
+function validateItemId($itemID)
 {
-    //Not working so for now just returns true
-    return true;
+    $regex_id = "/^[0-9]+$/";
+    return (preg_match($regex_id, $itemID));
 //    //table name in database
 //    $table = "item";
 //
@@ -84,29 +84,13 @@ function validateItemId($item)
 //    }
 }
 
-//validates the price input
-function validatePrice($price)
-{
-//  price has integer(s) (dollar amount)
-//  split by a decimal
-//  and follows with 2 integers (cents)
-    $test = "/^[0-9]+(\.[0-9]{2})?$/";
-    return (preg_match($test, $price));
-}
-
-//validate integers
-function validateInteger($integer)
-{
-    $test = "/^[0-9]+$/";
-    return (preg_match($test, $integer));
-}
-
 //validate admin by pulling from admin file
 //admin id exists in admins table
 //need to create a db-admin.php file
 function validateAdmin($adminID)
 {
-    return true;
+    $regex_id = "/^[0-9]+$/";
+    return (preg_match($regex_id, $adminID));
 }
 
 //validate contact by pulling from admin file
@@ -114,15 +98,9 @@ function validateAdmin($adminID)
 //needs to create a db-contact.php file
 function validateContact($contactID)
 {
-    return true;
+    $regex_id = "/^[0-9]+$/";
+    return (preg_match($regex_id, $contactID));
 }
-
-function validateTime($time)
-{
-    $regex = preg_match("/^(?:1[012]|0[0-9]):[0-5][0-9]$/", $time);
-    return $regex;
-}
-
 
 //validateDate();
 
@@ -132,6 +110,9 @@ function validateTime($time)
 // Commenting everything out and having it return True
 function validateDateTime($datetime)
 {
+    $regex_dt = "^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|((([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$";
+    return (preg_match($regex_dt, $datetime));
+
 //    echo '<pre>';
 //    var_dump($datetime);
 //    echo '</pre>';
@@ -151,18 +132,38 @@ function validateString($string)
     return ctype_alpha($string);
 }
 
-// Need to improve for allowed characters in names
+//validates the price input
+function validatePrice($price)
+{
+//  price has integer(s) (dollar amount)
+//  split by a decimal
+//  and follows with 2 integers (cents)
+    $regex_price = "/^[0-9]+(\.[0-9]{2})?$/";
+    return (preg_match($regex_price, $price));
+}
+
+//validate integers
+function validateInteger($integer)
+{
+    $test = "/^[0-9]+$/";
+    return (preg_match($test, $integer));
+}
+
+function validateTime($time)
+{
+    $regex_time = "/^(?:1[012]|0[0-9]):[0-5][0-9]$/";
+    return preg_match($regex_time, $time);
+}
+
 function validateName($name)
 {
     $regex_name = "/^[a-zA-Z]+(([\'\,\.\-][a-zA-Z])?[a-zA-Z]*)*$/";
-    if(preg_match($regex_name, $name))echo 'name good'; else echo 'name bad';
-
-    //return validateString($name);
+    return (preg_match($regex_name, $name));
 }
 
 function validateAddress($address)
 {
-$regex_address = "/^\d+?[A-Za-z]*\s\w*\s?\w+?\s\w{2}\w*\s*\w*$/";
+    $regex_address = "/^\d+?[A-Za-z]*\s\w*\s?\w+?\s\w{2}\w*\s*\w*$/";
     return preg_match($regex_address, $address);
 }
 
