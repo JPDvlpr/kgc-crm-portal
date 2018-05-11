@@ -180,6 +180,9 @@ class Transaction
         }
 
 //        $this->checkNum = $checkNum;
+        // A = Cash
+        // H = Check
+        // R = Credit
         //Todo if not a check then don't validate
         //validate that checkNum is an integer
         if ($this->transType == "H") {
