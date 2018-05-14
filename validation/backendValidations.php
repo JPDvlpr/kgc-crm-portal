@@ -110,7 +110,7 @@ function validateContact($contactID)
 // Commenting everything out and having it return True
 function validateDateTime($datetime)
 {
-    $regex_dt = "^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|((([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$";
+    $regex_dt = "/^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|((([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$/";
     return (preg_match($regex_dt, $datetime));
 
 //    echo '<pre>';
@@ -174,7 +174,7 @@ function validateState($state)
     return (in_array($state, $states) || in_array($state, $provinces));
 }
 
-function validZip($zip)
+function validateZip($zip)
 {
     $regexp = "/^\d{5,9}$/i";
     return preg_match($regexp, $zip);
