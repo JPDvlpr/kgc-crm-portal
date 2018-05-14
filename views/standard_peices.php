@@ -56,12 +56,14 @@ function standard_header($title, $stylesheet)
             </a>
         </nav>
         <nav class="navbar navbar-light bg-faded">
-            <ul class="list-inline">
+            <ul class="navbar-nav">
                 <li>
-                    <a href="" class="list-inline-item"><h4>Transactions</h4></a>
+                    <a href="views/newTransaction.php" class="nav-item active"><h4>New Transactions</h4></a>
+                </li>
+                <li>
+                    <a href="views/newContact.php" class="nav-item active"><h4>New Contact</h4></a>
                 </li>
             </ul>
-
         </nav>
     </header>
 
