@@ -33,7 +33,7 @@
                         <td colspan="2">Address:</td>
                         <td colspan="4">
                             <input id="contactAddress" type="text" name="address" class="form-control" placeholder="Street Address">
-                            <div class="input-group w-100">
+                            <div id="addressDiv" class="input-group">
                                 <input id="contactCity" type="text" name="city" class="form-control my-2" placeholder="City">
                                 <select id="states" name="state" class="form-control m-2">
                                     <?php

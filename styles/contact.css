@@ -22,3 +22,9 @@
 #otherPhone {
     width: 300px;
 }
+
+.error {
+    color: red;
+    margin-left: 5%;
+    width: 100%;
+}
