@@ -127,7 +127,23 @@ function validCity(city) {
 
 function validZip(zip) {
     if(isEmptyString(zip))return false;
-    if(zip.match(/^\d{5,9}$/)){
+    if(zip.match(/^\d{5}-?\d{4}?$/)){
+        return true;
+    }
+    return false;
+}
+
+function validPhone(phone) {
+    if(isEmptyString(phone)) return false;
+    if(phone.match(/^\d{10}$/)){
+        return true
+    }
+    return false;
+}
+
+function validEmail(email) {
+    if(isEmptyString(email)) return false;
+    if(email.match(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/)){
         return true;
     }
     return false;
