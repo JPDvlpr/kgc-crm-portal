@@ -8,8 +8,8 @@
  * @version 0.1
  */
 
-include_once("./validation/backendValidations.php");
-include_once("./model/db-contact.php");
+include_once("../validation/backendValidations.php");
+include_once("../model/db-contact.php");
 
 /**
  * Class "Contact" represents a contact on the CRM Portal. A contact may be

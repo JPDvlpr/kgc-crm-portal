@@ -115,7 +115,7 @@ class DBContact extends DBObject
     public static function getContacts($table = 'contact')
     {
         global $dbh;
-        $dbh = Parent::connect();
+        $dbh = (new self)->connect();
 
         //Define Query
         $sql = "SELECT * FROM ".$table;
@@ -124,11 +124,11 @@ class DBContact extends DBObject
         $statement = $dbh->prepare($sql);
 
         //execute query
-        $statement->exexute();
+        $statement->execute();
 
         $results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        Parent::disconnect();
+        (new self)->disconnect();
 
         return $results;
     }
