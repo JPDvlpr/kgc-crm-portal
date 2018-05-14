@@ -89,11 +89,11 @@ class Contact
         foreach ($contacts as $contact){
 
         // construct transaction
-            $contactTemp = new Contact($contact['created_date'], $contact['createdBy'],
-                $contact['contactName'], $contact['address'], $contact['city'],
+            $contactTemp = new Contact($contact['created_date'], $contact['created_by'],
+                $contact['contact_name'], $contact['address'], $contact['city'],
                 $contact['state'], $contact['zip'], $contact['phone'], $contact['cell'],
-                $contact['emailAddress'], $contact['altContactName'],
-                                $contact['altContactPhone']);
+                $contact['email_address'], $contact['alt_contact_name'],
+                                $contact['alt_contact_phone']);
 
             // validate transaction
             // if valid, add to transactions array
