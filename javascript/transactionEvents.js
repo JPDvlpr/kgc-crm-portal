@@ -364,7 +364,11 @@ $(document).on('click', '#submit', function (e) {
         transType, checkNum, ccType, transDesc, size = 1;
 
     adminId = $('#adminId').val();
-    contactId = $('#contactId').val();
+    contactId = -1;
+    for(var i = 0; i < contacts.length; i++) {
+        if ($('#chosenContact').val() == contacts[i]['name'])
+            contactId = contacts[i]['id'];
+    }
     transDate = $('#date').val();
     amountPaid = $('#paid').val();
     transType = $('input[name="payMethod"]:checked').val();
@@ -439,7 +443,7 @@ $(document).on('click', '#submit', function (e) {
                     transType: transType,
                     checkNum: checkNum,
                     ccType: ccType,
-                    transDesc: transDesc},
+                    transDesc: transDesc },
             success: function (data) {
                 alert(data);
 
@@ -450,13 +454,9 @@ $(document).on('click', '#submit', function (e) {
                     //display success message
                     alert("Your form was submitted.");
                 }
-                else{
-                    //display errors
-
-                }
             },
             error: function(xhr, textStatus, thrownError, data) {
-                alert("Error: " + thrownError);
+                //display errors
             }
         });
     }

@@ -8,10 +8,11 @@
     *  This file contains the backend validations that use PHP.
     */
 
-include_once("../model/db-object.php");
-include_once("../model/db-categories.php");
-include_once("../model/db-item.php");
-include_once("../model/db-transaction.php");
+include_once($_SERVER['HOME']."/public_html/355/kgc-crm-portal-team/model/db-object.php");///home/troemerg/public_html/355/kgc-crm-portal-team/model/db-object.php
+include_once($_SERVER['HOME']."/public_html/355/kgc-crm-portal-team/model/db-categories.php");
+include_once($_SERVER['HOME']."/public_html/355/kgc-crm-portal-team/model/db-item.php");
+include_once($_SERVER['HOME']."/public_html/355/kgc-crm-portal-team/model/db-transaction.php");
+
 
 function validateDate($date)
 {
