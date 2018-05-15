@@ -73,7 +73,6 @@ function standard_header($title, $stylesheet)
 
 function standard_footer($pagejs)
 {
-    echo "<p>Footer</p>";
     ?>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.js"
