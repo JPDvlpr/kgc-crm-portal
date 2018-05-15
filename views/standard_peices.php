@@ -58,10 +58,10 @@ function standard_header($title, $stylesheet)
         <nav class="navbar navbar-light bg-faded">
             <ul class="navbar-nav">
                 <li>
-                    <a href="views/newTransaction.php" class="nav-item active"><h4>New Transactions</h4></a>
+                    <a href="index.php" class="nav-item active"><h4>New Transactions</h4></a>
                 </li>
                 <li>
-                    <a href="views/newContact.php" class="nav-item active"><h4>New Contact</h4></a>
+                    <a href="contactIndex.php" class="nav-item active"><h4>New Contact</h4></a>
                 </li>
             </ul>
         </nav>
