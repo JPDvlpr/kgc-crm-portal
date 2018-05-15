@@ -78,3 +78,15 @@ $(document).on('input', '#contactAltName', function () {
             "</ul>");
     }
 });
+
+$(document).on('click', '#submint', function (e) {
+
+    valid = true;
+
+    if($('.error').length)
+        valid = false;
+
+    if(!valid)
+        e.preventDefault();
+
+});
