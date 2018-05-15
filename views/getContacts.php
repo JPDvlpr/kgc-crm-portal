@@ -6,5 +6,5 @@
 
     $results = Contact::getContacts();
 
-    echo $results;
+    echo json_encode($results);
 ?>

@@ -87,21 +87,32 @@ class Contact
 
         //loop through transactions
         foreach ($contacts as $contact){
+            array_push($contactList, array(
+                'id' => $contact['contact_id'],
+                'name' => $contact['contact_name'],
+                'address' => $contact['address'].', '.$contact['city'],
+                'cell' => $contact['cell'],
+                'phone' => $contact['phone'],
+                'email' => $contact['email_address'],
+                'altName' => $contact['alt_contact_name'],
+                'altPhone' => $contact['alt_contact_phone']));
 
-        // construct transaction
-            $contactTemp = new Contact($contact['created_date'], $contact['created_by'],
-                $contact['contact_name'], $contact['address'], $contact['city'],
-                $contact['state'], $contact['zip'], $contact['phone'], $contact['cell'],
-                $contact['email_address'], $contact['alt_contact_name'],
-                                $contact['alt_contact_phone']);
 
-            // validate transaction
-            // if valid, add to transactions array
-            $errors = array();
-            if($contactTemp->validateContact($errors, false)){
-               $contactTemp->new = false;
-               $contactList[]=$contactTemp;
-            }
+            //OLD WAY................................................
+//        // construct transaction
+//            $contactTemp = new Contact($contact['created_date'], $contact['created_by'],
+//                $contact['contact_name'], $contact['address'], $contact['city'],
+//                $contact['state'], $contact['zip'], $contact['phone'], $contact['cell'],
+//                $contact['email_address'], $contact['alt_contact_name'],
+//                                $contact['alt_contact_phone']);
+//
+//            // validate transaction
+//            // if valid, add to transactions array
+//            $errors = array();
+//            if($contactTemp->validateContact($errors, false)){
+//               $contactTemp->new = false;
+//               $contactList[]=$contactTemp;
+//            }
         }
         return $contactList;
     }

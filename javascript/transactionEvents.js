@@ -2,7 +2,7 @@ var total = 0.00; //total to diplay and add to @ bottom
 var rows = 0; //numbers of line items rows, when 0 header should disappear
 var valid = false; //check to see if form is valid on server before submitting to server
 var currentYear = parseInt((new Date).getFullYear()); //get current year for future display
-var contacts; //variable to
+var contacts = []; //variable to store contacts (2d array) from database
 //create string to generate options for quantity select tags
 var optionsString = "<option selected=\"selected\">Qty</option>";
 for(var i = 1; i <= 10; i++)
@@ -66,17 +66,36 @@ function defualtDate() {
 defualtDate();
 
 //Get initial contacts and add them to datalist
-// $.ajax({
-//     type: "POST",
-//     url: "",
-//     dataType: "json",
-//     success: function (data) {
-//
-//     },
-//     error: function (xhr, textStatus, thrownError, data) {
-//         alert("Error: " + thrownError);
-//     }
-// });
+$.ajax({
+    type: "POST",
+    url: "views/getContacts.php",
+    dataType: "json",
+    success: function (data) {
+        for(var i = 0; i < data.length; i++){
+            $('#contacts').append("<option value='"+data[i]['name']+"'></option>");
+            contacts.push(data[i]);
+        }
+    },
+    error: function (xhr, textStatus, thrownError, data) {
+        alert("Error: " + thrownError);
+    }
+});
+
+
+//wait for user to enter contact then fill in
+//the contacts information
+$(document).on('input', '#chosenContact', function () {
+    for(var i = 0; i < contacts.length; i++){
+        if($(this).val() == contacts[i]['name']){
+            $('#conEmail').html("Email: "+contacts[i]['email']);
+            $('#conCell').html("Cell Phone: "+contacts[i]['cell']);
+            $('#conPhone').html("Other Phone: "+contacts[i]['phone']);
+            $('#conAddress').html("Address: "+contacts[i]['address']);
+            $('#altName').html("Alternate Contact Name: "+contacts[i]['altName']);
+            $('#altPhone').html("Alternate Contact Phone: "+contacts[i]['altPhone']);
+        }
+    }
+});
 
 
 //add drop down to categories(reasons for deposit)
@@ -198,7 +217,7 @@ $(document).on('click', '#add', function (e) {
     else{
         price = desc[1];
         desc = desc[0];
-        quantity = $('select#quantity').val('Qty');
+        quantity = $('select#quantity').val();
         if(valid){
             $('#lineItems').after(
                 "<tr class='item'>"+
@@ -215,7 +234,7 @@ $(document).on('click', '#add', function (e) {
 
     rows++;
     $('#add').remove();
-    $('select#quantity').val(0);
+    $('select#quantity').val('Qty');
     $('thead#lineItems').removeClass('hidden');
     total = 0.00;
     $('.price').each(function() {
@@ -410,7 +429,7 @@ $(document).on('click', '#submit', function (e) {
     if(valid){
         $.ajax({
             type: "POST",
-            url: "process.php",
+            url: "processTransaction.php",
             dataType:"json",
             data: { adminId: adminId,
                     contactId: contactId,
@@ -426,10 +445,10 @@ $(document).on('click', '#submit', function (e) {
 
                 if(data === 1){
                     //refresh page OR clear all selected fields
-
+                    location.reload();
 
                     //display success message
-
+                    alert("Your form was submitted.");
                 }
                 else{
                     //display errors

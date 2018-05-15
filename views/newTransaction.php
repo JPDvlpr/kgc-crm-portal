@@ -20,11 +20,13 @@
                         <td colspan="4">
                             <input id="chosenContact" type=text list=contacts class="form-control">
                             <datalist id="contacts">
-                                <option>Google</option>
-                                <option>IE</option>
-                                <option>Safari</option>
-                                <option>Purple people eater</option>
                             </datalist>
+                            <p id="conAddress"></p>
+                            <p id="conCell"></p>
+                            <p id="conPhone"></p>
+                            <p id="conEmail"></p>
+                            <p id="altName"></p>
+                            <p id="altPhone"></p>
                         </td>
                     </tr>
                     <tr>
