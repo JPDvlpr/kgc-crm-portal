@@ -6,6 +6,8 @@
     //include class object
     include_once "classes/contact.php";
 
+    $date = date("Y-m-d");
+
     //store data from $_POST array to individual variables
     $errors = array();
     $contCreatedBy = $_POST['adminIdContact'];
@@ -21,4 +23,14 @@
     $alternateContPhone = $_POST['altPhone'];
 
     //create object
-    $contact = new Contact();
+    $contact = new Contact($date, $contCreatedBy, $contactName, $contactAddress, $contactCity,
+        $contactState, $contactZip, $contactOtherPhone, $contactCellPhone, $contactEmail,
+        $alternateContName, $alternateContPhone);
+    $errors = $contact->validateContact($errors);
+    if(empty($errors)){
+        $contact->saveContact();
+    }
+    else{
+        echo ($errors);
+    }
+?>
