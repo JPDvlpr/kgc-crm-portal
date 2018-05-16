@@ -8,8 +8,8 @@
  * @version 0.1
  */
 
-include_once("../validation/backendValidations.php");
-include_once("../model/db-contact.php");
+include_once($_SERVER['HOME']."/public_html/kgc-crm-portal-team/validation/backendValidations.php");
+include_once($_SERVER['HOME']."/public_html/kgc-crm-portal-team/model/db-contact.php");
 
 /**
  * Class "Contact" represents a contact on the CRM Portal. A contact may be
@@ -198,7 +198,7 @@ class Contact
     public function saveContact()
     {
         $errors = array();
-        $this->validateContact($errors);
+//        $this->validateContact($errors);
         if (sizeof($errors) <= 0) {
             //if valid, then save
             $saveToLocation = new DBContact();

@@ -58,7 +58,7 @@ class DBContact extends DBObject
         if(!is_null($altContactPhone)) {
             $sql = $sql . "alt_contact_phone, ";
         }
-        $sql = $sql . "date_created, created_by, date_modified, modified_by) ";
+        $sql = $sql . "created_date, created_by, modified_date, modified_by) ";
         $sql = $sql . "VALUES (:contactName, :address, :city, :state, :zip, ";
         if(!is_null($phone)) {
             $sql = $sql . ":phone, ";

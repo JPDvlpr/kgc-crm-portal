@@ -19,7 +19,7 @@
 
 <body>
     <div class="container">
-        <form id="newContact" name="newContact" action="#" method="post">
+        <form id="newContact" name="newContact" action="processContact.php" method="post">
             <table id="contact" class="table table-bordered">
                 <thead>
                     <th colspan="6"><strong>New Contact</strong></th>
@@ -46,7 +46,7 @@
                                     }
                                     ?>
                                 </select>
-                                <input id="contactZipCode" type="text" name="city" class="form-control my-2" placeholder="Zip Code">
+                                <input id="contactZipCode" type="text" name="zipCode" class="form-control my-2" placeholder="Zip Code">
                             </div>
 
                         </td>
@@ -76,7 +76,7 @@
                     </tr>
                 </tbody>
             </table>
-            <button id="submit" type="submit" class="btn" name="contactSubmit">Submit Contact</button>
+            <button id="submit" type="submit" class="btn" name="submit">Submit Contact</button>
         </form>
     </div>
 </body>
