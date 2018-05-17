@@ -10,6 +10,8 @@
 
 include_once("./validation/backendValidations.php");
 include_once("transactionItem.php");
+include_once("model/db-transaction.php");
+include_once("model/db-item.php");
 
 /**
  * Class "Transaction" represents a transaction on the CRM Portal.
@@ -99,8 +101,63 @@ class Transaction
 
     // creates and returns an array of transactions from the database
     // may return only a single Transaction, e.g if filter is id
-    public static function getTransactions($filters, $filterValues)
+    // commented out until I can test it further
+    /*public static function getTransactions($filterValues=null)
     {
+        $transactions = DBTransaction::getTransactions($filterValues);
+        $transactionList = array();
+
+        // how to get transaction items and add to transaction efficiently.
+
+        //loop through transactions
+        foreach ($transactions as $transaction) {
+
+            //use transaction id to get array of transaction line items... then add in?
+            $transactionTemp = new Transaction($transaction['created_by'], $transaction['contactId'],
+                $transaction['transDate'], $transaction['transactionItemsArray'], $transaction['amount'],
+                $transaction['transDesc'], $transaction['transType'], $transaction['checkNum'],
+                $transaction['ccType'], $transaction['id']);
+
+            // still need to set values that aren't part of a new transaction
+
+            // validate transaction
+            // if valid, add to transactions array
+            $errors = array();
+            if ($transactionTemp->validateTransaction($errors, false)) {
+                $transactionTemp->new = false;
+                $transactionList[] = $transactionTemp;
+            }
+        }
+
+//            array_push($contactList, array(
+//                'id' => $contact['contact_id'],
+//                'name' => $contact['contact_name'],
+//                'address' => $contact['address'].', '.$contact['city'],
+//                'cell' => $contact['cell'],
+//                'phone' => $contact['phone'],
+//                'email' => $contact['email_address'],
+//                'altName' => $contact['alt_contact_name'],
+//                'altPhone' => $contact['alt_contact_phone']));
+
+
+            //OLD WAY................................................
+//        // construct transaction
+//            $contactTemp = new Contact($contact['created_date'], $contact['created_by'],
+//                $contact['contact_name'], $contact['address'], $contact['city'],
+//                $contact['state'], $contact['zip'], $contact['phone'], $contact['cell'],
+//                $contact['email_address'], $contact['alt_contact_name'],
+//                                $contact['alt_contact_phone']);
+//
+//            // validate transaction
+//            // if valid, add to transactions array
+//            $errors = array();
+//            if($contactTemp->validateContact($errors, false)){
+//               $contactTemp->new = false;
+//               $contactList[]=$contactTemp;
+//            }
+//        }
+        return $transactionList;
+
         //get transactions
 
         //loop through transactions
@@ -112,7 +169,7 @@ class Transaction
         // if valid, add to transactions array
 
         //return array of Transactions
-    }
+    }*/
 
     // TODO figure out where to do all of this and what needs to be validated.
     public function validateTransaction($errors, $new = true)
