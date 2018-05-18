@@ -38,34 +38,94 @@ error_reporting(E_ALL);
         </div>
     </div>
 </form>
+
+<form action="#" method="post">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 form-group">
+                <h4>Contacts</h4>
+                <input id="chosenContact" type=text list=contacts class="form-control">
+                <datalist id="contacts">
+                </datalist>
+                <p id="conAddress"></p>
+                <p id="conCell"></p>
+                <p id="conPhone"></p>
+                <p id="conEmail"></p>
+                <p id="altName"></p>
+                <p id="altPhone"></p>
+            </div>
+            <div class="col-md-3 form-group">
+                <h4>Contacts</h4>
+                <input id="chosenContact" type=text list=contacts class="form-control">
+                <datalist id="contacts">
+                </datalist>
+                <p id="conAddress"></p>
+                <p id="conCell"></p>
+                <p id="conPhone"></p>
+                <p id="conEmail"></p>
+                <p id="altName"></p>
+                <p id="altPhone"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 form-group">
+                <h4>Contacts</h4>
+                <input id="chosenContact" type=text list=contacts class="form-control">
+                <datalist id="contacts">
+                </datalist>
+                <p id="conAddress"></p>
+                <p id="conCell"></p>
+                <p id="conPhone"></p>
+                <p id="conEmail"></p>
+                <p id="altName"></p>
+                <p id="altPhone"></p>
+            </div>
+            <div class="col-md-3 form-group">
+                <h4>Contacts</h4>
+                <input id="chosenContact" type=text list=contacts class="form-control">
+                <datalist id="contacts">
+                </datalist>
+                <p id="conAddress"></p>
+                <p id="conCell"></p>
+                <p id="conPhone"></p>
+                <p id="conEmail"></p>
+                <p id="altName"></p>
+                <p id="altPhone"></p>
+            </div>
+        </div>
+</form>
+            <style>
+                html {
+                    margin-top: 5%;
+                    margin-left: 25%;
+                    text-align: center;
+                }
+
+                h1 {
+                    display: table-header-group;
+                }
+
+                .col-md-1 form-group {
+                    position: absolute;
+                    left: 0%;
+                    bottom: 0%;
+                }
+
+                #filter {
+                    position: absolute;
+                    left: 0%;
+                    bottom: 0%;
+                }
+
+                #from_date, #to_date {
+                    left: 0%;
+                    bottom: 0%;
+                }
+
+            </style>
+            <?php
+            require_once("../model/db-filters.php");
+            ?>
 </body>
-<style>
-    html {
-        margin-top: 5%;
-        margin-left: 25%;
-        text-align: center;
-    }
-
-    h1 {
-        display: table-header-group;
-    }
-
-    .col-md-1 form-group{
-        position: absolute;
-        left: 0%;
-        bottom: 0%;
-    }
-
-    #filter{
-        position: absolute;
-        left: 0%;
-        bottom: 0%;
-    }
-    #from_date,#to_date{
-        left: 0%;
-        bottom: 0%;
-    }
-
-</style>
 </html>
 
