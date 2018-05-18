@@ -8,8 +8,7 @@
  *  This file is called by the AJAX and retrieves a single item, returns with the HTML formatting
  */
 
-include_once($_SERVER['HOME']."/public_html/kgc-crm-portal-team/model/db-object.php");
-include_once($_SERVER['HOME']."/public_html/kgc-crm-portal-team/model/db-categories.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/model/db-categories.php");
 
 $dbItem = new DBCategories();
 $results = $dbItem->getCategories();

@@ -4,7 +4,8 @@
 //require '/home/troemerg/config.php';
 //require '/home/kbarterg/config.php';
 //require("/home/mfeltong/config_files/config.php");
-require($_SERVER['HOME']."/config.php");
+
+require($_SERVER['DOCUMENT_ROOT']."/config.php");
 
 
 /**

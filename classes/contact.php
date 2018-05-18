@@ -8,8 +8,8 @@
  * @version 0.1
  */
 
-include_once($_SERVER['HOME']."/public_html/kgc-crm-portal-team/validation/backendValidations.php");
-include_once($_SERVER['HOME']."/public_html/kgc-crm-portal-team/model/db-contact.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/validation/backendValidations.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/model/db-contact.php");
 
 /**
  * Class "Contact" represents a contact on the CRM Portal. A contact may be

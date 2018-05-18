@@ -1,8 +1,3 @@
-<?php
-    //php error reporting
-    ini_set("display_errors", 1);
-    error_reporting(E_ALL);
-?>
 
     <div class="container">
         <form id="transactionForm" name="transactionForm" action="#" method="post">

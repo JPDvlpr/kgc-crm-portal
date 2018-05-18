@@ -1,17 +1,16 @@
 <?php
 /*
- *  details.php
- *  Cat-Wishes Final Project
- *  IT-328
- *  Melanie Felton
+ *  items.php
+ *  CRM Portal Final Project
+ *  IT-355
+ *  Just oK TeaM
  *
- *  This file is called by the AJAX and retrieves a single item, returns with the HTML formatting
+ *  This file gets the categories and subcategories from the database for display
  */
-ini_set("display_errors", 1);
-error_reporting(E_ALL);
-include_once("../model/db-object.php");
-include_once("../model/db-item.php");
-include_once("../model/db-categories.php");
+
+include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/model/db-object.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/model/db-item.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/model/db-categories.php");
 
 $getItems = function ($table, $category)
 {

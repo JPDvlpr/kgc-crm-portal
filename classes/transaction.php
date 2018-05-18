@@ -8,10 +8,10 @@
  * @version 0.1
  */
 
-include_once("./validation/backendValidations.php");
-include_once("transactionItem.php");
-include_once("model/db-transaction.php");
-include_once("model/db-item.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/validation/backendValidations.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/classes/transactionItem.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/model/db-transaction.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/model/db-item.php");
 
 /**
  * Class "Transaction" represents a transaction on the CRM Portal.

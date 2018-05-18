@@ -1,8 +1,6 @@
 <?php
-    ini_set("display_errors", 1);
-    error_reporting(E_ALL);
 
-    include_once("../classes/contact.php");
+    include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/classes/contact.php");
 
     $results = Contact::getContacts();
 

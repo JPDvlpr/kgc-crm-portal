@@ -7,6 +7,7 @@
  * @version 0.1
  */
 
+require_once("db-object.php");
 
 /**
  * Class DBContact extends DBObject adding the ability to get/update multiple items.

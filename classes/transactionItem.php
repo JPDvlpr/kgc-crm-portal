@@ -8,8 +8,8 @@
  * @version 0.1
  */
 
-include_once("./validation/backendValidations.php");
-include_once("transaction.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/validation/backendValidations.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/classes/transaction.php");
 
 /**
  * Class "TransactionItem" represents a transaction_item on the CRM Portal.

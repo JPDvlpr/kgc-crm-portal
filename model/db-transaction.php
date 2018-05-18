@@ -1,5 +1,7 @@
 <?php
 
+require_once("db-object.php");
+
 class DBTransaction extends DBObject
 {
     /* @param $id
