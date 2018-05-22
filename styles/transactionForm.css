@@ -86,10 +86,16 @@ div.ui-dialog-buttonset
     float: right;
 }
 
+
 ul.error
 {
     margin-left: 5%;
     color: red;
     width: 100%;
+}
+
+/* Force drop-down arrow to display constantly for combo-box */
+input::-webkit-calendar-picker-indicator {
+    opacity: 100;
 }
 
