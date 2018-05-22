@@ -1,0 +1,26 @@
+html {
+    margin-top: 5%;
+    margin-left: 25%;
+    text-align: center;
+}
+
+h1 {
+    display: table-header-group;
+}
+
+.col-md-1 form-group {
+    position: absolute;
+    left: 0%;
+    bottom: 0%;
+}
+
+#filter {
+    position: absolute;
+    left: 0%;
+    bottom: 0%;
+}
+
+#from_date, #to_date {
+    left: 0%;
+    bottom: 0%;
+}
