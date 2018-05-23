@@ -1,7 +1,15 @@
+<!--
+Just Ok Team
+DB Filters
+Filters the data in the database and returns
+results based on what the user selects in order
+to be generated to a csv file
+-->
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 
 require_once("db-object.php");
 
@@ -71,6 +79,8 @@ where table_schema = 'jpappoeg_grc' AND table_name = 'contact'";
 
         return $results;
     }
+
+
 }
 
 DBFilter::getContacts();

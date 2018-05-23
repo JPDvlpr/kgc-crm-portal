@@ -15,25 +15,12 @@
 //this command will eventually need to pass in the variables to filter on...
 $(document).on('click', '#generate', function (){
     $('#generate').html('Generating');
-    var filter = '"'+$('#filter').val()+'"';
-    var filter = $('#filter').val();
-    alert(filter);
 
-    var filename = {"filteringData":{
-            "filename":
-                $('#filename').val()
-            ,
-            "filters": [
-                {filter: $('#filter_value').val()}
-                ]
-        }
-    };
-    // alert (filename);
+    var filename = $(this).attr('href');
     var me = $(this);
     $.ajax({
         type: "POST",
         url: "controller/generateCSV.php",
-        data: filename,
 
         success: function (results) {
             var filename = "files/" + results;

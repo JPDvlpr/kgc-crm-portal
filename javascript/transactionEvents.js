@@ -104,7 +104,7 @@ $(document).on('click', 'label.category', function (){
     var me = $(this);
     $.ajax({
         type: "POST",
-        url: "views/items.php",
+        url: "views/items_temp.php",
         dataType:"json",
         data: { category: category },
         success: function (data) {

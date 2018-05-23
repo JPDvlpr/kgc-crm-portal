@@ -1,7 +1,7 @@
 <?php
     require_once("views/standard_peices.php");
 
-    standard_header("New Transaction","/kgc-crm-portal-team/styles/transactionForm.css");
+    standard_header("New Transaction","/kgc-crm-portal-team/styles/temp.css");
 
     require_once("views/newTransaction.php");
 

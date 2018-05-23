@@ -1,3 +1,7 @@
+/*
+Just Ok Team
+Stylesheet made for the filters page
+*/
 html {
     margin-top: 5%;
     margin-left: 25%;
@@ -20,6 +24,7 @@ h1 {
     bottom: 0%;
 }
 
+/*date*/
 #from_date, #to_date {
     left: 0%;
     bottom: 0%;

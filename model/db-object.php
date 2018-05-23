@@ -21,7 +21,7 @@ class DBObject
      * Function to connect to db
      * @return PDO database connection
      */
-    public static function connect()
+    function connect()
     {
         try {
             //Instantiate a database object
@@ -37,7 +37,7 @@ class DBObject
     /**
      * Function to disconnect from the database
      */
-    public static function disconnect()
+    function disconnect()
     {
         global $dbh;
         $dbh = "";
