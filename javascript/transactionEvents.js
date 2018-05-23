@@ -433,7 +433,7 @@ $(document).on('click', '#submit', function (e) {
     if(valid){
         $.ajax({
             type: "POST",
-            url: "processTransaction.php",
+            url: "controller/processTransaction.php",
             dataType:"json",
             data: { adminId: adminId,
                     contactId: contactId,
@@ -454,9 +454,12 @@ $(document).on('click', '#submit', function (e) {
                     //display success message
                     alert("Your form was submitted.");
                 }
+                else{
+                    //display errors
+                }
             },
             error: function(xhr, textStatus, thrownError, data) {
-                //display errors
+                alert("Error: " + thrownError);
             }
         });
     }

@@ -172,7 +172,7 @@ class Transaction
     }*/
 
     // TODO figure out where to do all of this and what needs to be validated.
-    public function validateTransaction($errors, $new = true)
+    public function validateTransaction(&$errors, $new = true)
     {
 //        protected $id; // INT(11)
 //        protected $amount; // DECIMAL(8,2)

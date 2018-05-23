@@ -4,7 +4,7 @@
     error_reporting(E_ALL);
 
     //include class object
-    include_once "classes/transaction.php";
+    include_once $_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/classes/transaction.php";
 
     //store data from $_POST array to individual vars
     $errors = array();
@@ -20,7 +20,7 @@
 
     //create object
     $transaction = new Transaction($createdBy, $contactId, $transDate, $transactionItemsArray, $amount,  $transDesc, $transType,  $checkNum, $ccType);
-    $errors = $transaction->validateTransaction($errors);
+    $transaction->validateTransaction($errors);
     if(empty($errors)){
         $transaction->saveTransaction();
         echo json_encode(1);

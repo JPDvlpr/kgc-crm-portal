@@ -15,21 +15,9 @@ include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/model/db-transactio
 
 function validateDate($date)
 {
-    $date_regex = '/(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\d\d/';
-
-    //$date = '03/22/2010';
-    if (preg_match($date_regex, $date)) {
-        echo 'this date is formatted correctly';
-    } else {
-        echo 'this date is not formatted correctly';
-    }
-    //Maybe I created my date wrong, but this is failing so returning true for now
-    return true;
-//    if (!checkdate($date['month'], $date['day'], $date['year'])) {
-//        return false;
-//    } else {
-//        return true;
-//    }
+    $date = trim($date);
+    $date = explode('-', $date);
+    return checkdate($date[1], $date[2], $date[0]);
 }
 
 /**
@@ -110,19 +98,22 @@ function validateContact($contactID)
 // Commenting everything out and having it return True
 function validateDateTime($datetime)
 {
-    $regex_dt = "/^(((((0[13578])|([13578])|(1[02]))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|((([469])|(11))[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\-\/\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\-\/\s]?\d{4})(\s(((0[1-9])|([1-9])|(1[0-2]))\:([0-5][0-9])((\s)|(\:([0-5][0-9])\s))([AM|PM|am|pm]{2,2})))?$/";
-    return (preg_match($regex_dt, $datetime));
+    $datetime = trim($datetime);
 
-//    echo '<pre>';
-//    var_dump($datetime);
-//    echo '</pre>';
-//    $time = 0;
-//    if (!checkdate($datetime['month'], $datetime['day'], $datetime['year']) && !validateTime($time)) {
-//        return false;
-//    } else {
-//        return true;
-//    }
-    return true;
+    if(strlen($datetime) <= 10){
+        date_default_timezone_set('America/Los_Angeles');
+        $date = $datetime;
+        $time = date('H:i:s',time());
+    }
+    else{
+        $date = substr($datetime, 0, 10);
+        $time = substr($datetime, 11);
+    }
+
+
+    $regex = "/\s?[0-2][0-9]:[0-5][0-9]:[0-5][0-9]\s?/";//regular expression for time(HH:MM:SS)
+
+    return validateDate($date) && preg_match($regex, $time);
 }
 
 // used for validating this like the description of
@@ -147,12 +138,6 @@ function validateInteger($integer)
 {
     $test = "/^[0-9]+$/";
     return (preg_match($test, $integer));
-}
-
-function validateTime($time)
-{
-    $regex_time = "/^(?:1[012]|0[0-9]):[0-5][0-9]$/";
-    return preg_match($regex_time, $time);
 }
 
 function validateName($name)
