@@ -67,6 +67,9 @@ class DBTransaction extends DBObject
 
         //Execute Statement
         $statement->execute();
+
+        //return id to use when adding line_items to database
+        return $dbh->lastInsertId();
     }
 
     function addLineItem($transItemId, $transId, $itemDesc, $amount, $itemId, $dateCreated, $createdBy, $dateModified, $modifiedBy,$table = 'transaction_item'){
