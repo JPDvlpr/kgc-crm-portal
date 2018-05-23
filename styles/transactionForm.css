@@ -1,0 +1,101 @@
+td
+{
+    padding: 0px;
+}
+.hidden
+{
+    display: none !important;
+    margin-left: 5%;
+    width: 90%;
+}
+#categories
+{
+    margin-left: 5%;
+}
+button
+{
+    float: right;
+}
+#add
+{
+    margin-right: 5%;
+}
+
+
+/*Sub-category styles*/
+.subCategory
+{
+    margin-left: 5%;
+}
+div.subCategory div.input-group
+{
+    display: inline-flex;
+    width: 50%;
+}
+.subCategory select
+{
+    display: inline-flex;
+}
+.subCategory select#quantity
+{
+    width: 10%;
+}
+.subCategory select#subCategory
+{
+    width: 40%;
+}
+.subCategory select#donation
+{
+    width: 25%;
+    margin-right: 2em;
+}
+#checkNum, #paypal, #square
+{
+    display: block;
+    margin-left: 5%;
+    width: 50%;
+}
+#itemDonation
+{
+    display: inline;
+    width: 40%;
+}
+
+
+
+/*Delete confirmation(dialog box) styles*/
+div.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix
+{
+    padding: 0px;
+}
+button.ui-dialog-titlebar-close
+{
+    display: none;
+}
+div.ui-dialog-buttonset
+{
+    width: 100%;
+}
+#confirm
+{
+    float: left;
+    margin-left: 0.5em;
+}
+#cancel
+{
+    float: right;
+}
+
+
+ul.error
+{
+    margin-left: 5%;
+    color: red;
+    width: 100%;
+}
+
+/* Force drop-down arrow to display constantly for combo-box */
+input::-webkit-calendar-picker-indicator {
+    opacity: 100;
+}
+
