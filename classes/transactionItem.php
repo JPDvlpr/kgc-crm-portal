@@ -157,8 +157,10 @@ class TransactionItem
     //get list of items transaction_item table
     //write to database use method in db_transaction
     //***need to get item from transaction.php and insert into transactions table
-    public function saveTransactionItem($table = 'transaction', $numReturn = 0)
+    public function saveTransactionItem($transId, $table = 'transaction', $numReturn = 0)
     {
+        $this->transId = $transId;
+
         $errors = array();
         $this->validateTransactionItem($errors);
         if (sizeof($errors) <= 0) {
