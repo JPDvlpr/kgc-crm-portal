@@ -123,4 +123,41 @@ class DBTransaction extends DBObject
 
         return $results;
     }
+
+    public static function getFilteredTransactions($filters = null)
+    {
+        global $dbh;
+        $dbh = Parent::connect();
+
+        //Define Query
+        $sql = 'SELECT t.trans_id as "Transaction Number", c.contact_name as "Contact Name", 
+                    t.amount as "Transaction Total", i.item_price as "Item Price", 
+                    ic.cat_name as "Category", i.item_name as "Item",
+                    (ti.amount/ i.item_price) as Quantity
+                  FROM transaction t
+                  INNER JOIN transaction_item ti ON t.trans_id = ti.trans_id
+                  INNER JOIN contact c ON c.contact_id = t.contact_id
+                  LEFT JOIN item i ON ti.item_id = i.item_id
+                  LEFT JOIN item_category ic ON i.cat_id = ic.cat_id ';
+        if ($filters['filter']) {
+
+            $sql .= 'WHERE t.trans_id' . ' = '.$filters['filter'];
+        }
+
+
+        //prepare statement
+        $statement = $dbh->prepare($sql);
+
+        //bind (but nothing to bind yet
+
+        //execute query
+        $statement->execute();
+
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        Parent::disconnect();
+
+        return $results;
+
+    }
 }
