@@ -1,4 +1,7 @@
 <?php
+    //php error reporting
+    ini_set("display_errors", 1);
+    error_reporting(E_ALL);
 
     $states = array('WA','AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL',
         'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
@@ -7,6 +10,14 @@
         'TX', 'UT', 'VT', 'VA', 'WV', 'WI', 'WY');
 ?>
 
+<head>
+    <title>New Contact</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../styles/contact.css">
+</head>
+
+<body>
     <div class="container">
         <form id="newContact" name="newContact" action="processContact.php" method="post">
             <table id="contact" class="table table-bordered">
@@ -68,4 +79,4 @@
             <button id="submit" type="submit" class="btn" name="submit">Submit Contact</button>
         </form>
     </div>
-
+</body>

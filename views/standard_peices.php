@@ -4,12 +4,9 @@ function standard_header($title, $stylesheet)
     ?>
     <!--
         header.html
-        IT-328
-        Cat-Wishes Final Project
-        This file has the head and header (nav bar) for Cat-Wishes web site.
-        Bessy Torres-Miller
-        Melanie Felton
-
+        IT-355
+        CRM Portal
+        Just oK TeaM
     -->
     <!DOCTYPE html>
     <html lang="en">
@@ -43,6 +40,8 @@ function standard_header($title, $stylesheet)
         <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+        <!-- nav bar styles-->
+<!--        <link rel="stylesheet" type="text/css" href="../styles/navbarStyles.css">-->
     </head>
     <body>
 
@@ -50,20 +49,11 @@ function standard_header($title, $stylesheet)
     <!-- navigation bar at the top -->
     <header>
         <!-- Just an image -->
-        <nav class="navbar navbar-light bg-faded text-white">
-            <a class="navbar-brand" id="logoSite" href="">
-                <h1>CRM Portal</h1>
-            </a>
-        </nav>
-        <nav class="navbar navbar-light bg-faded">
-            <ul class="navbar-nav">
-                <li>
-                    <a href="index.php" class="nav-item active"><h4>New Transactions</h4></a>
-                </li>
-                <li>
-                    <a href="contactIndex.php" class="nav-item active"><h4>New Contact</h4></a>
-                </li>
-            </ul>
+        <nav id="nabar" class="navbar navbar-expand-lg navbar-light bg-faded text-white">
+            <form class="form-inline">
+                <button class="btn btn-sm btn-outline-primary h-25" type="button"><a class="nav-link" href="index.php" class="nav-item active"><h4>New Transactions</h4></a></button>
+                <button class="btn btn-sm btn-outline-primary h-25" type="button"><a class="nav-link" href="contactIndex.php" class="nav-item active"><h4>New Contact</h4></a></button>
+            </form>
         </nav>
     </header>
 
