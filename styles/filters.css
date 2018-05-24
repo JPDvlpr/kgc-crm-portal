@@ -1,6 +1,6 @@
 /*
 Just Ok Team
-Stylesheet made for the filters page
+Stylesheet made for the filters page.
 */
 html {
     margin-top: 5%;
@@ -10,6 +10,10 @@ html {
 
 h1 {
     display: table-header-group;
+}
+
+th{
+    border-bottom-color: transparent !important;
 }
 
 .col-md-1 form-group {
@@ -28,4 +32,13 @@ h1 {
 #from_date, #to_date {
     left: 0%;
     bottom: 0%;
+}
+
+.btn-success{
+    margin: auto !important;
+    display: block !important;
+}
+
+.td1{
+    border-right-color: transparent !important;
 }
