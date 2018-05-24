@@ -16,7 +16,10 @@ error_reporting(E_ALL);
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <!--    <link rel="stylesheet" href="../styles/filters.css">-->
-
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -28,93 +31,122 @@ error_reporting(E_ALL);
             </thead>
             <tbody>
             <tr>
-                <td class="td1">
-                    <h5>Start Date:</h5>
-                    <input type="date" class="form-control" id="from_date" name="from_date"
-                           value="<?php echo date("Y-01-01") ?>">
-                </td>
                 <td>
-                    <h5>End Date:</h5>
-                    <input type="date" class="form-control" id="to_date" name="to_date"
-                           value="<?php echo date("Y-m-d") ?>">
+                    <h5>Date:</h5>
                 </td>
-                <td>
-                    <button type="button" class="btn btn-success" id="success">Add</button>
+                <td class="td1" colspan="2">
+                    <div class="form-row">
+                        <div class="col" >
+                            <h5>Start Date:</h5>
+                            <label for="from_date"></label><input type="date" class="form-control" id="from_date"
+                                                                  name="from_date"
+                                                                  value="<?php echo date("Y-01-01") ?>">
+
+                        </div>
+
+                        <div class="col">
+                            <h5>End Date:</h5>
+                            <label for="to_date"></label><input type="date" class="form-control" id="to_date"
+                                                                name="to_date"
+                                                                value="<?php echo date("Y-m-d") ?>">
+                        </div>
+                    </div>
                 </td>
             </tr>
 
 
             <tr>
                 <td>
-                    <h5>Contact Information</h5>
-                    <input id="chosenContact" type=text list=contacts class="form-control"
+                    <h5>Contact Name</h5>
+                </td>
+                <td colspan="2">
+                    <input id="contactColumn" type=text list=contacts class="form-control"
                            placeholder="Filter By Contact Columns">
                     <datalist id="contacts">
-                        <select id="columnselect">
-                            <?php
-                            $columns = array("contact_name", "city", "state", "zip");
-                            foreach ($columns as $col)
-                                echo "<option id = '$col' value='$col'>" . $col . "</option>";
-                            ?>
+                        <label for="columnselect"></label><select id="columnselect">
+                            <script>
+                                var contacts;
+                                $.ajax({
+                                    type: "POST",
+                                    url: "views/getContacts.php",
+                                    dataType: "json",
+                                    success: function (data) {
+                                        for (var i = 0; i < data.length; i++) {
+                                            $('#columnselect').append("<option value='" + data[i]['phone'] + "'></option>" +
+                                                "<option value='" + data[i]['name'] + "'></option>");
+                                            contacts.push(data[i]);
+
+                                        }
+                                    },
+                                    error: function (xhr, textStatus, thrownError, data) {
+                                        alert("Error: " + thrownError);
+                                    }
+                                });
+                            </script>
                         </select>
                     </datalist>
                 </td>
-                <td>
-                    <h5></h5>
-                    <input id="chosenContact" type=text list=contacts class="form-control"
-                           placeholder="Filter By Contact Results">
+            </tr>
+
+            <tr>
+                <td height="150px">
+                    <h5>Category/Item</h5>
+                </td>
+                <td height="150px">
+                    <input id="contactColumn" type=text list=contacts class="form-control"
+                           placeholder="Filter By Contact Columns">
                     <datalist id="contacts">
-                        <select id="columnselect">
-                            <option>
-                                Bob Smith
-                            </option>
-                        </select>
-                    </datalist>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-success">Add</button>
-                </td>
-            </tr>
-            <!--            Transactions -->
-            <tr>
-                <td>
-                    <h5>Transaction Information</h5>
+                        <label for="columnselect"></label><select id="columnselect">
+                            <script>
+                                var contacts;
+                                $.ajax({
+                                    type: "POST",
+                                    url: "views/getContacts.php",
+                                    dataType: "json",
+                                    success: function (data) {
+                                        for (var i = 0; i < data.length; i++) {
+                                            $('#columnselect').append("<option value='" + data[i]['phone'] + "'></option>" +
+                                                "<option value='" + data[i]['name'] + "'></option>");
+                                            contacts.push(data[i]);
 
-                    <input id="chosenTransaction" type=text list=transactions class="form-control"
-                           placeholder="Filter By Transaction Columns">
-                    <datalist id="transactions">
-                        <select id="transactionSelect" placeholder="Filter By Transaction Columns">
-                            <?php
-                            $transactions = array("check_num", "source_type", "trans_type");
-                            foreach ($transactions as $trans)
-                                echo "<option id = '$trans' value='$trans'>" . $trans . "</option>";
-                            ?>
+                                        }
+                                    },
+                                    error: function (xhr, textStatus, thrownError, data) {
+                                        alert("Error: " + thrownError);
+                                    }
+                                });
+                            </script>
                         </select>
                     </datalist>
                 </td>
                 <td>
-                    <h5>Transactions</h5>
-                    <input id="chosenTransaction" type=text list=transactions class="form-control"
-                           placeholder="Filter By Transaction Results">
-                    <datalist id="transactions">
-                        <select id="transactionSelect">
-                            <option>
-                                Bob Smith
-                            </option>
-                        </select>
-                    </datalist>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-success">Add</button>
-                </td>
-            </tr>
-            <tr
-            <tr>
-                <th colspan="12">Filtered Results</th>
-            </tr>
-            <td colspan="12">
+                    <input id="contactColumn" type=text list=contacts class="form-control"
+                           placeholder="Filter By Contact Columns">
+                    <datalist id="contacts">
+                        <label for="columnselect"></label><select id="columnselect">
+                            <script>
+                                var contacts;
+                                $.ajax({
+                                    type: "POST",
+                                    url: "views/getContacts.php",
+                                    dataType: "json",
+                                    success: function (data) {
+                                        for (var i = 0; i < data.length; i++) {
+                                            $('#columnselect').append("<option value='" + data[i]['phone'] + "'></option>" +
+                                                "<option value='" + data[i]['name'] + "'></option>");
+                                            contacts.push(data[i]);
 
-            </td>
+                                        }
+                                    },
+                                    error: function (xhr, textStatus, thrownError, data) {
+                                        alert("Error: " + thrownError);
+                                    }
+                                });
+                            </script>
+                        </select>
+                    </datalist>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
