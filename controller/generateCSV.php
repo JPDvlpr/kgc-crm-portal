@@ -9,14 +9,16 @@
  *  It loops through a series of 6 filenames so that the multiple users can create files at
  *  once.
  */
+include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/model/db-transaction.php");
 
 $getCSVFile = function ($table, $category) {
     $fileName = $_POST['filteringData']['filename'];
     $filters = $_POST['filteringData']['filters'][0];
-//    var_dump($filters);
-    $transactions = Transaction::getTransactions($filters);
+    var_dump($_POST['filteringData']);
+//    $transactions = Transaction::getTransactions($filters);
 //    $transactions = array(array('Mel23', '24', '99'), array('Tye', '67', '25'), array('Kev', '45', '2'), array('Joe', '33', '44'));
 //    $fileName = "LATEST_FILE";
+    $transactions = DBTransaction::getFilteredTransactions($filters);
     $count = 100;
     $fileNameTemp = $fileName.$count.".csv";
 

@@ -19,12 +19,24 @@ $(document).on('click', '#generate', function (){
     var filter = $('#filter').val();
     // alert(filter);
 
+    var filters = {};
+    $('input').each(function() {
+        var index = $(this).attr("id");
+        filters[index] = $(this).val();
+    });
+
     // var filename = $(this).attr('href');
+    // var filename = {"filteringData":{
+    //         "filename": $('#filename').val(),
+    //         "filters": [
+    //             {filter: $('#filter_value').val()}
+    //         ]
+    //     }
+    // };
+
     var filename = {"filteringData":{
             "filename": $('#filename').val(),
-            "filters": [
-                {filter: $('#filter_value').val()}
-            ]
+            "filters": filters
         }
     };
 
