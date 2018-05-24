@@ -20,7 +20,6 @@ function standard_header($title, $stylesheet)
         <title><?php echo $title ?></title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-        <link rel="stylesheet" href='<?php echo $stylesheet ?>'>
 
         <!-- bootstrap css -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
@@ -30,10 +29,13 @@ function standard_header($title, $stylesheet)
         <!-- JQuery UI CSS -->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-        <!-- awesome fonts css -->
+        <!-- Awesome fonts css -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
               integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
               crossorigin="anonymous">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href='<?php echo $stylesheet ?>'>
 
         <!--[if lt IE 9]>
         <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -41,7 +43,7 @@ function standard_header($title, $stylesheet)
         <![endif]-->
 
         <!-- nav bar styles-->
-<!--        <link rel="stylesheet" type="text/css" href="../styles/navbarStyles.css">-->
+        <link rel="stylesheet" type="text/css" href="styles/navbarStyles.css">
     </head>
     <body>
 
@@ -50,9 +52,9 @@ function standard_header($title, $stylesheet)
     <header>
         <!-- Just an image -->
         <nav id="nabar" class="navbar navbar-expand-lg navbar-light bg-faded text-white">
-            <form class="form-inline">
-                <button class="btn btn-sm btn-outline-primary h-25" type="button"><a class="nav-link" href="index.php" class="nav-item active"><h4>New Transactions</h4></a></button>
-                <button class="btn btn-sm btn-outline-primary h-25" type="button"><a class="nav-link" href="contactIndex.php" class="nav-item active"><h4>New Contact</h4></a></button>
+            <form id="form" class="form-inline">
+                <button id="button1" class="btn btn-sm btn-outline-primary h-25" type="button"><a class="nav-link" href="index.php" class="nav-item active"><h4>New Transactions</h4></a></button>
+                <button id="button2"class="btn btn-sm btn-outline-primary h-25" type="button"><a class="nav-link" href="contactIndex.php" class="nav-item active"><h4>New Contact</h4></a></button>
             </form>
         </nav>
     </header>
@@ -64,6 +66,8 @@ function standard_header($title, $stylesheet)
 function standard_footer($pagejs)
 {
     ?>
+    <br><br>
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.js"
             integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="

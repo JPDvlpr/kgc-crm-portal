@@ -1,0 +1,11 @@
+/*nav bar styles*/
+
+.form-inline {
+    margin-bottom: 20px;
+}
+
+#button1, #button2 {
+    height: 20px;
+    size: 15px;
+}
+
