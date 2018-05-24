@@ -100,15 +100,8 @@ function validateDateTime($datetime)
 {
     $datetime = trim($datetime);
 
-    if(strlen($datetime) <= 10){
-        date_default_timezone_set('America/Los_Angeles');
-        $date = $datetime;
-        $time = date('H:i:s',time());
-    }
-    else{
-        $date = substr($datetime, 0, 10);
-        $time = substr($datetime, 11);
-    }
+    $date = substr($datetime, 0, 10);
+    $time = substr($datetime, 11);
 
 
     $regex = "/\s?[0-2][0-9]:[0-5][0-9]:[0-5][0-9]\s?/";//regular expression for time(HH:MM:SS)

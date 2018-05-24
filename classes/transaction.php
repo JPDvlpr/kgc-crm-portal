@@ -64,6 +64,13 @@ class Transaction
 //    public function __construct($id(move to end), $amount, $transDate, $checkNum, $depositById (not in initial creation), $bankDepositDate, $transStatus, $sourceType, $sourceId, $transType, $contactId, $dateCreated, $createdBy, $dateModified, $modifiedBy, $transactionItems)
     public function __construct($createdBy, $contactId, $transDate, $transactionItemsArray, $amount, $transDesc, $transType, $checkNum, $ccType, $id = 0)
     {
+        if(strlen($transDate) <= 10){
+            date_default_timezone_set('America/Los_Angeles');
+            $date = $transDate;
+            $time = date('H:i:s',time());
+            $transDate = $date." ".$time;
+        }
+
         $this->new = true;
         $this->id = $id; // change to use random generator
         $this->amount = $amount;
@@ -259,7 +266,7 @@ class Transaction
         $this->validateTransaction($errors);
         if (sizeof($errors) <= 0) {
             //if valid, then save
-            $saveToLocation = new DBTransaction();
+            $saveToLocation = new DBItem();
 
             $this->id = $saveToLocation->addTransaction($this->id, $this->amount, $this->transDate, $this->checkNum,
                 $this->depositById, $this->bankDepositDate, $this->transStatus, $this->transDesc,

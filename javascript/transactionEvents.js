@@ -428,7 +428,7 @@ $(document).on('click', '#submit', function (e) {
     });
     //add discount to end of array
     transactionItems[transactionItems.length-1][0] = 1;
-    transactionItems[transactionItems.length-1][1] = 'discount';
+    transactionItems[transactionItems.length-1][1] = 'Discount';
     transactionItems[transactionItems.length-1][2] = $('#discount').val();
     transactionItems[transactionItems.length-1][3] = 'discount';
 
@@ -456,7 +456,7 @@ $(document).on('click', '#submit', function (e) {
             success: function (data) {
                 if(data === 1){
                     //refresh page OR clear all selected fields
-                    location.reload();
+                    // location.reload();
 
                     //display success message
                     alert("Your form was submitted.");
