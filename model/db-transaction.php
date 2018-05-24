@@ -73,38 +73,6 @@ class DBTransaction extends DBObject
         return $dbh->lastInsertId();
     }
 
-    function addLineItem($transItemId, $transId, $itemDesc, $amount, $itemId, $dateCreated, $createdBy, $dateModified, $modifiedBy, $table = 'transaction_item')
-    {
-        global $dbh;
-        $dbh = Parent::connect();
-
-        $table = "transaction_item";
-
-        //Define Query
-        $sql = "INSERT INTO " . $table;
-        $sql = $sql . "(trans_item_id, trans_id, item_desc, amount, 
-            item_id, date_created, created_by, date_modified, modified_by)";
-        $sql = $sql . "VALUES (:transItemId, :transId, :itemDesc, :amount, 
-            :itemId, :dateCreated, :createdBy, :dateModified, :modifiedBy) ";
-
-        //Prepare Statement
-        $statement = $dbh->prepare($sql);
-
-        //Bind Parameter
-        $statement->bindParam(':transItemId', $transItemId, PDO::PARAM_STR);
-        $statement->bindParam(':transId', $transId, PDO::PARAM_STR);
-        $statement->bindParam(':itemDesc', $itemDesc, PDO::PARAM_STR);
-        $statement->bindParam(':amount', $amount, PDO::PARAM_STR);
-        $statement->bindParam(':itemId', $itemId, PDO::PARAM_STR);
-        $statement->bindParam(':dateCreated', $dateCreated, PDO::PARAM_STR);
-        $statement->bindParam(':createdBy', $createdBy, PDO::PARAM_STR);
-        $statement->bindParam(':dateModified', $dateModified, PDO::PARAM_STR);
-        $statement->bindParam(':modifiedBy', $modifiedBy, PDO::PARAM_STR);
-
-        //Execute Statement
-        $statement->execute();
-    }
-
     function getTransactions($table = 'transaction')
     {
         global $dbh;

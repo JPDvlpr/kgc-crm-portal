@@ -454,8 +454,6 @@ $(document).on('click', '#submit', function (e) {
                     ccType: ccType,
                     transDesc: transDesc },
             success: function (data) {
-                alert(data);
-
                 if(data === 1){
                     //refresh page OR clear all selected fields
                     location.reload();
