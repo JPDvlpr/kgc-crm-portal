@@ -1,4 +1,4 @@
-filename: <input id="fileName" type="text"></input>
+filename: <input id="filename" type="text"></input>
 TransactionID: <input id = "trans_id" type="text"></input>
 
 
