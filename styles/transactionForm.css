@@ -38,11 +38,11 @@ div.subCategory div.input-group
 }
 .subCategory select#quantity
 {
-    width: 10%;
+    width: 15%;
 }
 .subCategory select#subCategory
 {
-    width: 40%;
+    width: 50%;
 }
 .subCategory select#donation
 {
