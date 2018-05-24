@@ -15,7 +15,7 @@ $getCSVFile = function ($table, $category) {
     $fileName = $_POST['filteringData']['filters']['filename'];
     $filters = $_POST['filteringData']['filters'];
     unset($filters['filename']);
-    var_dump($filters);
+//    var_dump($filters);
 //    $transactions = Transaction::getTransactions($filters);
 //    $transactions = array(array('Mel23', '24', '99'), array('Tye', '67', '25'), array('Kev', '45', '2'), array('Joe', '33', '44'));
 //    $fileName = "LATEST_FILE";
@@ -48,12 +48,12 @@ $getCSVFile = function ($table, $category) {
     //open file
     $file = fopen('../files/'.$fileName, 'wb');
     //store column headers
-    $store = array("dont Have", "transaction");
+    $store = array("Transaction Number", "Contact Name");
     fputcsv($file, $store);
 
     //store column values
     foreach ($transactions as $transaction) {
-        $store = array($transaction['trans_id'],$transaction['trans_name']);
+        $store = array($transaction['Transaction Number'],$transaction['Contact Name']);
         fputcsv($file, $store);
 //        fputcsv($file, $transaction);
     }

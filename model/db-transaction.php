@@ -139,12 +139,23 @@ class DBTransaction extends DBObject
                   INNER JOIN contact c ON c.contact_id = t.contact_id
                   LEFT JOIN item i ON ti.item_id = i.item_id
                   LEFT JOIN item_category ic ON i.cat_id = ic.cat_id ';
-        if ($filters['filter']) {
+//        if ($filters['trans_id']) {
+//
+//            $sql .= 'WHERE t.trans_id' . ' = '.$filters['trans_id'];
+//        }
+        if (sizeof($filters) > 0) {
+            $sql .= 'WHERE ';
+            $first = true;
+            $transactionColumns = array("trans_id","contact_id");
+            $contactColumns = array('contact_name');
+            foreach ($filters as $filter => $filterValue){
+                if (!$first) $sql .= ', ';
+                if(in_array($filter,$transactionColumns)) $sql .= 't.';
+                $sql .= $filter . ' = ' . $filterValue;
+                $first = false;
+            }
 
-            $sql .= 'WHERE t.trans_id' . ' = '.$filters['filter'];
-        }
-
-
+}
         //prepare statement
         $statement = $dbh->prepare($sql);
 
