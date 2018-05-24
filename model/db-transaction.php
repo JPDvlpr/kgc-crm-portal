@@ -5,42 +5,43 @@ require_once("db-object.php");
 class DBTransaction extends DBObject
 {
     /* @param $id
-* @param $amount
-* @param $transDate
-* @param $checkNum
-* @param $depositById
-* @param $bankDepositDate
-* @param $transStatus
-* @param $sourceType
-* @param $sourceId
-* @param $transType
-* @param $contactId
-* @param $dateCreated
-* @param $createdBy
-* @param $dateModified
-* @param $modifiedBy
-* @param $transactionItems
+     * @param $amount
+     * @param $transDate
+     * @param $checkNum
+     * @param $depositById
+     * @param $bankDepositDate
+     * @param $transStatus
+     * @param $sourceType
+     * @param $sourceId
+     * @param $transType
+     * @param $contactId
+     * @param $dateCreated
+     * @param $createdBy
+     * @param $dateModified
+     * @param $modifiedBy
+     * @param $transactionItems
      */
     function addTransaction($id, $amount, $transDate, $checkNum, $depositById,
                             $bankDepositDate, $transStatus, $transDesc, $sourceType, $sourceId,
                             $transType, $contactId, $dateCreated, $createdBy,
                             $dateModified, $modifiedBy, $transactionItems,
-                            $table = 'transaction'){//}, $dateOfTrans, $payMethod, $discount, $payAmount){
+                            $table = 'transaction')
+    {//}, $dateOfTrans, $payMethod, $discount, $payAmount){
         global $dbh;
         $dbh = Parent::connect();
 
         //Define Query
-        $sql = "INSERT INTO ". $table;
+        $sql = "INSERT INTO " . $table;
 //        $sql = $sql . "(dateOfTrans, payMethod, discount, paymentAmount)";
 //        $sql = $sql . "VALUES (:dateOfTrans, :payMethod, :discount, :payAmount)";
         $sql = $sql . " (trans_id, amount, trans_date, ";
-        if($checkNum != 0) {
+        if ($checkNum != 0) {
             $sql = $sql . "check_num, ";
         }
         $sql = $sql . "trans_status, trans_desc, trans_type, contact_id,
             date_created, created_by, date_modified, modified_by) ";
         $sql = $sql . "VALUES (:id, :amount, :transDate, ";
-        if($checkNum != 0) {
+        if ($checkNum != 0) {
             $sql = $sql . ":checkNum, ";
         }
         $sql = $sql . ":transStatus, :transDesc, :transType, :contactId,
@@ -50,10 +51,10 @@ class DBTransaction extends DBObject
         $statement = $dbh->prepare($sql);
 
         //Bind Parameter
-        $statement->bindParam(':id', $id,PDO::PARAM_INT);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->bindParam(':amount', $amount, PDO::PARAM_STR);
         $statement->bindParam(':transDate', $transDate, PDO::PARAM_STR);
-        if($checkNum != 0){
+        if ($checkNum != 0) {
             $statement->bindParam(':checkNum', $checkNum, PDO::PARAM_STR);
         }
         $statement->bindParam(':transStatus', $transStatus, PDO::PARAM_STR);
@@ -72,14 +73,15 @@ class DBTransaction extends DBObject
         return $dbh->lastInsertId();
     }
 
-    function addLineItem($transItemId, $transId, $itemDesc, $amount, $itemId, $dateCreated, $createdBy, $dateModified, $modifiedBy,$table = 'transaction_item'){
+    function addLineItem($transItemId, $transId, $itemDesc, $amount, $itemId, $dateCreated, $createdBy, $dateModified, $modifiedBy, $table = 'transaction_item')
+    {
         global $dbh;
         $dbh = Parent::connect();
 
         $table = "transaction_item";
 
         //Define Query
-        $sql = "INSERT INTO ". $table;
+        $sql = "INSERT INTO " . $table;
         $sql = $sql . "(trans_item_id, trans_id, item_desc, amount, 
             item_id, date_created, created_by, date_modified, modified_by)";
         $sql = $sql . "VALUES (:transItemId, :transId, :itemDesc, :amount, 
@@ -109,7 +111,7 @@ class DBTransaction extends DBObject
         $dbh = Parent::connect();
 
         //Define Query
-        $sql = "SELECT * FROM ".$table;
+        $sql = "SELECT * FROM " . $table;
 
         //prepare statement
         $statement = $dbh->prepare($sql);
@@ -146,16 +148,19 @@ class DBTransaction extends DBObject
         if (sizeof($filters) > 0) {
             $sql .= 'WHERE ';
             $first = true;
-            $transactionColumns = array("trans_id","contact_id");
+            $transactionColumns = array("trans_id", "contact_id");
             $contactColumns = array('contact_name');
-            foreach ($filters as $filter => $filterValue){
-                if (!$first) $sql .= ', ';
-                if(in_array($filter,$transactionColumns)) $sql .= 't.';
-                $sql .= $filter . ' = ' . $filterValue;
-                $first = false;
+            foreach ($filters as $filter => $filterValue) {
+                if ($filterValue != "") {
+                    if (!$first) $sql .= 'AND ';
+                    if (in_array($filter, $transactionColumns)) $sql .= 't.';
+                    if (in_array($filter, $contactColumns)) $sql .= 'c.';
+                    $sql .= $filter . ' = ' . $filterValue;
+                    $first = false;
+                }
             }
 
-}
+        }
         //prepare statement
         $statement = $dbh->prepare($sql);
 
