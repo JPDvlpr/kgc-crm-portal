@@ -90,7 +90,7 @@ class Contact
             array_push($contactList, array(
                 'id' => $contact['contact_id'],
                 'name' => $contact['contact_name'],
-                'address' => $contact['address'].', '.$contact['city'],
+                'address' => $contact['address'].' '.$contact['city'].', '.$contact['state'].' '.$contact['zip'],
                 'cell' => $contact['cell'],
                 'phone' => $contact['phone'],
                 'email' => $contact['email_address'],

@@ -3,6 +3,7 @@ var rows = 0; //numbers of line items rows, when 0 header should disappear
 var valid = false; //check to see if form is valid on server before submitting to server
 var currentYear = parseInt((new Date).getFullYear()); //get current year for future display
 var contacts = []; //variable to store contacts (2d array) from database
+
 //create string to generate options for quantity select tags
 var optionsString = "<option selected=\"selected\">Qty</option>";
 for(var i = 1; i <= 10; i++)
@@ -93,6 +94,14 @@ $(document).on('input', '#chosenContact', function () {
             $('#conAddress').html("Address: "+contacts[i]['address']);
             $('#altName').html("Alternate Contact Name: "+contacts[i]['altName']);
             $('#altPhone').html("Alternate Contact Phone: "+contacts[i]['altPhone']);
+        }
+        else{
+            $('#conEmail').html('');
+            $('#conCell').html('');
+            $('#conPhone').html('');
+            $('#conAddress').html('');
+            $('#altName').html('');
+            $('#altPhone').html('');
         }
     }
 });
@@ -266,7 +275,7 @@ $(document).on('input', '#paid, #discount', function () {
             $('#'+other.attr('id')+'Error').remove();
         }
         else if(!isNaN(difference))
-            other.val(difference);
+            other.val(Math.round(difference * 100) / 100);
     }
     else{
         $(this).parent().after(
