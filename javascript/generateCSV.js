@@ -15,7 +15,6 @@ $(document).on('click', '#generate', function (){
     $('#generate').html('Generating');
     var filter = ':' + $('#filter').val() + '"';
     var filter = $('#filter').val();
-    // alert(filter);
 
     var filters = {};
     $('input').each(function() {

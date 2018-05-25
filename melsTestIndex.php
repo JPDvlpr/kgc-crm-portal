@@ -93,5 +93,5 @@ include("views/generateCSVButton.php");
 //   }
 ?>
 <?php
-standard_footer("javascript/generateCSV.js");
+standard_footer("javascript/filterData.js");
 ?>

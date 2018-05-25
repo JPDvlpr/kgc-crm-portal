@@ -117,14 +117,14 @@ class DBTransaction extends DBObject
                 if ($filterValue != "") {
                     if ($first) $sql .= 'WHERE ';
                     if (!$first) $sql .= ' AND ';
-                    if ($filter == 'begin_date') {
+                    if ($filter == 'start_date') {
                         $sql .= 'trans_date' . " >= '" . $filterValue . "' ";
                     } elseif ($filter == 'end_date') {
                         $sql .= 'trans_date' . " <= '" . $filterValue . "' ";
                     } else {
                         $sql .= $filter . " = '" . $filterValue . "' ";
-                        $first = false;
                     }
+                    $first = false;
                 }
             }
 

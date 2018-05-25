@@ -11,22 +11,19 @@
 include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/model/db-transaction.php");
 
 $previewCSVData = function () {
-    $fileName = $_POST['filteringData']['filters']['filename'];
     $filters = $_POST['filteringData']['filters'];
     unset($filters['filename']);
 
     $transactions = DBTransaction::getFilteredTransactions($filters);
-    $previews = array();
+    $previews = array(array("Transaction Date","contact name", "total amount", "item description"));
 
     foreach ($transactions as $transaction) {
         $store = array($transaction['trans_date'],$transaction['contact_name'],
             $transaction['total_amount'],$transaction['item_desc']);
         array_push($previews, $store);
-//        fputcsv($file, $transaction);
     }
 
-    return $previews;
-
+    echo json_encode($previews);
 };
 $previewCSVData();
 

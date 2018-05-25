@@ -20,16 +20,16 @@ contact category that returns real contact data
                     <div class="form-row">
                         <div class="col">
                             <h5>Start Date:</h5>
-                            <label for="from_date"></label><input type="date" class="form-control" id="from_date"
-                                                                  name="from_date"
+                            <label for="from_date"></label><input type="date" class="form-control" id="start_date"
+                                                                  name="start_date"
                                                                   value="<?php echo date("Y-01-01") ?>">
 
                         </div>
 
                         <div class="col">
                             <h5>End Date:</h5>
-                            <label for="to_date"></label><input type="date" class="form-control" id="to_date"
-                                                                name="to_date"
+                            <label for="to_date"></label><input type="date" class="form-control" id="end_date"
+                                                                name="end_date"
                                                                 value="<?php echo date("Y-m-d") ?>">
                         </div>
                     </div>
@@ -42,7 +42,7 @@ contact category that returns real contact data
                     <h5>Contact Name</h5>
                 </td>
                 <td colspan="2">
-                    <input id="contactColumn" type=text list=contacts class="form-control"
+                    <input id="contact_name" type=text list=contacts class="form-control"
                            placeholder="Filter By Contact Columns">
                     <datalist id="contacts">
 
@@ -55,17 +55,17 @@ contact category that returns real contact data
                     <h5>Category/Item</h5>
                 </td>
                 <td height="150px">
-<!--                    <input list="contacts" name="contacts"-->
-<!--                           placeholder="Filter By Contact Columns">-->
-<!--                    <datalist id="contacts">-->
-<!--                            <option value="purple">-->
-<!--                            <option value="yellow">-->
-<!--                    </datalist>-->
+                    <!--                    <input list="contacts" name="contacts"-->
+                    <!--                           placeholder="Filter By Contact Columns">-->
+                    <!--                    <datalist id="contacts">-->
+                    <!--                            <option value="purple">-->
+                    <!--                            <option value="yellow">-->
+                    <!--                    </datalist>-->
 
                     <input list=category id="chosencategory" class="form-control" placeholder="textttt">
                     <datalist id="category">
                         <?php
-                        require ("categories2.php");
+                        require("categories2.php");
                         ?>
                     </datalist>
                 </td>
@@ -80,10 +80,8 @@ contact category that returns real contact data
             </tbody>
         </table>
     </div>
-    <input type="submit" class="btn btn-secondary" name="submit" id="filter" value="Filter">
+    <!--    <input type="submit" class="btn btn-secondary" name="submit" id="filter" value="Filter">-->
 </form>
-
-
 
 
 <form action="#" method="post">
@@ -98,15 +96,15 @@ contact category that returns real contact data
         <div class="col-8 border">
             <div class="row">
                 <div class="col-6"><h5>Start Date:</h5>
-                    <label for="from_date"></label><input type="date" class="form-control" id="from_date"
-                                                          name="from_date"
+                    <label for="from_date"></label><input type="date" class="form-control" id="start_date"
+                                                          name="start_date"
                                                           value="<?php echo date("Y-01-01") ?>">
 
                 </div>
                 <div class="col-6">
                     <h5>End Date:</h5>
-                    <label for="to_date"></label><input type="date" class="form-control" id="to_date"
-                                                        name="to_date"
+                    <label for="to_date"></label><input type="date" class="form-control" id="end_date"
+                                                        name="end_date"
                                                         value="<?php echo date("Y-m-d") ?>">
                 </div>
             </div>
@@ -121,7 +119,7 @@ contact category that returns real contact data
 
         <div class="col-8 border">
             <br>
-            <input id="contactColumn" type=text list=contacts class="form-control"
+            <input id="contact_name" type=text list=contacts class="form-control"
                    placeholder="Filter By Contact Columns">
             <datalist id="contacts">
                 <label for="columnselect"></label><select id="columnselect">
@@ -218,8 +216,18 @@ contact category that returns real contact data
 
 
     </div>
-    <input type="submit" class="btn btn-secondary" name="submit" id="filter" value="Filter">
+    <!--    <input type="submit" class="btn btn-secondary" name="submit" id="filter" value="Filter">-->
+    <div class="row p-3">
+        <div class="col-1"></div>
+        <div class="col-2">
+            <button id="preview">Preview Data</button>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-2">
+            <button id="generate">Generate CSV</button>
+        </div>
+    </div>
 </form>
+<div id="results"></div>
 <?php
 //require_once("../model/db-filters.php");
-//?>
