@@ -182,11 +182,13 @@ class Transaction
 
 //        $this->transDate = $transDate;
         // validate bankDepositDate - check if it is a valid date
-        if (!validateDate($this->dateModified)) {
-            $errors['dateModified'] = 'Invalid Date';
-        }
+//        if (!validateDate($this->bankDepositDate)) {
+//            $errors['dateModified'] = 'Invalid Date';
+//        }
 
 //        $this->checkNum = $checkNum;
+
+
         // A = Cash
         // H = Check
         // R = Credit
@@ -248,13 +250,11 @@ class Transaction
 
         // validate each line item
         // TODO make sure that number times itemCost == amount of this line_item
-        $transactionError = array();
+        $count = 1;
         foreach ($this->transactionItems as $item) {
-            if (!validateItemId($item->getItemId())) $transactionError[] = $item->getTransactionItemId();
-        }
-        if (sizeof($transactionError) > 0) {
-            $errors['lineItem'] = "Line item doesn't exist";
-            $errors['invalidLineItems'] = $transactionError;
+            $errors['item' + $count] = array();
+            $item->validateTransactionItem($errors['item' + $count]);
+            $count++;
         }
 
         return $errors;
@@ -266,7 +266,7 @@ class Transaction
         $this->validateTransaction($errors);
         if (sizeof($errors) <= 0) {
             //if valid, then save
-            $saveToLocation = new DBItem();
+            $saveToLocation = new DBTransaction();
 
             $this->id = $saveToLocation->addTransaction($this->id, $this->amount, $this->transDate, $this->checkNum,
                 $this->depositById, $this->bankDepositDate, $this->transStatus, $this->transDesc,
@@ -274,8 +274,9 @@ class Transaction
                 $this->dateCreated, $this->createdBy, $this->dateModified, $this->modifiedBy,
                 $this->transactionItems);
 
+            $count = 1;
             foreach ($this->transactionItems as $item) {
-                $item->saveTransactionItem($this->id);
+                $item->saveTransactionItem($this->id, $count++);
             }
         }
     }

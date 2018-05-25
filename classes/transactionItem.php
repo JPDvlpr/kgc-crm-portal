@@ -82,14 +82,6 @@ class TransactionItem
     // TODO figure out where to do all of this and what needs to be validated.
     public function validateTransactionItem($errors, $new = true)
     {
-//        protected $transItemId; // INT(11)
-        if (!validateInteger($this->transItemId)) {
-            //TODO - should this be a check for an integer or a check for existence in database
-            // here (ie whether new or old check for integer - add a check in !$new for existence
-            // in database
-            $errors['transItemId'] = 'Transaction Item ID was not valid';
-        }
-
         //        protected $transId; // INT(11)
         // TODO - change to validating by checking if ID exists in database or ???
         // here (ie whether new or old check for integer - add a check in !$new for existence
@@ -156,20 +148,15 @@ class TransactionItem
     //get list of items transaction_item table
     //write to database use method in db_transaction
     //***need to get item from transaction.php and insert into transactions table
-    public function saveTransactionItem($transId, $table = 'transaction', $numReturn = 0)
+    public function saveTransactionItem($transId, $numReturn = 0)
     {
         $this->transId = $transId;
 
-        $errors = array();
-        $this->validateTransactionItem($errors);
-        if (sizeof($errors) <= 0) {
-            //if valid, then save
-            $saveToLocation = new DBTransaction();
+        $saveToLocation = new DBItem();
 
-            $saveToLocation->addLineItem($this->transItemId, $this->transId,
-                $this->itemDesc, $this->amount, $this->itemId,
-                $this->dateCreated, $this->createdBy, $this->dateModified, $this->modifiedBy,$table = 'transaction_item');
-        }
+        $saveToLocation->addLineItem($this->transId,
+            $this->itemDesc, $this->amount, $this->itemId,
+            $this->dateCreated, $this->createdBy, $this->dateModified, $this->modifiedBy,$table = 'transaction_item');
     }
 //        //gives access to the variable in index
 //        global $dbh;
