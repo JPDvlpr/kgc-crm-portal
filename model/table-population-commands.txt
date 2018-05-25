@@ -1,5 +1,22 @@
 -----Update Commands for database as of 4/27/2018------
 UPDATE item SET cat_id = 7 WHERE cat_id = 3
+-----Update Commands for database as of 5/24/3018------
+CREATE VIEW transaction_information AS
+SELECT t.trans_id, ti.trans_item_id, t.trans_date, c.contact_name, t.trans_status,
+                    t.amount as total_amount, t.trans_desc,
+					i.item_name, (ti.amount/ i.item_price) as quantity, ti.item_desc, i.item_price, ic.cat_name,
+					t.check_num, addepositby.admin_name, t.bank_deposit_date,
+					t.source_type, t.source_id, t.trans_type,
+					ti.date_created, adcreate.admin_name as created_by,
+					ti.date_modified, admodify.admin_name as modified_by
+                  FROM transaction t
+                  INNER JOIN transaction_item ti ON t.trans_id = ti.trans_id
+                  INNER JOIN contact c ON c.contact_id = t.contact_id
+                  LEFT JOIN item i ON ti.item_id = i.item_id
+                  LEFT JOIN item_category ic ON i.cat_id = ic.cat_id
+                  LEFT JOIN admins adcreate ON t.created_by = adcreate.admin_id
+				  LEFT JOIN admins admodify ON t.modified_by = admodify.admin_id
+				  LEFT JOIN admins addepositby ON t.deposit_by_id = addepositby.admin_id
 
 
 

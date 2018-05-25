@@ -100,31 +100,31 @@ class DBTransaction extends DBObject
         $dbh = Parent::connect();
 
         //Define Query
-        $sql = 'SELECT t.trans_id as "Transaction Number", c.contact_name as "Contact Name", 
-                    t.amount as "Transaction Total", i.item_price as "Item Price", 
-                    ic.cat_name as "Category", i.item_name as "Item",
-                    (ti.amount/ i.item_price) as Quantity
-                  FROM transaction t
-                  INNER JOIN transaction_item ti ON t.trans_id = ti.trans_id
-                  INNER JOIN contact c ON c.contact_id = t.contact_id
-                  LEFT JOIN item i ON ti.item_id = i.item_id
-                  LEFT JOIN item_category ic ON i.cat_id = ic.cat_id ';
-//        if ($filters['trans_id']) {
-//
-//            $sql .= 'WHERE t.trans_id' . ' = '.$filters['trans_id'];
-//        }
+//        $sql = 'SELECT t.trans_id as "Transaction Number", c.contact_name as "Contact Name",
+//                    t.amount as "Transaction Total", i.item_price as "Item Price",
+//                    ic.cat_name as "Category", i.item_name as "Item",
+//                    (ti.amount/ i.item_price) as Quantity
+//                  FROM transaction t
+//                  INNER JOIN transaction_item ti ON t.trans_id = ti.trans_id
+//                  INNER JOIN contact c ON c.contact_id = t.contact_id
+//                  LEFT JOIN item i ON ti.item_id = i.item_id
+//                  LEFT JOIN item_category ic ON i.cat_id = ic.cat_id ';
+
+        $sql = 'SELECT * FROM transaction_information ';
         if (sizeof($filters) > 0) {
-            $sql .= 'WHERE ';
             $first = true;
-            $transactionColumns = array("trans_id", "contact_id");
-            $contactColumns = array('contact_name');
             foreach ($filters as $filter => $filterValue) {
                 if ($filterValue != "") {
-                    if (!$first) $sql .= 'AND ';
-                    if (in_array($filter, $transactionColumns)) $sql .= 't.';
-                    if (in_array($filter, $contactColumns)) $sql .= 'c.';
-                    $sql .= $filter . ' = ' . $filterValue;
-                    $first = false;
+                    if ($first) $sql .= 'WHERE ';
+                    if (!$first) $sql .= ' AND ';
+                    if ($filter == 'begin_date') {
+                        $sql .= 'trans_date' . " >= '" . $filterValue . "' ";
+                    } elseif ($filter == 'end_date') {
+                        $sql .= 'trans_date' . " <= '" . $filterValue . "' ";
+                    } else {
+                        $sql .= $filter . " = '" . $filterValue . "' ";
+                        $first = false;
+                    }
                 }
             }
 
