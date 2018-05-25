@@ -22,11 +22,11 @@ th{
     bottom: 0%;
 }
 
-#filter {
-    position: absolute;
-    left: 0%;
-    bottom: 0%;
-}
+/*#filter {*/
+    /*position: absolute;*/
+    /*left: 0%;*/
+    /*bottom: 0%;*/
+/*}*/
 
 /*date*/
 #from_date, #to_date {
@@ -41,4 +41,8 @@ th{
 
 .td1{
     border-right-color: transparent !important;
+}
+
+td #td-left-col{
+    width: 50px !important;
 }

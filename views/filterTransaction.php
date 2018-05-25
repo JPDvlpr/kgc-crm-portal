@@ -4,23 +4,7 @@ Filter page has the option to retrieve data
 back between certain dates and can filter by
 contact category that returns real contact data
 -->
-<?php
-ini_set("display_errors", 1);
-error_reporting(E_ALL);
-?>
-<!DOCTYPE html>
-<html>
-<head>
 
-    <!-- CDN minimized bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <!--    <link rel="stylesheet" href="../styles/filters.css">-->
-    <script
-            src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
-</head>
 <body>
 
 <form action="#" method="post">
@@ -31,7 +15,7 @@ error_reporting(E_ALL);
             </thead>
             <tbody>
             <tr>
-                <td>
+                <td class="td-left-col">
                     <h5>Date:</h5>
                 </td>
                 <td class="td1" colspan="2">
@@ -56,7 +40,7 @@ error_reporting(E_ALL);
 
 
             <tr>
-                <td>
+                <td class="td-left-col">
                     <h5>Contact Name</h5>
                 </td>
                 <td colspan="2">
@@ -89,7 +73,7 @@ error_reporting(E_ALL);
             </tr>
 
             <tr>
-                <td height="150px">
+                <td id="td-left-col" height="150px">
                     <h5>Category/Item</h5>
                 </td>
                 <td height="150px">
