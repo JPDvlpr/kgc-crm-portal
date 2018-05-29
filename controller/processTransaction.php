@@ -1,8 +1,4 @@
 <?php
-    //php error reporting
-    ini_set("display_errors", 1);
-    error_reporting(E_ALL);
-
     //include class object
     include_once $_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/classes/transaction.php";
 

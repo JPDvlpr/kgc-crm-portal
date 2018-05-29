@@ -7,11 +7,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="2">Created By: </td>
+                        <td colspan="2">Created By: <span class="text-success">*</span></td>
                         <td colspan="4"><input id="adminId" type="text" name="depositby" class="form-control"></td>
                     </tr>
                     <tr>
-                        <td colspan="2">Contact: </td>
+                        <td colspan="2">Contact: <span class="text-success">*</span></td>
                         <td colspan="4">
                             <input id="chosenContact" type=text list=contacts class="form-control">
                             <datalist id="contacts">
@@ -29,7 +29,7 @@
                         <td colspan="4"><input id="date" type="date" name="date" class="form-control"></td>
                     </tr>
                     <tr>
-                        <td colspan="6">Reason for Deposit:
+                        <td colspan="6">Reason for Deposit: <span class="text-success">*</span>
                             <div id="categories" class="container">
                                 <?php
                                     include("categories.php");
@@ -61,7 +61,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">Amount Paid: </td>
+                        <td colspan="2">Amount Paid: <span class="text-success">*</span></td>
                         <td colspan="4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -72,7 +72,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">Deposit Type: </td>
+                        <td colspan="2">Deposit Type: <span class="text-success">*</span></td>
                         <td colspan="4">
                             <div class="radio">
                                 <label><input class="payMethod" type="radio" name="payMethod" value="A"> Cash</label>

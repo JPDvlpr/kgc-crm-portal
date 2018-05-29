@@ -55,6 +55,7 @@ function standard_header($title, $stylesheet)
             <form id="form" class="form-inline">
                 <button id="button1" class="btn btn-sm btn-outline-primary h-25" type="button"><a class="nav-link" href="index.php" class="nav-item active"><h4>New Transactions</h4></a></button>
                 <button id="button2"class="btn btn-sm btn-outline-primary h-25" type="button"><a class="nav-link" href="contactIndex.php" class="nav-item active"><h4>New Contact</h4></a></button>
+                <button id="button3"class="btn btn-sm btn-outline-primary h-25" type="button"><a class="nav-link" href="filterIndex.php" class="nav-item active"><h4>Filter Transactions</h4></a></button>
             </form>
         </nav>
     </header>
