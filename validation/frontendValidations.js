@@ -111,7 +111,7 @@ function validName(name) {
 
 function validAddress(address) {
     if(isEmptyString(address)) return false;
-    if(address.match(/^(\w|\d|\s){0,200}$/)){
+    if(address.match(/^(\w|\d|\s|(?:[' . -])){0,200}$/)){
         return true;
     }
     return false;
@@ -127,7 +127,7 @@ function validCity(city) {
 
 function validZip(zip) {
     if(isEmptyString(zip))return false;
-    if(zip.match(/^\d{5}-?\d{4}?$/)){
+    if(zip.match(/^\d{5}(-?\d{4})?$/)){
         return true;
     }
     return false;

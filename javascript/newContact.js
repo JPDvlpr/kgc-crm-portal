@@ -11,7 +11,7 @@ $(document).on('input', '#contactAddress', function () {
     $("#addressErrors").remove();
     if(!validAddress($(this).val()) && $(this).val().length > 0){
         $(this).after("<ul id='addressErrors' class='error'>" +
-                "<li>Address must be less than 200 characters</li>" +
+                "<li>Address must be less than 200 characters and can't have Quotes in it</li>" +
             "</ul>");
     }
 });
@@ -29,7 +29,7 @@ $(document).on('input', '#contactZipCode', function () {
     $("#zipCodeErrors").remove();
     if(!validZip($(this).val()) && $(this).val().length > 0){
         $(this).after("<ul id='zipCodeErrors' class='error'>" +
-                "<li>Zip can't be more than 10 numbers and can't contain letters</li>" +
+                "<li>Zip can't be less thane 5 or more than 10 numbers and can't contain letters</li>" +
             "</ul>");
     }
 });
