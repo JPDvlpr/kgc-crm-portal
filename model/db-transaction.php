@@ -114,7 +114,7 @@ class DBTransaction extends DBObject
         if (sizeof($filters) > 0) {
             $first = true;
             foreach ($filters as $filter => $filterValue) {
-                if ($filterValue != "") {
+                if ($filterValue != "" && $filterValue != "all") {
                     if ($first) $sql .= 'WHERE ';
                     if (!$first) $sql .= ' AND ';
                     if ($filter == 'start_date') {
