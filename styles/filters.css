@@ -42,6 +42,11 @@ th{
     display: block !important;
 }
 
+/* Force drop-down arrow to display constantly for combo-box */
+input::-webkit-calendar-picker-indicator {
+    opacity: 100;
+}
+
 /*.td1{*/
 /*border-right-color: transparent !important;*/
 /*}*/

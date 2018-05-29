@@ -43,27 +43,7 @@ contact category that returns real contact data
             <input id="contact_name" type=text list=contacts class="form-control"
                    placeholder="Filter By Contact Columns">
             <datalist id="contacts">
-                <label for="columnselect"></label><select id="columnselect">
-                    <script>
-                        var contacts;
-                        $.ajax({
-                            type: "POST",
-                            url: "views/getContacts.php",
-                            dataType: "json",
-                            success: function (data) {
-                                for (var i = 0; i < data.length; i++) {
-                                    $('#columnselect').append("<option value='" + data[i]['phone'] + "'></option>" +
-                                        "<option value='" + data[i]['name'] + "'></option>");
-                                    contacts.push(data[i]);
 
-                                }
-                            },
-                            error: function (xhr, textStatus, thrownError, data) {
-                                alert("Error: " + thrownError);
-                            }
-                        });
-                    </script>
-                </select>
             </datalist>
             <br>
         </div>
@@ -76,41 +56,19 @@ contact category that returns real contact data
 
         <div class="col-4 border">
             <br>
-            <input list=category id="chosencategory" class="form-control" placeholder="textttt">
-            <datalist id="category">
+            <select id="category" class="form-control">
+                <option value="all" selected>All</option>
                 <?php
                 require("categories2.php");
                 ?>
-            </datalist>
+            </select>
             <br>
         </div>
         <div class="col-4 border">
             <br>
-            <input id="contactColumn" type=text list=contacts class="form-control"
-                   placeholder="Filter By Contact Columns">
-            <datalist id="contacts">
-                <label for="columnselect"></label><select id="columnselect">
-                    <script>
-                        var contacts;
-                        $.ajax({
-                            type: "POST",
-                            url: "views/getContacts.php",
-                            dataType: "json",
-                            success: function (data) {
-                                for (var i = 0; i < data.length; i++) {
-                                    $('#columnselect').append("<option value='" + data[i]['phone'] + "'></option>" +
-                                        "<option value='" + data[i]['name'] + "'></option>");
-                                    contacts.push(data[i]);
-
-                                }
-                            },
-                            error: function (xhr, textStatus, thrownError, data) {
-                                alert("Error: " + thrownError);
-                            }
-                        });
-                    </script>
-                </select>
-            </datalist>
+            <select id="sub-category" class="form-control" disabled>
+                <option>Please Select Category First</option>
+            </select>
             <br>
         </div>
 

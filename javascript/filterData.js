@@ -11,6 +11,62 @@
  *  TODO: Determine if Preview or Generate button needs updating
  *  TODO: Figure out what Tyler wants in the view file that this will return
  */
+//initailize variables
+var contacts = [];
+
+//Get initial contacts and add them to datalist
+$.ajax({
+    type: "POST",
+    url: "views/getContacts.php",
+    dataType: "json",
+    success: function (data) {
+        for(var i = 0; i < data.length; i++){
+            $('#contacts').append("<option value='"+data[i]['name']+"'></option>");
+            contacts.push(data[i]);
+        }
+    },
+    error: function (xhr, textStatus, thrownError, data) {
+        alert("Error: " + thrownError);
+    }
+});
+
+
+//Get sub-categories when category is selected
+$(document).on('change', '#category', function (){
+    var category = $(this).val();
+    var me = $('#sub-category');
+    $('#chosenSub').attr('placeholder', 'Filter by '+category);
+    $.ajax({
+        type: "POST",
+        url: "views/items.php",
+        dataType:"json",
+        data: { category: category },
+        success: function (data) {
+            me.empty();
+            $('#chosenSub').val('');
+
+            if(category != 'all'){
+                me.prop("disabled", false);
+
+                me.append("<option value='all' selected>All</option>")
+                for (var i = 0; i < data.length; i++) {
+                    me.append(
+                        "<option>" + data[i]['item_name'] + "</option>"
+                    );
+                }
+            }
+            else{
+                me.append("<option selected>Please Select Category First</option>");
+                me.prop("disabled", true);
+            }
+
+        },
+        error: function(xhr, textStatus, thrownError, data) {
+            alert("Error: " + thrownError);
+        }
+    });
+});
+
 
 //creates preview of data in csv file
 $(document).on('click', '#preview', function (){
