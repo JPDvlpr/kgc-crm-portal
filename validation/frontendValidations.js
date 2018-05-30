@@ -111,7 +111,7 @@ function validName(name) {
 
 function validAddress(address) {
     if(isEmptyString(address)) return false;
-    if(address.match(/^(\w|\d|\s|(?:[' . -])){0,200}$/)){
+    if(address.match(/^(\w|\d|\s|(?:[' . # -])){0,200}$/)){
         return true;
     }
     return false;
