@@ -30,6 +30,12 @@ $.ajax({
     }
 });
 
+//apply filter data table
+$(document).ready(function () {
+    $('#example').DataTable({
+        "pagingType": "full_numbers"
+    });
+});
 
 //Get sub-categories when category is selected
 $(document).on('change', '#category', function (){

@@ -174,19 +174,3 @@ contact category that returns real contact data
         </tr>
         </tbody>
     </table>
-
-    <script>
-        $(document).ready(function () {
-            $('#example').DataTable({
-                "pagingType": "full_numbers"
-            });
-        });
-    </script>
-<!--</div>-->
-
-<!--        Data Tables for filter page -->
-<script
-        src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>

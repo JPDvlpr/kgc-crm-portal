@@ -35,6 +35,9 @@ function standard_header($title, $stylesheet)
               integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
               crossorigin="anonymous">
 
+        <!--        data table for filter page-->
+        <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+
         <!-- Custom CSS -->
         <link rel="stylesheet" href='<?php echo $stylesheet ?>'>
 
@@ -46,7 +49,6 @@ function standard_header($title, $stylesheet)
         <!-- nav bar styles-->
         <link rel="stylesheet" type="text/css" href="styles/navbarStyles.css">
 
-       
 
     </head>
     <body>
@@ -102,6 +104,9 @@ function standard_footer($pagejs)
             integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
             crossorigin="anonymous"></script>
 
+    <!--        data table for filter page-->
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    
     <!-- custom javascript -->
     <script src="./validation/frontendValidations.js"></script>
     <script src='<?php echo $pagejs ?>'></script>
