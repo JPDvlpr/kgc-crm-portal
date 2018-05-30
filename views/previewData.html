@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+
+<table id="example" class="display" style="width:100%">
+    <thead>
+    <tr>
+        <th>Transaction Date</th>
+        <th>Contact Name</th>
+        <th>Total Amount</th>
+        <th>Item Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>11/30/2017</td>
+        <td>Tim Tebow</td>
+        <td>$250.00</td>
+        <td>Some item description</td>
+    </tr>
+    <tr>
+        <td>05/25/2018</td>
+        <td>Kevin Durant</td>
+        <td>$375.00</td>
+        <td>Some other item description</td>
+    </tr>
+    <tr>
+        <td>11/30/2017</td>
+        <td>Tim Tebow</td>
+        <td>$250.00</td>
+        <td>Some item description</td>
+    </tr>
+    <tr>
+        <td>05/25/2018</td>
+        <td>Kevin Durant</td>
+        <td>$375.00</td>
+        <td>Some other item description</td>
+    </tr>
+    <tr>
+        <td>11/30/2017</td>
+        <td>Tim Tebow</td>
+        <td>$250.00</td>
+        <td>Some item description</td>
+    </tr>
+    <tr>
+        <td>05/25/2018</td>
+        <td>Kevin Durant</td>
+        <td>$375.00</td>
+        <td>Some other item description</td>
+    </tr>
+    <tr>
+        <td>11/30/2017</td>
+        <td>Tim Tebow</td>
+        <td>$250.00</td>
+        <td>Some item description</td>
+    </tr>
+    <tr>
+        <td>05/25/2018</td>
+        <td>Kevin Durant</td>
+        <td>$375.00</td>
+        <td>Some other item description</td>
+    </tr>
+    <tr>
+        <td>11/30/2017</td>
+        <td>Tim Tebow</td>
+        <td>$250.00</td>
+        <td>Some item description</td>
+    </tr>
+    <tr>
+        <td>05/25/2018</td>
+        <td>Kevin Durant</td>
+        <td>$375.00</td>
+        <td>Some other item description</td>
+    </tr>
+    <tr>
+        <td>11/30/2017</td>
+        <td>Tim Tebow</td>
+        <td>$250.00</td>
+        <td>Some item description</td>
+    </tr>
+    <tr>
+        <td>05/25/2018</td>
+        <td>Kevin Durant</td>
+        <td>$375.00</td>
+        <td>Some other item description</td>
+    </tr>
+    </tbody>
+</table>
+
+
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "pagingType": "full_numbers"
+        });
+    });
+</script>
+
+</body>
+</html>

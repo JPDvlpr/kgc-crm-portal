@@ -19,7 +19,8 @@ function standard_header($title, $stylesheet)
 
         <title><?php echo $title ?></title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+              integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+              crossorigin="anonymous">
 
         <!-- bootstrap css -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
@@ -44,6 +45,9 @@ function standard_header($title, $stylesheet)
 
         <!-- nav bar styles-->
         <link rel="stylesheet" type="text/css" href="styles/navbarStyles.css">
+
+       
+
     </head>
     <body>
 
@@ -53,9 +57,18 @@ function standard_header($title, $stylesheet)
         <!-- Just an image -->
         <nav id="nabar" class="navbar navbar-expand-lg navbar-light bg-faded text-white">
             <form id="form" class="form-inline">
-                <button id="button1" class="btn btn-sm btn-outline-primary h-25" type="button"><a class="nav-link" href="index.php" class="nav-item active"><h4>New Transactions</h4></a></button>
-                <button id="button2"class="btn btn-sm btn-outline-primary h-25" type="button"><a class="nav-link" href="contactIndex.php" class="nav-item active"><h4>New Contact</h4></a></button>
-                <button id="button3"class="btn btn-sm btn-outline-primary h-25" type="button"><a class="nav-link" href="filterIndex.php" class="nav-item active"><h4>Filter Transactions</h4></a></button>
+                <button id="button1" class="btn btn-sm btn-outline-primary h-25" type="button"><a class="nav-link"
+                                                                                                  href="index.php"
+                                                                                                  class="nav-item active">
+                        <h4>New Transactions</h4></a></button>
+                <button id="button2" class="btn btn-sm btn-outline-primary h-25" type="button"><a class="nav-link"
+                                                                                                  href="contactIndex.php"
+                                                                                                  class="nav-item active">
+                        <h4>New Contact</h4></a></button>
+                <button id="button3" class="btn btn-sm btn-outline-primary h-25" type="button"><a class="nav-link"
+                                                                                                  href="filterIndex.php"
+                                                                                                  class="nav-item active">
+                        <h4>Filter Transactions</h4></a></button>
             </form>
         </nav>
     </header>

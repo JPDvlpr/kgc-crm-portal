@@ -88,6 +88,105 @@ contact category that returns real contact data
         </div>
     </div>
 </form>
-<div id="results"></div>
-<?php
-//require_once("../model/db-filters.php");
+<!--<div id="results">-->
+
+    <table id="example" class="display" style="width:100%">
+        <thead>
+        <tr>
+            <th>Transaction Date</th>
+            <th>Contact Name</th>
+            <th>Total Amount</th>
+            <th>Item Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>11/30/2017</td>
+            <td>Tim Tebow</td>
+            <td>$250.00</td>
+            <td>Some item description</td>
+        </tr>
+        <tr>
+            <td>05/25/2018</td>
+            <td>Kevin Durant</td>
+            <td>$375.00</td>
+            <td>Some other item description</td>
+        </tr>
+        <tr>
+            <td>11/30/2017</td>
+            <td>Tim Tebow</td>
+            <td>$250.00</td>
+            <td>Some item description</td>
+        </tr>
+        <tr>
+            <td>05/25/2018</td>
+            <td>Kevin Durant</td>
+            <td>$375.00</td>
+            <td>Some other item description</td>
+        </tr>
+        <tr>
+            <td>11/30/2017</td>
+            <td>Tim Tebow</td>
+            <td>$250.00</td>
+            <td>Some item description</td>
+        </tr>
+        <tr>
+            <td>05/25/2018</td>
+            <td>Kevin Durant</td>
+            <td>$375.00</td>
+            <td>Some other item description</td>
+        </tr>
+        <tr>
+            <td>11/30/2017</td>
+            <td>Tim Tebow</td>
+            <td>$250.00</td>
+            <td>Some item description</td>
+        </tr>
+        <tr>
+            <td>05/25/2018</td>
+            <td>Kevin Durant</td>
+            <td>$375.00</td>
+            <td>Some other item description</td>
+        </tr>
+        <tr>
+            <td>11/30/2017</td>
+            <td>Tim Tebow</td>
+            <td>$250.00</td>
+            <td>Some item description</td>
+        </tr>
+        <tr>
+            <td>05/25/2018</td>
+            <td>Kevin Durant</td>
+            <td>$375.00</td>
+            <td>Some other item description</td>
+        </tr>
+        <tr>
+            <td>11/30/2017</td>
+            <td>Tim Tebow</td>
+            <td>$250.00</td>
+            <td>Some item description</td>
+        </tr>
+        <tr>
+            <td>05/25/2018</td>
+            <td>Kevin Durant</td>
+            <td>$375.00</td>
+            <td>Some other item description</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable({
+                "pagingType": "full_numbers"
+            });
+        });
+    </script>
+<!--</div>-->
+
+<!--        Data Tables for filter page -->
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
