@@ -88,89 +88,93 @@ contact category that returns real contact data
         </div>
     </div>
 </form>
-<!--<div id="results">-->
 
-    <table id="example" class="display" style="width:100%">
-        <thead>
-        <tr>
-            <th>Transaction Date</th>
-            <th>Contact Name</th>
-            <th>Total Amount</th>
-            <th>Item Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>11/30/2017</td>
-            <td>Tim Tebow</td>
-            <td>$250.00</td>
-            <td>Some item description</td>
-        </tr>
-        <tr>
-            <td>05/25/2018</td>
-            <td>Kevin Durant</td>
-            <td>$375.00</td>
-            <td>Some other item description</td>
-        </tr>
-        <tr>
-            <td>11/30/2017</td>
-            <td>Tim Tebow</td>
-            <td>$250.00</td>
-            <td>Some item description</td>
-        </tr>
-        <tr>
-            <td>05/25/2018</td>
-            <td>Kevin Durant</td>
-            <td>$375.00</td>
-            <td>Some other item description</td>
-        </tr>
-        <tr>
-            <td>11/30/2017</td>
-            <td>Tim Tebow</td>
-            <td>$250.00</td>
-            <td>Some item description</td>
-        </tr>
-        <tr>
-            <td>05/25/2018</td>
-            <td>Kevin Durant</td>
-            <td>$375.00</td>
-            <td>Some other item description</td>
-        </tr>
-        <tr>
-            <td>11/30/2017</td>
-            <td>Tim Tebow</td>
-            <td>$250.00</td>
-            <td>Some item description</td>
-        </tr>
-        <tr>
-            <td>05/25/2018</td>
-            <td>Kevin Durant</td>
-            <td>$375.00</td>
-            <td>Some other item description</td>
-        </tr>
-        <tr>
-            <td>11/30/2017</td>
-            <td>Tim Tebow</td>
-            <td>$250.00</td>
-            <td>Some item description</td>
-        </tr>
-        <tr>
-            <td>05/25/2018</td>
-            <td>Kevin Durant</td>
-            <td>$375.00</td>
-            <td>Some other item description</td>
-        </tr>
-        <tr>
-            <td>11/30/2017</td>
-            <td>Tim Tebow</td>
-            <td>$250.00</td>
-            <td>Some item description</td>
-        </tr>
-        <tr>
-            <td>05/25/2018</td>
-            <td>Kevin Durant</td>
-            <td>$375.00</td>
-            <td>Some other item description</td>
-        </tr>
-        </tbody>
-    </table>
+
+<div class="row" id="filter-div">
+    <div class="col-10 border">
+        <table id="example" class="display">
+            <thead>
+            <tr>
+                <th>Transaction Date</th>
+                <th>Contact Name</th>
+                <th>Total Amount</th>
+                <th>Item Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>11/30/2017</td>
+                <td>Tim Tebow</td>
+                <td>$250.00</td>
+                <td>Some item description</td>
+            </tr>
+            <tr>
+                <td>05/25/2018</td>
+                <td>Kevin Durant</td>
+                <td>$375.00</td>
+                <td>Some other item description</td>
+            </tr>
+            <tr>
+                <td>11/30/2017</td>
+                <td>Tim Tebow</td>
+                <td>$250.00</td>
+                <td>Some item description</td>
+            </tr>
+            <tr>
+                <td>05/25/2018</td>
+                <td>Kevin Durant</td>
+                <td>$375.00</td>
+                <td>Some other item description</td>
+            </tr>
+            <tr>
+                <td>11/30/2017</td>
+                <td>Tim Tebow</td>
+                <td>$250.00</td>
+                <td>Some item description</td>
+            </tr>
+            <tr>
+                <td>05/25/2018</td>
+                <td>Kevin Durant</td>
+                <td>$375.00</td>
+                <td>Some other item description</td>
+            </tr>
+            <tr>
+                <td>11/30/2017</td>
+                <td>Tim Tebow</td>
+                <td>$250.00</td>
+                <td>Some item description</td>
+            </tr>
+            <tr>
+                <td>05/25/2018</td>
+                <td>Kevin Durant</td>
+                <td>$375.00</td>
+                <td>Some other item description</td>
+            </tr>
+            <tr>
+                <td>11/30/2017</td>
+                <td>Tim Tebow</td>
+                <td>$250.00</td>
+                <td>Some item description</td>
+            </tr>
+            <tr>
+                <td>05/25/2018</td>
+                <td>Kevin Durant</td>
+                <td>$375.00</td>
+                <td>Some other item description</td>
+            </tr>
+            <tr>
+                <td>11/30/2017</td>
+                <td>Tim Tebow</td>
+                <td>$250.00</td>
+                <td>Some item description</td>
+            </tr>
+            <tr>
+                <td>05/25/2018</td>
+                <td>Kevin Durant</td>
+                <td>$375.00</td>
+                <td>Some other item description</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
