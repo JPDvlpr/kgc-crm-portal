@@ -14,6 +14,7 @@ $dbItem = new DBCategories();
 $results = $dbItem->getCategories();
 
 foreach ($results as $result){
+
         echo "<option value='$result'>$result</option>";
 }
 ?>

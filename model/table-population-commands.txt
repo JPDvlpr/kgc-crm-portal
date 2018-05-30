@@ -45,4 +45,5 @@ VALUES (1,'Books','Discount Books','2018-04-18 16:49:31',NULL,'2018-04-18 16:49:
 (3,'Discount','Discount','2018-04-18 16:53:28',NULL,'2018-04-18 16:53:28',NULL,'A'),
 (4,'Class Registration','Registration for the classes','2018-04-18 16:53:28',NULL,'2018-04-18 16:53:28',NULL,'A'),
 (5,'Summer Camps','Camps during summer vacation','2018-04-18 16:53:28',NULL,'2018-04-18 16:53:28',NULL,'A'),
-(6,'Workshops',NULL,'2018-04-18 16:53:28',NULL,'2018-04-18 16:53:28',NULL,'A');
+(6,'Workshops',NULL,'2018-04-18 16:53:28',NULL,'2018-04-18 16:53:28',NULL,'A'),
+(7,'Donation','Donation,'2018-04-27 15:29:35',NULL,'2018-04-27 15:29:35',NULL,'A');
