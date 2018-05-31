@@ -55,7 +55,7 @@ contact category that returns real contact data
 
         <div class="col-4 border">
             <br>
-            <select id="category" class="form-control">
+            <select id="cat_name" class="form-control">
                 <option value="all" selected>All</option>
                 <?php
                 require("categories2.php");
@@ -65,7 +65,7 @@ contact category that returns real contact data
         </div>
         <div class="col-4 border">
             <br>
-            <select id="sub-category" class="form-control" disabled>
+            <select id="item_name" class="form-control" disabled>
                 <option>Please Select Category First</option>
             </select>
             <br>
