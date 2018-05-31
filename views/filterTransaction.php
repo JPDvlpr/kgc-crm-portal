@@ -87,19 +87,5 @@ contact category that returns real contact data
 
 
 <div class="row" id="filter-div">
-    <div class="col-10 border">
-        <table id="example" class="display">
-            <thead>
-            <tr>
-                <th>Transaction Date</th>
-                <th>Contact Name</th>
-                <th>Total Amount</th>
-                <th>Item Description</th>
-            </tr>
-            </thead>
-            <tbody>
-           
-            </tbody>
-        </table>
-    </div>
+
 </div>

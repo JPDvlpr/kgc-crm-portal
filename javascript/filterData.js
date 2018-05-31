@@ -20,8 +20,8 @@ $.ajax({
     url: "views/getContacts.php",
     dataType: "json",
     success: function (data) {
-        for(var i = 0; i < data.length; i++){
-            $('#contacts').append("<option value='"+data[i]['name']+"'></option>");
+        for (var i = 0; i < data.length; i++) {
+            $('#contacts').append("<option value='" + data[i]['name'] + "'></option>");
             contacts.push(data[i]);
         }
     },
@@ -38,20 +38,18 @@ $(document).ready(function () {
 });
 
 //Get sub-categories when category is selected
-$(document).on('change', '#category', function (){
+$(document).on('change', '#cat_name', function () {
     var category = $(this).val();
-    var me = $('#sub-category');
-    $('#chosenSub').attr('placeholder', 'Filter by '+category);
+    var me = $('#item_name');
     $.ajax({
         type: "POST",
         url: "views/items.php",
-        dataType:"json",
-        data: { category: category },
+        dataType: "json",
+        data: {category: category},
         success: function (data) {
             me.empty();
-            $('#chosenSub').val('');
 
-            if(category != 'all'){
+            if (category != 'all') {
                 me.prop("disabled", false);
 
                 me.append("<option value='all' selected>All</option>")
@@ -61,13 +59,13 @@ $(document).on('change', '#category', function (){
                     );
                 }
             }
-            else{
+            else {
                 me.append("<option selected>Please Select Category First</option>");
                 me.prop("disabled", true);
             }
 
         },
-        error: function(xhr, textStatus, thrownError, data) {
+        error: function (xhr, textStatus, thrownError, data) {
             alert("Error: " + thrownError);
         }
     });
@@ -75,18 +73,22 @@ $(document).on('change', '#category', function (){
 
 
 //creates preview of data in csv file
-$(document).on('click', '#preview', function (){
+$(document).on('click', '#preview', function (e) {
+    e.preventDefault();
     // $('#preview').html('Generating');
     // var filter = ':' + $('#filter').val() + '"';
     // var filter = $('#filter').val();
 
     var filters = {};
-    $('input').each(function() {
-        var index = $(this).attr("id");
-        filters[index] = $(this).val();
-    });
+    var filterElements = [$('#start_date'), $('#end_date'), $('#contact_name'), $('#cat_name'), $('#item_name')];
 
-    var filename = {"filteringData":{
+    for (var i = 0; i < filterElements.length; i++) {
+        var index = filterElements[i].attr("id");
+        filters[index] = filterElements[i].val();
+    }
+
+    var filename = {
+        "filteringData": {
             "filename": $('#filename').val(),
             "filters": filters
         }
@@ -96,18 +98,41 @@ $(document).on('click', '#preview', function (){
     $.ajax({
         type: "POST",
         url: "controller/previewDataCSV.php",
+        dataType: "json",
         data: filename,
 
         success: function (results) {
             // var filename = "files/" + results;
             // $('#generate').replaceWith('<button id="download"><a href="' + filename+ '"download>Download CSV</a></button>');
             // console.log(filename);
-            alert(results);
-            $('#result').html(results);
+            // // alert(results);
+            // alert(results);
+            // alert(results[0]);
+            // alert(results[0][0]);
+            var appendResults = '<div class="col-10 border">' +
+                                    '<table id="results" class="display">' +
+                                        '<thead><tr>' +
+                                            '<th>' + results[0][0] + '</th>' +
+                                            '<th>' + results[0][1] + '</th>' +
+                                            '<th>' + results[0][2] + '</th>' +
+                                            '<th>' + results[0][3] + '</th>' +
+                                        '</tr></thead><tbody>';
+            for(var i = 1; i < results.length; i++){
+                appendResults += '<tr>'+
+                    '<td>'+results[i][0]+'</td>'+
+                    '<td>'+results[i][1]+'</td>'+
+                    '<td>'+results[i][2]+'</td>'+
+                    '<td>'+results[i][3]+'</td>'+
+                '</tr>';
+            }
+
+            $('#filter-div').html('');
+            $('#filter-div').append(appendResults);
+
             $('#download').replaceWith('<button id="generate">Generate CSV</button>');
 
         },
-        error: function(xhr, textStatus, thrownError, data) {
+        error: function (xhr, textStatus, thrownError, data) {
             alert("Error: " + thrownError);
         }
     });
@@ -127,19 +152,20 @@ $(document).on('click', '#preview', function (){
  */
 
 //creates csv file
-$(document).on('click', '#generate', function (event){
+$(document).on('click', '#generate', function (event) {
     event.preventDefault();
     $('#generate').html('Generating');
     var filter = ':' + $('#filter').val() + '"';
     var filter = $('#filter').val();
 
     var filters = {};
-    $('input').each(function() {
+    $('input').each(function () {
         var index = $(this).attr("id");
         filters[index] = $(this).val();
     });
 
-    var filename = {"filteringData":{
+    var filename = {
+        "filteringData": {
             "filename": $('#filename').val(),
             "filters": filters
         }
@@ -153,10 +179,10 @@ $(document).on('click', '#generate', function (event){
 
         success: function (results) {
             var filename = "files/" + results;
-            $('#generate').replaceWith('<button id="download"><a href="' + filename+ '"download>Download CSV</a></button>');
+            $('#generate').replaceWith('<button id="download"><a href="' + filename + '"download>Download CSV</a></button>');
             console.log(filename);
         },
-        error: function(xhr, textStatus, thrownError, data) {
+        error: function (xhr, textStatus, thrownError, data) {
             alert("Error: " + thrownError);
         }
     });

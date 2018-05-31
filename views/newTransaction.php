@@ -8,7 +8,12 @@
                 <tbody>
                     <tr>
                         <td colspan="2">Created By: <span class="text-success">*</span></td>
-                        <td colspan="4"><input id="adminId" type="text" name="depositby" class="form-control"></td>
+                        <td colspan="4">
+                            <input id="adminId" type="text" name="depositby" class="form-control">
+
+                            <ul id='dateError' class='error'>
+                            </ul>
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="2">Contact: <span class="text-success">*</span></td>

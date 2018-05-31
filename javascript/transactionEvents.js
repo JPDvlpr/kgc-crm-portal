@@ -437,6 +437,9 @@ $(document).on('click', '#submit', function (e) {
     if($('.error').length)
         valid = false;
 
+    //TODO - validate required fields are filled in
+
+
 
     //submit to database if passed validation
     if(valid){
@@ -456,13 +459,15 @@ $(document).on('click', '#submit', function (e) {
             success: function (data) {
                 if(data === 1){
                     //refresh page OR clear all selected fields
-                    // location.reload();
+                    location.reload();
 
                     //display success message
+                    //TODO - format success message to look nicer/be more user friendly
                     alert("Your form was submitted.");
                 }
                 else{
-                    //display errors
+                    //TODO - display errors
+
                 }
             },
             error: function(xhr, textStatus, thrownError, data) {
