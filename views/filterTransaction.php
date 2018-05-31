@@ -98,78 +98,7 @@ contact category that returns real contact data
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>11/30/2017</td>
-                <td>Tim Tebow</td>
-                <td>$250.00</td>
-                <td>Some item description</td>
-            </tr>
-            <tr>
-                <td>05/25/2018</td>
-                <td>Kevin Durant</td>
-                <td>$375.00</td>
-                <td>Some other item description</td>
-            </tr>
-            <tr>
-                <td>11/30/2017</td>
-                <td>Tim Tebow</td>
-                <td>$250.00</td>
-                <td>Some item description</td>
-            </tr>
-            <tr>
-                <td>05/25/2018</td>
-                <td>Kevin Durant</td>
-                <td>$375.00</td>
-                <td>Some other item description</td>
-            </tr>
-            <tr>
-                <td>11/30/2017</td>
-                <td>Tim Tebow</td>
-                <td>$250.00</td>
-                <td>Some item description</td>
-            </tr>
-            <tr>
-                <td>05/25/2018</td>
-                <td>Kevin Durant</td>
-                <td>$375.00</td>
-                <td>Some other item description</td>
-            </tr>
-            <tr>
-                <td>11/30/2017</td>
-                <td>Tim Tebow</td>
-                <td>$250.00</td>
-                <td>Some item description</td>
-            </tr>
-            <tr>
-                <td>05/25/2018</td>
-                <td>Kevin Durant</td>
-                <td>$375.00</td>
-                <td>Some other item description</td>
-            </tr>
-            <tr>
-                <td>11/30/2017</td>
-                <td>Tim Tebow</td>
-                <td>$250.00</td>
-                <td>Some item description</td>
-            </tr>
-            <tr>
-                <td>05/25/2018</td>
-                <td>Kevin Durant</td>
-                <td>$375.00</td>
-                <td>Some other item description</td>
-            </tr>
-            <tr>
-                <td>11/30/2017</td>
-                <td>Tim Tebow</td>
-                <td>$250.00</td>
-                <td>Some item description</td>
-            </tr>
-            <tr>
-                <td>05/25/2018</td>
-                <td>Kevin Durant</td>
-                <td>$375.00</td>
-                <td>Some other item description</td>
-            </tr>
+           
             </tbody>
         </table>
     </div>
