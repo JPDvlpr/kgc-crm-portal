@@ -12,7 +12,6 @@ contact category that returns real contact data
     </div>
     <div class="row">
         <div class="col-1"></div>
-
         <div class="col-2 border"><h5>Date</h5></div>
         <div class="col-8 border">
             <div class="row">
@@ -71,12 +70,9 @@ contact category that returns real contact data
             </select>
             <br>
         </div>
-
+    </div>
     </div>
 
-
-    </div>
-    <!--    <input type="submit" class="btn btn-secondary" name="submit" id="filter" value="Filter">-->
     <div class="row p-3">
         <div class="col-1"></div>
         <div class="col-2">
