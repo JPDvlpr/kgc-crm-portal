@@ -1,5 +1,11 @@
 -----Update Commands for database as of 4/27/2018------
 UPDATE item SET cat_id = 7 WHERE cat_id = 3
+INSERT INTO `item_category`
+    VALUES (7,'Donation','Donation,'2018-04-27 15:29:35',NULL,'2018-04-27 15:29:35',NULL,'A');
+INSERT INTO `item`
+    VALUES (17,'Discount Variable',NULL,'A',NULL,7,'2018-04-18 16:57:19',NULL,'2018-04-18 16:57:19',NULL);
+
+
 -----Update Commands for database as of 5/24/3018------
 CREATE VIEW transaction_information AS
 SELECT t.trans_id, ti.trans_item_id, t.trans_date, c.contact_name, t.trans_status,
@@ -35,7 +41,8 @@ VALUES (1,'Stories from Punjab',NULL,'A',5.00,1,'2018-04-18 16:57:19',NULL,'2018
 (13,'Mathematics',NULL,'A',100.00,4,'2018-04-18 17:10:31',NULL,'2018-04-18 17:10:31',NULL),
 (14,'Robotics camp',NULL,'A',50.00,5,'2018-04-18 17:10:31',NULL,'2018-04-18 17:10:31',NULL),
 (15,'Parenting workshop',NULL,'A',5.00,6,'2018-04-18 17:10:31',NULL,'2018-04-18 17:10:31',NULL),
-(16,'Chardi Kala Camp',NULL,'A',25.00,5,'2018-04-18 17:10:32',NULL,'2018-04-18 17:10:32',NULL);
+(16,'Chardi Kala Camp',NULL,'A',25.00,5,'2018-04-18 17:10:32',NULL,'2018-04-18 17:10:32',NULL),
+(17,'Discount Variable',NULL,'A',NULL,7,'2018-04-18 16:57:19',NULL,'2018-04-18 16:57:19',NULL);
 
 
 ---Populates the Item Category Table----

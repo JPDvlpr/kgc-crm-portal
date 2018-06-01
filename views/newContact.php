@@ -23,7 +23,7 @@
                         <td colspan="4"><input id="contactName" type="text" name="name" class="form-control"></td>
                     </tr>
                     <tr>
-                        <td colspan="2">Address:</td>
+                        <td colspan="2">Address: <span class="text-success">*</span></td>
                         <td colspan="4">
                             <input id="contactAddress" type="text" name="address" class="form-control" placeholder="Street Address">
                             <div id="addressDiv" class="input-group">
@@ -41,7 +41,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">Phone:</td>
+                        <td colspan="2">Phone: <span class="text-success">*</span></td>
                         <td colspan="4">
                             <div id="cellPhone" class="input-group w-100">
                                 (cell)<input id="contactCellPhone" type="text" name="cellPhone" class="form-control m-2">
