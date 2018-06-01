@@ -30,12 +30,6 @@ $.ajax({
     }
 });
 
-//apply filter data table
-$(document).ready(function () {
-    $('#example').DataTable({
-        "pagingType": "full_numbers"
-    });
-});
 
 //Get sub-categories when category is selected
 $(document).on('change', '#cat_name', function () {
@@ -102,13 +96,6 @@ $(document).on('click', '#preview', function (e) {
         data: filename,
 
         success: function (results) {
-            // var filename = "files/" + results;
-            // $('#generate').replaceWith('<button id="download"><a href="' + filename+ '"download>Download CSV</a></button>');
-            // console.log(filename);
-            // // alert(results);
-            // alert(results);
-            // alert(results[0]);
-            // alert(results[0][0]);
             var appendResults = '<div class="col-10 border">' +
                                     '<table id="results" class="display">' +
                                         '<thead><tr>' +
@@ -128,6 +115,10 @@ $(document).on('click', '#preview', function (e) {
 
             $('#filter-div').html('');
             $('#filter-div').append(appendResults);
+
+            $('#results').DataTable({
+                "pagingType": "full_numbers"
+            });
 
             $('#download').replaceWith('<button id="generate">Generate CSV</button>');
 

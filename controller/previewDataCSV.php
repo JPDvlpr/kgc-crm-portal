@@ -15,7 +15,7 @@ $previewCSVData = function () {
     unset($filters['filename']);
 
     $transactions = DBTransaction::getFilteredTransactions($filters);
-    $previews = array(array("Transaction Date","contact name", "total amount", "item description"));
+    $previews = array(array("Transaction Date","Contact Name", "Total Amount", "Item Description"));
 
     foreach ($transactions as $transaction) {
         $store = array($transaction['trans_date'],$transaction['contact_name'],

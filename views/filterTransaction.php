@@ -66,7 +66,7 @@ contact category that returns real contact data
         <div class="col-4 border">
             <br>
             <select id="item_name" class="form-control" disabled>
-                <option>Please Select Category First</option>
+                <option value="all">Please Select Category First</option>
             </select>
             <br>
         </div>
