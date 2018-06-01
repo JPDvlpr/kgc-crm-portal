@@ -122,6 +122,11 @@ $(document).on('click', '#preview', function (e) {
 
             $('#download').replaceWith('<button id="generate">Generate CSV</button>');
 
+            $('html, body').animate({
+                scrollTop: $("#results").offset().top
+            }, 2000);
+
+
         },
         error: function (xhr, textStatus, thrownError, data) {
             alert("Error: " + thrownError);
