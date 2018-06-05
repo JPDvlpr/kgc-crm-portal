@@ -146,8 +146,12 @@ function validateAddress($address)
 
 function validateState($state)
 {
-    $states = array('AK', 'AR', 'AZ', 'ID', "OR", "WA");
-    $provinces = array('BC');
+    $states = array('WA','AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL',
+        'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
+        'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM',
+        'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN',
+        'TX', 'UT', 'VT', 'VA', 'WV', 'WI', 'WY');
+    $provinces = array('AB', 'BC', 'MB', 'NB', 'NS', 'ON', 'QC', 'SK');
     return (in_array($state, $states) || in_array($state, $provinces));
 }
 
