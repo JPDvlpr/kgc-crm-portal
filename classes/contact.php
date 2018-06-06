@@ -8,8 +8,8 @@
  * @version 0.1
  */
 
-include_once($_SERVER['DOCUMENT_ROOT'] . "/kgc-crm-portal-team/validation/backendValidations.php");
-include_once($_SERVER['DOCUMENT_ROOT'] . "/kgc-crm-portal-team/model/db-contact.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/validation/backendValidations.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/model/db-contact.php");
 
 /**
  * Class "Contact" represents a contact on the CRM Portal. A contact may be
@@ -80,17 +80,17 @@ class Contact
 
     // creates and returns an array of transactions from the database
     // may return only a single Transaction, e.g if filter is id
-    public static function getContacts($filterValues = null)
+    public static function getContacts($filterValues=null)
     {
         $contacts = DBContact::getContacts();
         $contactList = array();
 
         //loop through transactions
-        foreach ($contacts as $contact) {
+        foreach ($contacts as $contact){
             array_push($contactList, array(
                 'id' => $contact['contact_id'],
                 'name' => $contact['contact_name'],
-                'address' => $contact['address'] . ' ' . $contact['city'] . ', ' . $contact['state'] . ' ' . $contact['zip'],
+                'address' => $contact['address'].' '.$contact['city'].', '.$contact['state'].' '.$contact['zip'],
                 'cell' => $contact['cell'],
                 'phone' => $contact['phone'],
                 'email' => $contact['email_address'],
@@ -128,90 +128,69 @@ class Contact
             }
         }
 
-        // Validate dateCreated - check if it is a valid date
+        // validate dateCreated - check if it is a valid date
         if (!validateDateTime($this->dateCreated)) {
             $errors['dateCreated'] = 'Invalid Date';
         }
 
-        // Validate created_by - check if id exists in admin table
+        // validate created_by - check if id exists in admin table
         if (!validateAdmin($this->createdBy)) {
             $errors['createdBy'] = 'That admin does not exist.';
         }
 
-        // Validate dateModified - check if it is a valid date
+        // validate dateModified - check if it is a valid date
         if (!validateDateTime($this->dateModified)) {
             $errors['dateModified'] = 'Invalid Date';
         }
 
-        // Validate modified_by - check if id exists in admin table
+        // validate modified_by - check if id exists in admin table
         if (!validateAdmin($this->modifiedBy)) {
             $errors['modifiedBy'] = 'That admin does not exist.';
         }
 
-        // Validate Contact Name (required)
-        if ($this->contactName == null || $this->contactName == "") {
-            $errors['contactName'] = 'Contact Name is required';
-        } elseif (!validateName($this->contactName)) {
+//        protected $contactName; // VARCHAR(200)
+        if(!validateName($this->contactName)){
             $errors['contactName'] = 'Invalid contact name';
         }
-
-        // Validate address (required)
-        if ($this->address == null || $this->address == "") {
-            $errors['address'] = 'Address is required';
-        } elseif (!validateAddress($this->address)) {
+//        protected $address; // VARCHAR(200)
+        if(!validateAddress($this->address)){
             $errors['address'] = 'Invalid address';
         }
-
-        // Validate city (required)
-        if ($this->city == null || $this->city == "") {
-            $errors['city'] = 'City is required';
-        } elseif (!validateName($this->city)) {
+//        protected $city; // VARCHAR(45)
+        if(!validateName($this->city)){
             $errors['city'] = 'Invalid city';
         }
-
-        // Validate state (required)
-        if ($this->state == null || $this->state == "") {
-            $errors['state'] = 'State is required';
-        } elseif (!validateState($this->state)) {
+//        protected $state; // VARCHAR(2)
+        if(!validateState($this->state)){
             $errors['state'] = 'Invalid state';
         }
-
-        // Validate zip (required)
-        if ($this->zip == null || $this->zip == "") {
-            $errors['zip'] = 'Zip is required';
-        } elseif (!validateZip($this->zip)) {
+//        protected $zip; // VARCHAR(10)
+        if(!validateZip($this->zip)){
             $errors['zip'] = 'Invalid zip';
         }
-
-        // Validate phone numbers (required)
-        if (($this->phone == null || $this->phone == "") && ($this->cell == null || $this->cell == "")) {
-            $errors['phone'] = 'Must enter at least one phone number';
-            $errors['cell'] = 'Must enter at least one phone number';
-        } else {
-            if (!validatePhone($this->phone)) {
-                $errors['phone'] = 'Invalid phone number';
-            }
-            if (!validatePhone($this->cell)) {
-                $errors['cell'] = 'Invalid cell phone number';
-            }
+//        protected $phone; // VARCHAR(15)
+        if(!validatePhone($this->phone)){
+            $errors['phone'] = 'Invalid phone number';
         }
-
-        // Validate email (required)
-        if ($this->email == null || $this->email == "") {
-            $errors['emailAddress'] = 'Email address is required';
-        } elseif (!validateEmail($this->emailAddress)) {
+//        protected $cell; // VARCHAR(15)
+        if(!validatePhone($this->cell)){
+            $errors['cell'] = 'Invalid cell phone number';
+        }
+//        protected $emailAddress; // VARCHAR(45)
+        if(!validateEmail($this->emailAddress)){
             $errors['emailAddress'] = 'Invalid email address';
         }
 
-        // Validate Alternate Contact Name (not required)
-        if (!validateName($this->altContactName)) {
+//        protected $altContactName; // VARCHAR(45)
+        if(!validateName($this->altContactName)){
             $errors['altContactName'] = 'Invalid alternate Contact Name';
         }
-
-        // Validate Alternate Contact Phone (not required)
-        if (!validatePhone($this->altContactPhone)) {
+//        protected $altContactPhone; // VARCHAR(45)
+        if(!validatePhone($this->altContactPhone)){
             $errors['altContactPhone'] = 'Invalid alternate contact phone number';
         }
+
+
 
         return $errors;
     }
