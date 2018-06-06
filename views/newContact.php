@@ -39,17 +39,15 @@
                             </div>
 
                         </td>
-                    </tr>
+                    </tr>g
                     <tr>
                         <td colspan="2">Phone: <span class="text-success">*</span></td>
                         <td colspan="4">
                             <div id="cellPhone" class="input-group w-100">
-                                Primary<span class="text-success">*</span>
-                                <input id="contactCellPhone" type="text" name="cellPhone" class="form-control m-2">
+                                Primary<input id="contactCellPhone" type="text" name="cellPhone" class="form-control m-2">
                             </div>
                             <div id="otherPhone" class="input-group w-100">
-                                Primary<span class="text-success">*</span>
-                                <input id="contactPhone" type="text" name="phone" class="form-control m-2">
+                                Secondary<input id="contactPhone" type="text" name="phone" class="form-control m-2">
                             </div>
                         </td>
                     </tr>
