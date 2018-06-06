@@ -44,15 +44,17 @@
                         <td colspan="2">Phone: <span class="text-success">*</span></td>
                         <td colspan="4">
                             <div id="cellPhone" class="input-group w-100">
-                                (cell)<input id="contactCellPhone" type="text" name="cellPhone" class="form-control m-2">
+                                Primary<span class="text-success">*</span>
+                                <input id="contactCellPhone" type="text" name="cellPhone" class="form-control m-2">
                             </div>
                             <div id="otherPhone" class="input-group w-100">
-                                (other)<input id="contactPhone" type="text" name="phone" class="form-control m-2">
+                                Primary<span class="text-success">*</span>
+                                <input id="contactPhone" type="text" name="phone" class="form-control m-2">
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">Email Address:</td>
+                        <td colspan="2">Email Address: <span class="text-success">*</span> </td>
                         <td colspan="4"><input id="contactEmail" type="email" name="email" class="form-control"></td>
                     </tr>
                     <tr>
