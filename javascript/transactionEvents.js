@@ -2,7 +2,7 @@ var total = 0.00; //total to diplay and add to @ bottom
 var rows = 0; //numbers of line items rows, when 0 header should disappear
 var valid = false; //check to see if form is valid on server before submitting to server
 var currentYear = parseInt((new Date).getFullYear()); //get current year for future display
-var contacts = []; //variable to store contacts (2d array) from database
+var contacts = [], admins = []; //variable to store contacts & admins (2d array) from database
 
 //create string to generate options for quantity select tags
 var optionsString = "<option selected=\"selected\">Qty</option>";
@@ -82,6 +82,22 @@ $.ajax({
     }
 });
 
+//Get initial admins and add them to datalist
+$.ajax({
+    type: "POST",
+    url: "views/getAdmins.php",
+    dataType: "json",
+    success: function (data) {
+        for(var i = 0; i < data.length; i++){
+            $('#admins').append("<option value='"+data[i]['admin_name']+"'></option>");
+            admins.push(data[i]);
+        }
+    },
+    error: function (xhr, textStatus, thrownError, data) {
+        alert("Error: " + thrownError);
+    }
+});
+
 
 //wait for user to enter contact then fill in
 //the contacts information
@@ -94,6 +110,13 @@ $(document).on('input', '#chosenContact', function () {
             $('#conAddress').html("Address: "+contacts[i]['address']);
             $('#altName').html("Alternate Contact Name: "+contacts[i]['altName']);
             $('#altPhone').html("Alternate Contact Phone: "+contacts[i]['altPhone']);
+            $('#conEmail').removeClass('hidden');
+            $('#conCell').removeClass('hidden');
+            $('#conPhone').removeClass('hidden');
+            $('#conAddress').removeClass('hidden');
+            $('#altName').removeClass('hidden');
+            $('#altPhone').removeClass('hidden');
+            break;
         }
         else{
             $('#conEmail').html('');
@@ -102,6 +125,12 @@ $(document).on('input', '#chosenContact', function () {
             $('#conAddress').html('');
             $('#altName').html('');
             $('#altPhone').html('');
+            $('#conEmail').addClass('hidden');
+            $('#conCell').addClass('hidden');
+            $('#conPhone').addClass('hidden');
+            $('#conAddress').addClass('hidden');
+            $('#altName').addClass('hidden');
+            $('#altPhone').addClass('hidden');
         }
     }
 });
@@ -363,6 +392,8 @@ $(document).on('input', '#checkNum', function () {
 
 //validate input before submitting to server
 $(document).on('click', '#submit', function (e) {
+    alert("Hello?");
+
     //prevent submittion of form
     e.preventDefault()
     valid = true;
@@ -372,7 +403,14 @@ $(document).on('click', '#submit', function (e) {
     var adminId, contactId, transDate, transactionItems, amountPaid,
         transType, checkNum, ccType, transDesc, size = 1;
 
-    adminId = $('#adminId').val();
+    alert("Hello? 222");
+
+    adminId = -1;
+    for(var i = 0; i < admins.length; i++) {
+        if ($('#adminId').val() == admins[i]['name'])
+            adminId = admins[i]['id'];
+    }
+
     contactId = -1;
     for(var i = 0; i < contacts.length; i++) {
         if ($('#chosenContact').val() == contacts[i]['name'])
@@ -432,6 +470,7 @@ $(document).on('click', '#submit', function (e) {
     transactionItems[transactionItems.length-1][2] = $('#discount').val();
     transactionItems[transactionItems.length-1][3] = 'discount';
 
+    alert("Hello? 333");
 
     //check to see if any error messages are displaying
     if($('.error').length)
@@ -439,7 +478,7 @@ $(document).on('click', '#submit', function (e) {
 
     //TODO - validate required fields are filled in
 
-
+    alert("Hello? 444");
 
     //submit to database if passed validation
     if(valid){
@@ -467,7 +506,7 @@ $(document).on('click', '#submit', function (e) {
                 }
                 else{
                     //TODO - display errors
-
+                    alert("Errors: " + data)
                 }
             },
             error: function(xhr, textStatus, thrownError, data) {

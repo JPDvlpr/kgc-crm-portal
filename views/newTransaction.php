@@ -9,9 +9,10 @@
                     <tr>
                         <td colspan="2">Created By: <span class="text-success">*</span></td>
                         <td colspan="4">
-                            <input id="adminId" type="text" name="depositby" class="form-control">
+                            <input id="adminId" type=text list=admins class="form-control">
+                            <datalist id="admins">
 
-                            <ul id='dateError' class='error'>
+                            <ul id='depositByError' class='error hidden'>
                             </ul>
                         </td>
                     </tr>
@@ -21,12 +22,14 @@
                             <input id="chosenContact" type=text list=contacts class="form-control">
                             <datalist id="contacts">
                             </datalist>
-                            <p id="conAddress"></p>
-                            <p id="conCell"></p>
-                            <p id="conPhone"></p>
-                            <p id="conEmail"></p>
-                            <p id="altName"></p>
-                            <p id="altPhone"></p>
+                            <p id="conAddress" class="hidden"></p>
+                            <p id="conCell" class="hidden"></p>
+                            <p id="conPhone" class="hidden"></p>
+                            <p id="conEmail" class="hidden"></p>
+                            <p id="altName" class="hidden"></p>
+                            <p id="altPhone" class="hidden"></p>
+                            <ul id='depositByError' class='error hidden'>
+                            </ul>
                         </td>
                     </tr>
                     <tr>
