@@ -9,9 +9,11 @@
                     <tr>
                         <td colspan="2">Created By: <span class="text-success">*</span></td>
                         <td colspan="4">
-                            <input id="adminId" type=text list=admins class="form-control">
-                            <datalist id="admins">
-                            </datalist>
+                            <select id="adminId" class="form-control">
+                                <?php
+                                    include_once ('views/getAdmins.php');
+                                ?>
+                            </select>
 
                             <ul id='depositByError' class='error hidden'>
                             </ul>
@@ -23,6 +25,8 @@
                             <input id="chosenContact" type=text list=contacts class="form-control">
                             <datalist id="contacts">
                             </datalist>
+                            <ul id='contactIdError' class='error hidden'>
+                            </ul>
                             <p id="conAddress" class="hidden"></p>
                             <p id="conCell" class="hidden"></p>
                             <p id="conPhone" class="hidden"></p>
@@ -36,6 +40,9 @@
                     <tr>
                         <td colspan="2">Date: </td>
                         <td colspan="4"><input id="date" type="date" name="date" class="form-control"></td>
+
+                        <ul id='dateCreatedError' class='error hidden'>
+                        </ul>
                     </tr>
                     <tr>
                         <td colspan="6">Reason for Deposit: <span class="text-success">*</span>
@@ -77,6 +84,9 @@
                                     <span class="input-group-text">$</span>
                                 </div>
                                 <input id="paid" type="text" class="form-control">
+
+                                <ul id='amountError' class='error hidden'>
+                                </ul>
                             </div>
                         </td>
                     </tr>
@@ -91,6 +101,8 @@
                                 <label><input class="payMethod" type="radio" name="payMethod" value="H"> Check</label>
                             </div>
                             <input id="checkNum" class="hidden form-control" type="text" name="checkNum" placeholder="Check Number">
+                            <ul id='checkNumError' class='error hidden'>
+                            </ul>
 
                             <div class="radio">
                                 <label><input class="payMethod" type="radio" name="payMethod" value="R"> Credit Card</label>
@@ -98,6 +110,8 @@
                                 <label id="square" class="hidden"><input type="radio" name="credit" value="square"> Square</label>
                             </div>
 
+                            <ul id='transTypeError' class='error hidden'>
+                            </ul>
                         </td>
                     </tr>
                     <tr>

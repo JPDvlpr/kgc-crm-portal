@@ -82,22 +82,6 @@ $.ajax({
     }
 });
 
-//Get initial admins and add them to datalist
-$.ajax({
-    type: "POST",
-    url: "views/getAdmins.php",
-    dataType: "json",
-    success: function (data) {
-        for(var i = 0; i < data.length; i++){
-            $('#admins').append("<option value='"+data[i]['admin_name']+"'></option>");
-            admins.push(data[i]);
-        }
-    },
-    error: function (xhr, textStatus, thrownError, data) {
-        alert("Error: " + thrownError);
-    }
-});
-
 
 //wait for user to enter contact then fill in
 //the contacts information
@@ -495,11 +479,19 @@ $(document).on('click', '#submit', function (e) {
 
                     //display success message
                     //TODO - format success message to look nicer/be more user friendly
-                    alert("Your form was submitted.");
+                    alert("Your form was submitted successfully.");
                 }
                 else{
-                    //TODO - display errors
-                    alert("Errors: " + data)
+                    //display errors
+                    $('.error').each(function () {
+                        if($(this).attr('id') in data){
+                            $(this).html("<li>"+data[$(this).attr('id')]+"</li>");
+                            $(this).removeClass('hidden');
+                        }
+                        else{
+                            $(this).addClass('hidden');
+                        }
+                    });
                 }
             },
             error: function(xhr, textStatus, thrownError, data) {
