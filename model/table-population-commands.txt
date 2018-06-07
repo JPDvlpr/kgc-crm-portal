@@ -31,6 +31,8 @@ INSERT INTO `item`
 VALUES (1,'Stories from Punjab',NULL,'A',5.00,1,'2018-04-18 16:57:19',NULL,'2018-04-18 16:57:19',NULL),
 (4,'Sikhs by Kushwant Singh',NULL,'A',10.00,1,'2018-04-18 17:00:36',NULL,'2018-04-18 17:00:36',NULL),
 (5,'Donation variable',NULL,'A',NULL,3,'2018-04-18 17:00:36',NULL,'2018-04-18 17:00:36',NULL),
+(6,'Donation 50',NULL,'A',50.00,3,'2018-04-18 17:00:36',NULL,'2018-04-18 17:00:36',NULL),
+(7,'Donation 100',NULL,'A',100.00,3,'2018-04-18 17:00:36',NULL,'2018-04-18 17:00:36',NULL),
 (8,'Donation 200',NULL,'A',200.00,3,'2018-04-18 17:00:36',NULL,'2018-04-18 17:00:36',NULL),
 (9,'Donation 500',NULL,'A',500.00,3,'2018-04-18 17:00:36',NULL,'2018-04-18 17:00:36',NULL),
 (10,'Tabla',NULL,'A',200.00,2,'2018-04-18 17:02:26',NULL,'2018-04-18 17:02:26',NULL),
@@ -42,11 +44,6 @@ VALUES (1,'Stories from Punjab',NULL,'A',5.00,1,'2018-04-18 16:57:19',NULL,'2018
 (16,'Chardi Kala Camp',NULL,'A',25.00,5,'2018-04-18 17:10:32',NULL,'2018-04-18 17:10:32',NULL),
 (17,'Discount Variable',NULL,'A',NULL,7,'2018-04-18 16:57:19',NULL,'2018-04-18 16:57:19',NULL);
 
---- Updated Items Table ---
-*** Delete current donations in items table ***
-INSERT INTO `item`(`item_name`, `item_desc`, `status`, `item_price`, `cat_id`, `created_by`, `modified_by`)
-VALUES ('Item',NULL,'A',0.00,7,NULL,NULL),
-('Cash',NULL,'A',0.00,7,NULL,NULL);
 
 ---Populates the Item Category Table----
 INSERT INTO `item_category`
