@@ -3,6 +3,7 @@ Just Ok Team
 Filter page has the option to retrieve data
 back between certain dates and can filter by
 contact category that returns real contact data
+User can choose a filename
 -->
 
 <form action="#" method="post">
