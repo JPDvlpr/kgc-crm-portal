@@ -404,8 +404,8 @@ $(document).on('click', '#submit', function (e) {
 
     adminId = -1;
     for(var i = 0; i < admins.length; i++) {
-        if ($('#adminId').val() == admins[i]['name'])
-            adminId = admins[i]['id'];
+        if ($('#adminId').val() == admins[i]['admin_name'])
+            adminId = admins[i]['admin_id'];
     }
 
     contactId = -1;
@@ -473,7 +473,8 @@ $(document).on('click', '#submit', function (e) {
 
     //TODO - validate that required fields are filled in
 
-
+    alert("Hello?\n" + " var: " + adminId+" var: " + contactId+" var: " + transDate+" var: " + transactionItems+" var: " + amountPaid+
+        " var: " + transType+" var: " + checkNum+" var: " +ccType+" var: " + transDesc + "..... Done....");
     //submit to database if passed validation
     if(valid){
         $.ajax({
