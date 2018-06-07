@@ -184,7 +184,7 @@ class Transaction
         // R = C(R)edit
         $type = array('A', 'H', 'R');
         if (!in_array($this->transType, $type)) {
-            $errors['transTypeError'] = 'Incorrect transaction status.';
+            $errors['transTypeError'] = 'Incorrect Payment Method.';
         };
 
         //If transaction type is check then require check number
