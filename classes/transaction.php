@@ -39,7 +39,7 @@ class Transaction
     protected $dateModified; // DATETIME
     protected $modifiedBy; // INT(11)
     protected $transactionItems; // an array of transactionItem
-    protected $errors; // an array of errors indexed by the field (TODO figure out how this will work with the array of transaction items!)
+//    protected $errors; // an array of errors indexed by the field (TODO figure out how this will work with the array of transaction items!)
     protected $new;
 
     /**
@@ -132,7 +132,7 @@ class Transaction
      * @param bool $new - True if new, false if gotten from database
      * @return mixed - the $errors array
      */
-    public function validateTransaction($errors, $new = true)
+    public function validateTransaction(&$errors, $new = true)
     {
         // TODO figure out where to do all of this and what needs to be validated.
 //        // this doesn't feel right... having the $new may correct this
@@ -178,71 +178,62 @@ class Transaction
 //            $errors['dateModifiedError'] = 'Invalid Date';
 //        }
 
-//        $this->checkNum = $checkNum;
-
-
-        // A = Cash
-        // H = Check
-        // R = Credit
-        //Todo if not a check then don't validate
-        //validate that checkNum is an integer
-        //Ask Tyler why this is seperate from 2 lines below.
-        if ($this->transType == "H") {
-            if (!validateInteger($this->checkNum) || $this->checkNum <= 0) {
-                $errors['checkNumError'] = 'Check Number must be an integer.';
-            }
-        }
-
-        // P = Pending
-        // D = Deposited
-        // C = Cancelled
-//        $this->transStatus = $transStatus;
-        $status = array('P', 'D', 'C');
-        if (!in_array($this->transStatus, $status)) {
-            $errors['transStatusError'] = 'Incorrect transaction status.';
-        };
-
+        // Validate that there is a correct transaction type
         // A = C(A)sh
         // H = C(H)eck
         // R = C(R)edit
-//        $this->transType = $transType;
         $type = array('A', 'H', 'R');
         if (!in_array($this->transType, $type)) {
             $errors['transTypeError'] = 'Incorrect transaction status.';
         };
 
-//        $this->contactId = $contactId;
-        // validate contact_id - check if id exists in contact table
+        //If transaction type is check then require check number
+        //Validate that checkNum is an integer
+        if ($this->transType == "H") {
+            if (!validateInteger($this->checkNum) || $this->checkNum <= 0 || $this->checkNum == null) {
+                $errors['checkNumError'] = 'Check Number must be an integer.';
+            }
+        }
+
+        // Validate transaction status, safe for a new transaction because we automatically set it to 'P';
+        // P = Pending
+        // D = Deposited
+        // C = Cancelled
+        $status = array('P', 'D', 'C');
+        if (!in_array($this->transStatus, $status)) {
+            $errors['transStatusError'] = 'Incorrect transaction status.';
+        };
+
+        // Validate contact_id - check if id exists in contact table
         if (!validateContact($this->contactId)) {
             $errors['contactIdError'] = 'That contact does not exist.';
         }
 
-//        $this->dateCreated = $dateCreated;
-        // validate dateCreated - check if it is a valid date
+        // Validate dateCreated - check if it is a valid date
         if (!validateDateTime($this->dateCreated)) {
             $errors['dateCreatedError'] = 'Invalid Date';
         }
 
-//        $this->createdBy = $createdBy;
-        // validate created_by - check if id exists in admin table
+        // Validate created_by - check if id exists in admin table
         if (!validateAdmin($this->createdBy)) {
             $errors['createdByError'] = 'That admin does not exist.';
         }
 
-//        $this->dateModified = $dateCreated;
-        // validate dateModified - check if it is a valid date
+        // Validate dateModified - check if it is a valid date
+        // This is safe even for a new transaction since for new we set dateModified to dateCreated
         if (!validateDateTime($this->dateModified)) {
             $errors['dateModifiedError'] = 'Invalid Date';
         }
 
-//        $this->modifiedBy = $createdBy;
-        // validate modified_by - check if id exists in admin table
+        // Validate modified_by - check if id exists in admin table
+        // This is safe even for a new transaction since for new we set modifiedBy to createdBy
         if (!validateAdmin($this->modifiedBy)) {
             $errors['modifiedByError'] = 'That admin does not exist.';
         }
 
-        // validate each line item
+        // Validate each line item
         // TODO make sure that number times itemCost == amount of this line_item
+        // TODO make sure that transaction item is still available in database
         $count = 1;
         foreach ($this->transactionItems as $item) {
             $errors['item' + $count] = array();

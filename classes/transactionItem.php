@@ -79,7 +79,8 @@ class TransactionItem
         //return array of TransactionsItems
     }
 
-    // TODO figure out where to do all of this and what needs to be validated.
+    // Validates transaction items. If the transaction is new, then makes sure that all
+    // items are still available and that the amounts are correct
     public function validateTransactionItem($errors, $new = true)
     {
         //        protected $transId; // INT(11)
@@ -91,57 +92,56 @@ class TransactionItem
             $errors['id'] = 'Transaction ID was not valid';
         }
 
-        //        protected $itemDesc; // VARCHAR(100) - I think this is where the user entered note would go
-        if (!validateString($this->itemDesc)) {
-            $errors['itemDesc'] = 'Amount is required';
+        //  Validate description: allowed to be null, empty or a valid string.
+        //  Description is one place where a user note might go.
+        if ($this->itemDesc != null && $this->itemDesc != "" && !validateString($this->itemDesc)) {
+            $errors['itemDesc'] = 'Description was invalid.';
         }
 
-        // protected $itemQuantity; // INT(11)
-        // Todo add to database
-        if (!validateInteger($this->itemQuantity)) {
-            $errors['itemQuantity'] = "Quantity is required.";
+        // Validate item quantity. This should be 1 for donations and discounts.
+        // Todo add to database and to appropriate insert statements
+        if (is_null($this->itemQuantity)) {
+            $errors['itemQuantity'] = 'Quantity is required';
+        } elseif (!validateInteger($this->itemQuantity)) {
+            $errors['itemQuantity'] = "Quantity was not valid.";
         }
 
-        // protected $amount; // DECIMAL(8,2)
-        //validate amount payed
+        // Validate amount payed
         if (is_null($this->amount)) {
             $errors['amount'] = 'Amount is required';
         } elseif (!validatePrice($this->amount)) {
             $errors['amount'] = 'Amount was not valid';
         };
 
-//        protected $itemId; // INT(11)
+        // Validate item ID - this be a check for an integer and, if new, check for availability in database
         if (!validateInteger($this->itemId)) {
-            //TODO - should this be a check for an integer and a check for existence in database
-            // here (ie whether new or old check for integer - add a check in !$new for existence
-            // in database
             $errors['itemId'] = 'Item ID was not valid';
         }
+        //TODO - check for existence in database here (add a check if $new for existence in database
+//        elseif($new && itemId not  in database) {
+//            $errors['itemId'] = 'Sorry, this item is no longer available.';
+//        }
 
-//        $this->dateCreated = $dateCreated;
-        // validate dateCreated - check if it is a valid date
+        // Validate dateCreated - check if it is a valid date
         if (!validateDateTime($this->dateCreated)) {
             $errors['dateCreated'] = 'Invalid Date';
         }
 
-//        $this->createdBy = $createdBy;
-        // validate created_by - check if id exists in admin table
+        // Validate created_by - check if id exists in admin table
         if (!validateAdmin($this->createdBy)) {
             $errors['createdBy'] = 'That admin does not exist.';
         }
 
-//        $this->dateModified = $dateCreated;
-        // validate dateModified - check if it is a valid date
+        // Validate dateModified - check if it is a valid date
         if (!validateDateTime($this->dateModified)) {
             $errors['dateModified'] = 'Invalid Date';
         }
 
-//        $this->modifiedBy = $createdBy;
         // validate modified_by - check if id exists in admin table
         if (!validateAdmin($this->modifiedBy)) {
             $errors['modifiedBy'] = 'That admin does not exist.';
         }
-        
+
         return $errors;
     }
 

@@ -392,8 +392,6 @@ $(document).on('input', '#checkNum', function () {
 
 //validate input before submitting to server
 $(document).on('click', '#submit', function (e) {
-    alert("Hello?");
-
     //prevent submittion of form
     e.preventDefault()
     valid = true;
@@ -403,7 +401,6 @@ $(document).on('click', '#submit', function (e) {
     var adminId, contactId, transDate, transactionItems, amountPaid,
         transType, checkNum, ccType, transDesc, size = 1;
 
-    alert("Hello? 222");
 
     adminId = -1;
     for(var i = 0; i < admins.length; i++) {
@@ -470,15 +467,12 @@ $(document).on('click', '#submit', function (e) {
     transactionItems[transactionItems.length-1][2] = $('#discount').val();
     transactionItems[transactionItems.length-1][3] = 'discount';
 
-    alert("Hello? 333");
-
     //check to see if any error messages are displaying
     if($('.error').length)
         valid = false;
 
-    //TODO - validate required fields are filled in
+    //TODO - validate that required fields are filled in
 
-    alert("Hello? 444");
 
     //submit to database if passed validation
     if(valid){
