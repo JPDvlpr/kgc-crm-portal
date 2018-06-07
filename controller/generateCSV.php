@@ -13,7 +13,11 @@ include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/model/db-transactio
 
 $getCSVFile = function ($table, $category) {
     $fileName = $_POST['filteringData']['filters']['filename'];
+    if($fileName == ""){
+        $fileName = "KGC_data";
+    }
     $filters = $_POST['filteringData']['filters'];
+    $fileName .= '_Date';
     unset($filters['filename']);
 //    var_dump($filters);
 //    $transactions = Transaction::getTransactions($filters);
