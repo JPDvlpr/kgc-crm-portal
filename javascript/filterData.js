@@ -35,34 +35,41 @@ $.ajax({
 $(document).on('change', '#cat_name', function () {
     var category = $(this).val();
     var me = $('#item_name');
-    $.ajax({
-        type: "POST",
-        url: "views/items.php",
-        dataType: "json",
-        data: {category: category},
-        success: function (data) {
-            me.empty();
+    if (){
 
-            if (category != 'all') {
-                me.prop("disabled", false);
+    } else if (){
 
-                me.append("<option value='all' selected>All</option>")
-                for (var i = 0; i < data.length; i++) {
-                    me.append(
-                        "<option>" + data[i]['item_name'] + "</option>"
-                    );
+    }
+    else {
+        $.ajax({
+            type: "POST",
+            url: "views/items.php",
+            dataType: "json",
+            data: {category: category},
+            success: function (data) {
+                me.empty();
+
+                if (category != 'all') {
+                    me.prop("disabled", false);
+
+                    me.append("<option value='all' selected>All</option>")
+                    for (var i = 0; i < data.length; i++) {
+                        me.append(
+                            "<option>" + data[i]['item_name'] + "</option>"
+                        );
+                    }
                 }
-            }
-            else {
-                me.append("<option selected>Please Select Category First</option>");
-                me.prop("disabled", true);
-            }
+                else {
+                    me.append("<option selected>Please Select Category First</option>");
+                    me.prop("disabled", true);
+                }
 
-        },
-        error: function (xhr, textStatus, thrownError, data) {
-            alert("Error: " + thrownError);
-        }
-    });
+            },
+            error: function (xhr, textStatus, thrownError, data) {
+                alert("Error: " + thrownError);
+            }
+        });
+    } //end else if
 });
 
 
