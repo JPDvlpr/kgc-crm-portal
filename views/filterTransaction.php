@@ -12,6 +12,15 @@ contact category that returns real contact data
     </div>
     <div class="row">
         <div class="col-1"></div>
+        <div class="col-2 border"><h5>Filename</h5></div>
+        <div class="col-8 border">
+            <input id="filename" type=text class="form-control"
+                   placeholder="System will add date and .csv">
+            <br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1"></div>
         <div class="col-2 border"><h5>Date</h5></div>
         <div class="col-8 border">
             <div class="row">
