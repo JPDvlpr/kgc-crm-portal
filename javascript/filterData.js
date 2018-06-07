@@ -69,7 +69,7 @@ $(document).on('change', '#cat_name', function () {
                 alert("Error: " + thrownError);
             }
         });
-    } //end else if
+    } //end else if changed
 });
 
 
