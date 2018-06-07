@@ -11,6 +11,7 @@
                         <td colspan="4">
                             <input id="adminId" type=text list=admins class="form-control">
                             <datalist id="admins">
+                            </datalist>
 
                             <ul id='depositByError' class='error hidden'>
                             </ul>

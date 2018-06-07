@@ -402,11 +402,7 @@ $(document).on('click', '#submit', function (e) {
         transType, checkNum, ccType, transDesc, size = 1;
 
 
-    adminId = -1;
-    for(var i = 0; i < admins.length; i++) {
-        if ($('#adminId').val() == admins[i]['admin_name'])
-            adminId = admins[i]['admin_id'];
-    }
+    adminId = $('#adminId').val();
 
     contactId = -1;
     for(var i = 0; i < contacts.length; i++) {
@@ -468,13 +464,15 @@ $(document).on('click', '#submit', function (e) {
     transactionItems[transactionItems.length-1][3] = 'discount';
 
     //check to see if any error messages are displaying
-    if($('.error').length)
-        valid = false;
+    $('.error').each(function () {
+        if($(this).html() == '')
+            valid = false;
+    });
+
 
     //TODO - validate that required fields are filled in
 
-    alert("Hello?\n" + " var: " + adminId+" var: " + contactId+" var: " + transDate+" var: " + transactionItems+" var: " + amountPaid+
-        " var: " + transType+" var: " + checkNum+" var: " +ccType+" var: " + transDesc + "..... Done....");
+
     //submit to database if passed validation
     if(valid){
         $.ajax({
