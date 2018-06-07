@@ -3,7 +3,7 @@ UPDATE item SET cat_id = 7 WHERE cat_id = 3
 INSERT INTO `item_category`
     VALUES (7,'Donation','Donation','2018-04-27 15:29:35',NULL,'2018-04-27 15:29:35',NULL,'A');
 INSERT INTO `item`
-    VALUES (17,'Discount Variable',NULL,'A',NULL,7,'2018-04-18 16:57:19',NULL,'2018-04-18 16:57:19',NULL);
+    VALUES (17,'Discount Variable',NULL,'A',NULL,3,'2018-04-18 16:57:19',NULL,'2018-04-18 16:57:19',NULL);
 
 
 -----Update Commands for database as of 5/24/3018------
