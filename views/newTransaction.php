@@ -15,7 +15,7 @@
                                 ?>
                             </select>
 
-                            <ul id='depositByError' class='error hidden'>
+                            <ul id='createdByError' class='error hidden'>
                             </ul>
                         </td>
                     </tr>
@@ -33,8 +33,6 @@
                             <p id="conEmail" class="hidden"></p>
                             <p id="altName" class="hidden"></p>
                             <p id="altPhone" class="hidden"></p>
-                            <ul id='depositByError' class='error hidden'>
-                            </ul>
                         </td>
                     </tr>
                     <tr>

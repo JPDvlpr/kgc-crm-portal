@@ -88,6 +88,9 @@ $.ajax({
 $(document).on('input', '#chosenContact', function () {
     for(var i = 0; i < contacts.length; i++){
         if($(this).val() == contacts[i]['name']){
+            $('#contactIdError').html('');
+            $('#contactIdError').addClass('hidden');
+
             $('#conEmail').html("Email: "+contacts[i]['email']);
             $('#conCell').html("Cell Phone: "+contacts[i]['cell']);
             $('#conPhone').html("Other Phone: "+contacts[i]['phone']);
@@ -181,6 +184,8 @@ $(document).on('click', 'label.category', function (){
 //add drop downs for check & credit card payment methods
 $(document).on('click', 'input.payMethod', function () {
     $('#checkNum, #paypal, #square, #checkNumError').addClass('hidden');
+    $('#transTypeError').html('');
+    $('#transTypeError').addClass('hidden');
 
     if($(this).val() == "H"){
         $('#checkNum').removeClass('hidden');
@@ -255,6 +260,8 @@ $(document).on('click', '#add', function (e) {
     }
 
     rows++;
+    $('#itemError').html('');
+    $('#itemError').addClass('hidden');
     $('#add').remove();
     $('select#quantity').val('Qty');
     $('thead#lineItems').removeClass('hidden');
@@ -272,6 +279,8 @@ $(document).on('click', '#add', function (e) {
 //auto generate discount/amount paid based on the others input
 $(document).on('input', '#paid, #discount', function () {
     $('#'+$(this).attr('id')+'Error').remove();
+    $('#amountError').html('');
+    $('#amountError').addClass('hidden');
 
     var value = $(this).val(), other;
     if($(this).attr('id') == 'discount')
