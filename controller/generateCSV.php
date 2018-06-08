@@ -15,14 +15,16 @@ $getCSVFile = function ($table, $category) {
     $fileName = $_POST['filteringData']['filters']['filename'];
     $filters = $_POST['filteringData']['filters'];
     unset($filters['filename']);
-//    var_dump($filters);
-//    $transactions = Transaction::getTransactions($filters);
-//    $fileName = "LATEST_FILE";
+    if(trim($fileName) == ""){
+        $fileName = "KGC_data";
+    }
     $transactions = DBTransaction::getFilteredTransactions($filters);
-    $count = 100;
-    $fileNameTemp = $fileName.$count.".csv";
+//    $date = new DateTime();
+    $count = date("_Y_M_d_H_i_s");
+//    $count = 100;
+    $fileName = $fileName.$count.".csv";
 
-    //increment file number and delete oldest...
+    /*//increment file number and delete oldest...
     // currently only allowing at most 6 files to exist
 
     //find an unused name
@@ -43,6 +45,7 @@ $getCSVFile = function ($table, $category) {
 
     //assign new name to $fileName
     $fileName = $fileNameTemp;
+    */
 
     //open file
     $file = fopen('../files/'.$fileName, 'wb');
