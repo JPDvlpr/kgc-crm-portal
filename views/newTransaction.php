@@ -50,6 +50,8 @@
                                 <?php
                                     include("categories.php");
                                 ?>
+                                <ul id='itemError' class='error hidden'>
+                                </ul>
                             </div>
                         </td>
                     </tr>

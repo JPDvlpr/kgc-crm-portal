@@ -166,10 +166,12 @@ class Transaction
         }
 
         //Validate Amount Payed
-        if (is_null($this->amount)) {
+        if (is_null($this->amount) || trim($this->amount) == "") {
             $errors['amountError'] = 'Amount is required';
         } elseif (!validatePrice($this->amount)) {
             $errors['amountError'] = 'Amount was not valid';
+        } elseif ($this->amount < 0) {
+            $errors['amountError'] = 'Amount must be greater than 0.';
         };
 
 //        $this->transDate = $transDate;
@@ -183,15 +185,19 @@ class Transaction
         // H = C(H)eck
         // R = C(R)edit
         $type = array('A', 'H', 'R');
-        if (!in_array($this->transType, $type)) {
-            $errors['transTypeError'] = 'Incorrect Payment Method.';
+        if (is_null($this->transType) || trim($this->transType) == "") {
+            $errors['transTypeError'] = 'Payment method is required.';
+        } elseif (!in_array($this->transType, $type)) {
+            $errors['transTypeError'] = 'Incorrect payment method.';
         };
 
         //If transaction type is check then require check number
         //Validate that checkNum is an integer
         if ($this->transType == "H") {
-            if (!validateInteger($this->checkNum) || $this->checkNum <= 0 || $this->checkNum == null) {
-                $errors['checkNumError'] = 'Check Number must be an integer.';
+            if (is_null($this->checkNum) || trim($this->checkNum) == "") {
+                $errors['checkNumError'] = 'Check number is required when the payment method is check.';
+            } elseif (!validateInteger($this->checkNum) || $this->checkNum <= 0 ) {
+                $errors['checkNumError'] = 'Check number must be a positive integer.';
             }
         }
 
@@ -205,17 +211,23 @@ class Transaction
         };
 
         // Validate contact_id - check if id exists in contact table
-        if (!validateContact($this->contactId)) {
+        if (is_null($this->contactId) || trim($this->contactId) == "" || $this->contactId < 0) {
+            $errors['contactIdError'] = 'A valid contact is required.';
+        } elseif (!validateContact($this->contactId)) {
             $errors['contactIdError'] = 'That contact does not exist.';
         }
 
         // Validate dateCreated - check if it is a valid date
-        if (!validateDateTime($this->dateCreated)) {
+        if (is_null($this->dateCreated) || trim($this->dateCreated) == "" ) {
+            $errors['dateCreatedError'] = 'A valid date is required.';
+        } elseif (!validateDateTime($this->dateCreated)) {
             $errors['dateCreatedError'] = 'Invalid Date';
         }
 
         // Validate created_by - check if id exists in admin table
-        if (!validateAdmin($this->createdBy)) {
+        if (is_null($this->createdBy) || trim($this->createdBy) == "" || $this->createdBy < 0) {
+            $errors['createdByError'] = 'Valid admin is required.';
+        } elseif (!validateAdmin($this->createdBy)) {
             $errors['createdByError'] = 'That admin does not exist.';
         }
 
@@ -231,13 +243,19 @@ class Transaction
             $errors['modifiedByError'] = 'That admin does not exist.';
         }
 
+        // Validate that at least one line item has been submitted.
+        // Less than 2 because the discount submits as a transaction item.
+        if (is_null($this->transactionItems) || count($this->transactionItems) < 2) {
+            $errors['itemError'] = 'At least one transaction item is required.';
+        }
+
         // Validate each line item
         // TODO make sure that number times itemCost == amount of this line_item
         // TODO make sure that transaction item is still available in database
         $count = 1;
         foreach ($this->transactionItems as $item) {
-            $errors['item' + $count] = array();
-            $item->validateTransactionItem($errors['item' + $count]);
+            $errors['item' . $count] = array();
+            $item->validateTransactionItem($errors['item' . $count]);
             $count++;
         }
 

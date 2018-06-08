@@ -180,7 +180,7 @@ $(document).on('click', 'label.category', function (){
 
 //add drop downs for check & credit card payment methods
 $(document).on('click', 'input.payMethod', function () {
-    $('#checkNum, #paypal, #square').addClass('hidden');
+    $('#checkNum, #paypal, #square, #checkNumError').addClass('hidden');
 
     if($(this).val() == "H"){
         $('#checkNum').removeClass('hidden');
