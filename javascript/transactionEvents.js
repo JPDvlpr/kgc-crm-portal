@@ -458,10 +458,9 @@ $(document).on('click', '#submit', function (e) {
 
     //check to see if any error messages are displaying
     $('.error').each(function () {
-        if($(this).html() == '')
+        if($(this).html().trim() != '')
             valid = false;
     });
-
 
     //TODO - validate that required fields are filled in
 

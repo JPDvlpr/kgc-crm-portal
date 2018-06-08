@@ -252,14 +252,13 @@ class Transaction
         // Validate each line item
         // TODO make sure that number times itemCost == amount of this line_item
         // TODO make sure that transaction item is still available in database
-        $count = 1;
-        foreach ($this->transactionItems as $item) {
-            $errors['item' . $count] = array();
-            $item->validateTransactionItem($errors['item' . $count]);
-            $count++;
-        }
+//        $count = 1;
+//        foreach ($this->transactionItems as $item) {
+//            $item->validateTransactionItem($errors, $count);
+//            $count++;
+//        }
 
-        return $errors;
+//        return $errors;
     }
 
     public function saveTransaction()
