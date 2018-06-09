@@ -26,6 +26,14 @@ th {
     height: 200px;
 }
 
+/* hide element */
+.hidden
+{
+    display: none !important;
+    margin-left: 5%;
+    width: 90%;
+}
+
 /*#filter {*/
 /*position: absolute;*/
 /*left: 0%;*/

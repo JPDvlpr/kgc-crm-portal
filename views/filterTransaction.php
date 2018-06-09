@@ -66,15 +66,19 @@ User can choose a filename
         <div class="col-4 border">
             <br>
             <select id="cat_name" class="form-control">
-                <option value="all" selected>All</option>
+                <option selected>All</option>
                 <?php
                 require("categories2.php");
                 ?>
             </select>
             <br>
         </div>
-        <div class="col-4 border">
+        <div class="col-4 border" id="second-form">
             <br>
+
+            <div id="discount">
+            </div>
+
             <select id="item_name" class="form-control" disabled>
                 <option value="all">Please Select Category First</option>
             </select>

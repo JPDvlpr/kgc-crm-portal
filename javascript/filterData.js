@@ -30,17 +30,36 @@ $.ajax({
     }
 });
 
-
 //Get sub-categories when category is selected
 $(document).on('change', '#cat_name', function () {
     var category = $(this).val();
     var me = $('#item_name');
-    if (false){
-
-    } else if (false){
-
+    var discount = $('#discount')
+    if (category == "Discount") {
+        me.prop('disabled', false);
+        me.addClass('hidden'),
+            $('#discount').removeClass('hidden');
+        discount.append('<div class="input-group">\n' +
+            '<div class="input-group-prepend">\n' +
+            '<span class="input-group-text">$</span>\n' +
+            '</div>\n' +
+            '<input id="discount" type="text" class="form-control">' +
+            '</div>');
+    } else if (category == "Donation") {
+        discount.empty();
+        me.empty();
+        $('#item_name').prop('disabled', false);
+        $('#item_name').removeClass('hidden');
+        discount.addClass('hidden');
+        me.append('<option value="all">All</option>' +
+            '<option value="item">Item</option>' +
+            '<option value="cash">Cash</option>');
     }
     else {
+        discount.empty();
+        me.empty();
+        discount.addClass('hidden');
+        me.removeClass('hidden');
         $.ajax({
             type: "POST",
             url: "views/items.php",
@@ -104,20 +123,20 @@ $(document).on('click', '#preview', function (e) {
 
         success: function (results) {
             var appendResults = '<div class="col-10 border">' +
-                                    '<table id="results" class="display">' +
-                                        '<thead><tr>' +
-                                            '<th>' + results[0][0] + '</th>' +
-                                            '<th>' + results[0][1] + '</th>' +
-                                            '<th>' + results[0][2] + '</th>' +
-                                            '<th>' + results[0][3] + '</th>' +
-                                        '</tr></thead><tbody>';
-            for(var i = 1; i < results.length; i++){
-                appendResults += '<tr>'+
-                    '<td>'+results[i][0]+'</td>'+
-                    '<td>'+results[i][1]+'</td>'+
-                    '<td>'+results[i][2]+'</td>'+
-                    '<td>'+results[i][3]+'</td>'+
-                '</tr>';
+                '<table id="results" class="display">' +
+                '<thead><tr>' +
+                '<th>' + results[0][0] + '</th>' +
+                '<th>' + results[0][1] + '</th>' +
+                '<th>' + results[0][2] + '</th>' +
+                '<th>' + results[0][3] + '</th>' +
+                '</tr></thead><tbody>';
+            for (var i = 1; i < results.length; i++) {
+                appendResults += '<tr>' +
+                    '<td>' + results[i][0] + '</td>' +
+                    '<td>' + results[i][1] + '</td>' +
+                    '<td>' + results[i][2] + '</td>' +
+                    '<td>' + results[i][3] + '</td>' +
+                    '</tr>';
             }
 
             $('#filter-div').html('');
