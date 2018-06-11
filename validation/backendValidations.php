@@ -8,9 +8,9 @@
     *  This file contains the backend validations that use PHP.
     */
 
-include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/model/db-categories.php");
-include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/model/db-item.php");
-include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/model/db-transaction.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . "/kgc-crm-portal-team/model/db-categories.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . "/kgc-crm-portal-team/model/db-item.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . "/kgc-crm-portal-team/model/db-transaction.php");
 
 
 function validateDate($date)
@@ -112,7 +112,8 @@ function validateDateTime($datetime)
 // an item donation
 function validateString($string)
 {
-    return ctype_alpha($string);
+    $regex_string = "/^(\w|[!@#$%^&amp*()-:;'\" <>?]){0,500}/";
+    return (preg_match($regex_string, $string));
 }
 
 //validates the price input
@@ -146,7 +147,7 @@ function validateAddress($address)
 
 function validateState($state)
 {
-    $states = array('WA','AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL',
+    $states = array('WA', 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL',
         'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
         'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM',
         'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN',
