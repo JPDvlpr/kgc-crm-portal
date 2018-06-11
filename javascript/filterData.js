@@ -79,7 +79,7 @@ $(document).on('change', '#cat_name', function () {
                     }
                 }
                 else {
-                    me.append("<option selected>Please Select Category First</option>");
+                    me.append("<option value='all' selected>Please Select Category First</option>");
                     me.prop("disabled", true);
                 }
 
@@ -177,14 +177,20 @@ $(document).on('click', '#preview', function (e) {
 $(document).on('click', '#generate', function (event) {
     event.preventDefault();
     $('#generate').html('Generating');
-    var filter = ':' + $('#filter').val() + '"';
-    var filter = $('#filter').val();
-
+    // var filter = ':' + $('#filter').val() + '"';
+    // var filter = $('#filter').val();
     var filters = {};
-    $('input').each(function () {
-        var index = $(this).attr("id");
-        filters[index] = $(this).val();
-    });
+
+    for (var i = 0; i < filterElements.length; i++) {
+        var index = filterElements[i].attr("id");
+        filters[index] = filterElements[i].val();
+    }
+
+    // var filters = {};
+    // $('input').each(function () {
+    //     var index = $(this).attr("id");
+    //     filters[index] = $(this).val();
+    // });
 
     var filename = {
         "filteringData": {
