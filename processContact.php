@@ -5,9 +5,7 @@
 
     //include class object
     include_once "classes/contact.php";
-
-//    echo "<h1>I'm Alive!! (in processContact.php)";
-//echo "<pre>".print_r($_POST)."</pre>";
+    include_once "validation/backendValidations.php";
 
     $date = date("Y-m-d");
 
@@ -29,12 +27,19 @@
     $contact = new Contact($date, $contCreatedBy, $contactName, $contactAddress, $contactCity,
         $contactState, $contactZip, $contactOtherPhone, $contactCellPhone, $contactEmail,
         $alternateContName, $alternateContPhone);
-//    $errors = $contact->validateContact($errors);
+    $errors = $contact->validateContact($errors);
     if(empty($errors)){
         $contact->saveContact();
+        header("Location: contactIndex.php");
     }
     else{
-        echo "<pre>".print_r($errors)."</pre>";
+        foreach ($errors as $error){
+            if($error){
+                echo "<p>".$error."</p>";
+            }
+        }
+//        echo "<pre>".print_r($errors)."</pre>";
+        header("Location: contactIndex.php");
     }
 
 ?>
