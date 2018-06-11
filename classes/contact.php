@@ -130,7 +130,7 @@ class Contact
 
         // Validate dateCreated - check if it is a valid date
         if (!validateDateTime($this->dateCreated)) {
-            $errors['dateCreated'] = 'Invalid Date';
+            $errors['dateCreated'] = 'Invalid Date'.$this->dateCreated;
         }
 
         // Validate created_by - check if id exists in admin table

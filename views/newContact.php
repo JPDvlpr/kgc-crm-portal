@@ -1,17 +1,14 @@
 <?php
-
-
-$states = array('WA', 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL',
-    'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
-    'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM',
-    'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN',
-    'TX', 'UT', 'VT', 'VA', 'WV', 'WI', 'WY');
-
 function contacts($errors)
 {
+    $states = array('WA', 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL',
+        'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
+        'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM',
+        'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN',
+        'TX', 'UT', 'VT', 'VA', 'WV', 'WI', 'WY');
     ?>
     <div class="container">
-        <form id="newContact" name="newContact" action="processContact.php" method="post">
+        <form id="newContact" name="newContact" action="#" method="post">
             <table id="contact" class="table table-bordered">
                 <thead>
                 <th colspan="6"><strong>New Contact</strong></th>
