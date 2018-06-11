@@ -108,8 +108,8 @@ function validateDateTime($datetime)
     return validateDate($date) && preg_match($regex, $time);
 }
 
-// used for validating this like the description of
-// an item donation
+// used for validating (Ex. description of
+// an item donation)
 function validateString($string)
 {
     $regex_string = "/^(\w|[!@#$%^&amp*()-:;'\" <>?]){0,500}/";
