@@ -252,6 +252,7 @@ class Transaction
         // Validate each line item
         // TODO make sure that number times itemCost == amount of this line_item
         // TODO make sure that transaction item is still available in database
+        // TODO seems the problem is with the names of the transaction items.
 //        $count = 1;
 //        foreach ($this->transactionItems as $item) {
 //            $item->validateTransactionItem($errors, $count);

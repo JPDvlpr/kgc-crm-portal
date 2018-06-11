@@ -144,7 +144,9 @@ class TransactionItem
         }
 
         if(!empty($temp)) {
-            $errors['item'.$count] = $temp;
+//            $errors['item'.$count] = $temp;
+            $errors['item'.$count] = "This item contained an error or is no longer available. 
+                 Please remove this item and reenter item number".$count;
         }
     }
 
