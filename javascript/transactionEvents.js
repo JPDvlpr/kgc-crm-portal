@@ -437,27 +437,27 @@ $(document).on('click', '#submit', function (e) {
         $(this).children('td').each(function () {
             if($(this).attr("class") == 'quantity')
                 transactionItems[size][1] = $(this).html();
-            else if($(this).attr("class") == 'selectedId') {
-                transactionItems[size][0] = $(this).attr("id");
-                transactionItems[size][3] = $(this).html();
-            }
             else if($(this).attr("class") == 'price'){
                 if($(this).html() == 'N/A')
                     transactionItems[size][2] = 0;
                 else
                     transactionItems[size][2] = $(this).html().slice(1);
             }
+            else if($(this).attr("class") == 'selectedId') {
+                transactionItems[size][0] = $(this).attr("id");
+                if($(this).attr("id") == 5)
+                    transactionItems[size][3] = $(this).html();
+                else
+                    transactionItems[size][3] = '';
+            }
         });
-        alert(transactionItems[size]);
         size++;
     });
     //add discount to end of array
-    transactionItems[transactionItems.length-1][0] = 1; // transaction id is 1 for discount
-    // transactionItems[transactionItems.length-1][1] = 'Discount';
+    transactionItems[transactionItems.length-1][0] = 17; // transaction id is 1 for discount
     transactionItems[transactionItems.length-1][1] = 1; // quantity is 1 for discount
     transactionItems[transactionItems.length-1][2] = $('#discount').val(); // amount is variable for discount
-    transactionItems[transactionItems.length-1][3] = 'discount'; // description is discount
-    alert(transactionItems[transactionItems.length-1]);
+    transactionItems[transactionItems.length-1][3] = ''; // description is discount
 
     //check to see if any error messages are displaying
     $('.error').each(function () {

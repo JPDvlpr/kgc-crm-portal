@@ -66,7 +66,7 @@ User can choose a filename
         <div class="col-4 border">
             <br>
             <select id="cat_name" class="form-control">
-                <option selected>All</option>
+                <option value="all" selected>All</option>
                 <?php
                 require("categories2.php");
                 ?>
