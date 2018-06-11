@@ -10,7 +10,7 @@ function processContact($errors)
     include_once "validation/backendValidations.php";
 
     if (isset($_POST['submit'])) {
-        $date = date("Y-m-d H: m:s");
+        $date = date("Y-m-d H:i:s");
 
         //store data from $_POST array to individual variables
         $contCreatedBy = $_POST['contactCreatedBy'];

@@ -8,9 +8,9 @@
     *  This file contains the backend validations that use PHP.
     */
 
-include_once($_SERVER['DOCUMENT_ROOT'] . "/kgc-crm-portal-team/model/db-categories.php");
-include_once($_SERVER['DOCUMENT_ROOT'] . "/kgc-crm-portal-team/model/db-item.php");
-include_once($_SERVER['DOCUMENT_ROOT'] . "/kgc-crm-portal-team/model/db-transaction.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/model/db-categories.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/model/db-item.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/model/db-transaction.php");
 
 
 function validateDate($date)
@@ -108,12 +108,11 @@ function validateDateTime($datetime)
     return validateDate($date) && preg_match($regex, $time);
 }
 
-// used for validating (Ex. description of
-// an item donation)
+// used for validating this like the description of
+// an item donation
 function validateString($string)
 {
-    $regex_string = "/^(\w|[!@#$%^&amp*()-:;'\" <>?]){0,500}/";
-    return (preg_match($regex_string, $string));
+    return ctype_alpha($string);
 }
 
 //validates the price input
@@ -135,7 +134,7 @@ function validateInteger($integer)
 
 function validateName($name)
 {
-    $regex_name = "/^[a-zA-Z]+(([\'\,\.\-][a-zA-Z])?[a-zA-Z]*)*$/";
+    $regex_name = "/^\D(\w|\s|(?:[' , . -])){0,200}$/i";
     return (preg_match($regex_name, $name));
 }
 
@@ -147,7 +146,7 @@ function validateAddress($address)
 
 function validateState($state)
 {
-    $states = array('WA', 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL',
+    $states = array('WA','AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL',
         'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
         'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM',
         'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN',

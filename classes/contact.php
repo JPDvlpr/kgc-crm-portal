@@ -197,7 +197,7 @@ class Contact
         }
 
         // Validate email (required)
-        if ($this->email == null || $this->email == "") {
+        if ($this->emailAddress == null || $this->emailAddress == "") {
             $errors['emailAddress'] = 'Email address is required';
         } elseif (!validateEmail($this->emailAddress)) {
             $errors['emailAddress'] = 'Invalid email address';
