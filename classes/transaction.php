@@ -199,8 +199,8 @@ class Transaction
 
         //If transaction type is credit than require a source type
         //Validate that source type exists and is Square or Paypal
-        $paypal = array('Paypal', 'paypal');
-        $square = array('Square', 'square');
+        $paypal = array('Paypal', 'paypal', 'pay');
+        $square = array('Square', 'square', 'squar');
         if ($this->transType == "R") {
             if (is_null($this->sourceType) || trim($this->sourceType) == "") {
                 $errors['sourceTypeError'] = 'Source type is required when the payment method is credit.';
