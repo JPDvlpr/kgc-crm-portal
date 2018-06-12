@@ -34,6 +34,7 @@ $.ajax({
 $(document).on('change', '#cat_name', function () {
     var category = $(this).val();
     var me = $('#item_name');
+    //if discount is selected
     var discount = $('#discount')
     if (category == "Discount") {
         me.prop('disabled', false);
@@ -45,6 +46,7 @@ $(document).on('change', '#cat_name', function () {
             '</div>\n' +
             '<input id="discount" type="text" class="form-control">' +
             '</div>');
+    //    if donation is selected
     } else if (category == "Donation") {
         discount.empty();
         me.empty();
@@ -55,7 +57,7 @@ $(document).on('change', '#cat_name', function () {
             '<option value="item">Item</option>' +
             '<option value="cash">Cash</option>');
     }
-    else {
+    else { //if anything else is selected besides donation or discount
         discount.empty();
         me.empty();
         discount.addClass('hidden');
@@ -122,6 +124,7 @@ $(document).on('click', '#preview', function (e) {
         data: filename,
 
         success: function (results) {
+            // filter data columns
             var appendResults = '<div class="col-10 border">' +
                 '<table id="results" class="display">' +
                 '<thead><tr>' +
@@ -131,6 +134,7 @@ $(document).on('click', '#preview', function (e) {
                 '<th>' + results[0][3] + '</th>' +
                 '</tr></thead><tbody>';
             for (var i = 1; i < results.length; i++) {
+                //filtered data from database
                 appendResults += '<tr>' +
                     '<td>' + results[i][0] + '</td>' +
                     '<td>' + results[i][1] + '</td>' +
@@ -139,13 +143,16 @@ $(document).on('click', '#preview', function (e) {
                     '</tr>';
             }
 
+            //append the results to the div
             $('#filter-div').html('');
             $('#filter-div').append(appendResults);
 
+            // pages of data
             $('#results').DataTable({
                 "pagingType": "full_numbers"
             });
 
+            //replace download with generate csv
             $('#download').replaceWith('<button id="generate">Generate CSV</button>');
 
             $('html, body').animate({
