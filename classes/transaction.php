@@ -80,8 +80,8 @@ class Transaction
             $this->transStatus = 'P';
         }
         // TODO Use sourceType
-//        $this->sourceType = $sourceType;
-//        $this->sourceId = $sourceId;
+        $this->sourceType = $sourceType;
+//        $this->sourceId = 0; // TODO get the correct number for this and determine.
         $this->transDesc = $transDesc;
         $this->transType = $transType;
         $this->sourceType = $sourceType;
@@ -199,12 +199,17 @@ class Transaction
 
         //If transaction type is credit than require a source type
         //Validate that source type exists and is Square or Paypal
-        $source = array('Paypal', 'paypal', 'Square', 'square');
+        $paypal = array('Paypal', 'paypal');
+        $square = array('Square', 'square');
         if ($this->transType == "R") {
             if (is_null($this->sourceType) || trim($this->sourceType) == "") {
                 $errors['sourceTypeError'] = 'Source type is required when the payment method is credit.';
-            } elseif (!in_array($this->sourceType, $source)) {
-                $errors['sourceTypeError'] = 'Source type must be a Paypal or Square.';
+            } elseif (!in_array($this->sourceType, $paypal) && !in_array($this->sourceType, $square)) {
+                $errors['sourceTypeError'] = 'Source type must be Paypal or Square.';
+            } elseif (in_array($this->sourceType, $paypal)) {
+                $this->sourceType = 'pay'; // trying to get it down to 5 characters
+            } elseif (in_array($this->sourceType, $square)) {
+                $this->sourceType ='squar'; // trying to get it down to 5 characters
             }
         }
 

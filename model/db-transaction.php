@@ -38,11 +38,17 @@ class DBTransaction extends DBObject
         if ($checkNum != 0) {
             $sql = $sql . "check_num, ";
         }
+        if ($sourceType != null || trim($sourceType) != ""){
+            $sql = $sql . "source_type, ";
+        }
         $sql = $sql . "trans_status, trans_desc, trans_type, contact_id,
             date_created, created_by, date_modified, modified_by) ";
         $sql = $sql . "VALUES (:id, :amount, :transDate, ";
         if ($checkNum != 0) {
             $sql = $sql . ":checkNum, ";
+        }
+        if ($sourceType != null || trim($sourceType) != ""){
+            $sql = $sql . ":sourceType, ";
         }
         $sql = $sql . ":transStatus, :transDesc, :transType, :contactId,
             :dateCreated, :createdBy, :dateModified, :modifiedBy)";
@@ -56,6 +62,9 @@ class DBTransaction extends DBObject
         $statement->bindParam(':transDate', $transDate, PDO::PARAM_STR);
         if ($checkNum != 0) {
             $statement->bindParam(':checkNum', $checkNum, PDO::PARAM_STR);
+        }
+        if ($sourceType != null || trim($sourceType) != ""){
+            $statement->bindParam(':sourceType', $sourceType, PDO::PARAM_STR);
         }
         $statement->bindParam(':transStatus', $transStatus, PDO::PARAM_STR);
         $statement->bindParam(':transDesc', $transDesc, PDO::PARAM_STR);

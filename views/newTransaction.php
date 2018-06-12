@@ -106,8 +106,9 @@
 
                             <div class="radio">
                                 <label><input class="payMethod" type="radio" name="payMethod" value="R"> Credit Card</label>
-                                <label id="paypal" class="hidden"><input type="radio" name="credit" value="paypal"> Paypal</label>
-                                <label id="square" class="hidden"><input type="radio" name="credit" value="square"> Square</label>
+                                <label id="paypal" class="hidden"><input class="creditMethod" type="radio" name="credit" value="paypal"> Paypal</label>
+                                <label id="square" class="hidden"><input class="creditMethod" type="radio" name="credit" value="square"> Square</label>
+                                <ul id='sourceTypeError' class='error hidden'></ul>
                             </div>
 
                             <ul id='transTypeError' class='error hidden'>

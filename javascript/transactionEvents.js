@@ -183,9 +183,13 @@ $(document).on('click', 'label.category', function (){
 
 //add drop downs for check & credit card payment methods
 $(document).on('click', 'input.payMethod', function () {
-    $('#checkNum, #paypal, #square, #checkNumError').addClass('hidden');
-    $('#transTypeError').html('');
-    $('#transTypeError').addClass('hidden');
+    $('#checkNum, #paypal, #square, #transTypeError, #checkNumError, #sourceTypeError').addClass('hidden');
+    $('#transTypeError, #sourceTypeError, #checkNumError').html('');
+    // $('#transTypeError').addClass('hidden');
+    // $('#sourceTypeError').html('');
+    // $('#sourceTypeError').addClass('hidden');
+    // $('#checkNumError').html('');
+    // $('#checkNumError').addClass('hidden');
 
     if($(this).val() == "H"){
         $('#checkNum').removeClass('hidden');
@@ -194,6 +198,11 @@ $(document).on('click', 'input.payMethod', function () {
         $('#paypal').removeClass('hidden');
         $('#square').removeClass('hidden');
     }
+})
+
+$(document).on('click', 'input.creditMethod', function () {
+    $('#transTypeError, #checkNumError, #sourceTypeError').addClass('hidden');
+    $('#transTypeError, #sourceTypeError, #checkNumError').html('');
 })
 
 
@@ -454,7 +463,7 @@ $(document).on('click', '#submit', function (e) {
         size++;
     });
     //add discount to end of array
-    transactionItems[transactionItems.length-1][0] = 17; // transaction id is 1 for discount
+    transactionItems[transactionItems.length-1][0] = 17; // transaction id is 17 for discount
     transactionItems[transactionItems.length-1][1] = 1; // quantity is 1 for discount
     transactionItems[transactionItems.length-1][2] = $('#discount').val(); // amount is variable for discount
     transactionItems[transactionItems.length-1][3] = ''; // description is discount
