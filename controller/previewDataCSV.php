@@ -14,12 +14,14 @@ $previewCSVData = function () {
     $filters = $_POST['filteringData']['filters'];
     unset($filters['filename']);
 
+//    filter data header
     $transactions = DBTransaction::getFilteredTransactions($filters);
     $previews = array(array("Transaction Date","Contact Name", "Total Amount", "Item Description"));
 
+//    filtered data from database
     foreach ($transactions as $transaction) {
         $store = array($transaction['trans_date'],$transaction['contact_name'],
-            $transaction['total_amount'],$transaction['item_desc']);
+            $transaction['total_amount'],$transaction['item_name']);
         array_push($previews, $store);
     }
 

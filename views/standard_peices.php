@@ -60,7 +60,7 @@ function standard_header($title, $stylesheet)
         <nav id="nabar" class="navbar navbar-expand-lg navbar-light bg-faded text-white">
             <form id="form" class="form-inline">
                 <button id="button1" class="btn btn-sm btn-outline-primary h-25" type="button"><a class="nav-link"
-                                                                                                  href="index.php"
+                                                                                                  href="transactionIndex.php"
                                                                                                   class="nav-item active">
                         <h4>New Transactions</h4></a></button>
                 <button id="button2" class="btn btn-sm btn-outline-primary h-25" type="button"><a class="nav-link"
