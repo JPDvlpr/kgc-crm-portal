@@ -86,6 +86,16 @@ $(document).on('click', '#submint', function (e) {
     if($('.error').length)
         valid = false;
 
+    alert(isEmptyString($('#contactName').val()));
+    alert($('#contactName').val())
+    if(isEmptyString($('#contactName').val())){
+        $('#contactName').after("<ul id='reqName' class='error'>" +
+            "<li>Name is required</li>" +
+            "</ul>");
+
+        valid = false;
+    }
+
     if(!valid)
         e.preventDefault();
 

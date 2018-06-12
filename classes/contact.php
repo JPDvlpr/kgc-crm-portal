@@ -186,7 +186,7 @@ class Contact
         // Validate phone numbers (required)
         if (($this->phone == null || $this->phone == "") && ($this->cell == null || $this->cell == "")) {
             $errors['phoneError'] = 'Must enter at least one phone number';
-            $errors['cellError'] = 'Must enter at least one phone number';
+            $errors['cellError'] = 'Must enter at least one cell number';
         }
         else {
             if (!empty($this->phone) && !validatePhone($this->phone)) {

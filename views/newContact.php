@@ -98,13 +98,6 @@ function contacts($errors)
                             echo '</ul>';
                         }
                         ?>
-                        <?php
-                        if(array_key_exists('cellError', $errors)){
-                            echo '<ul id="cellError" class="error">';
-                            echo '<li>'.$errors['cellError'].'</li>';
-                            echo '</ul>';
-                        }
-                        ?>
                     </td>
                 </tr>
                 <tr>
@@ -121,11 +114,27 @@ function contacts($errors)
                 </tr>
                 <tr>
                     <td colspan="2">Alternate Contact Name:</td>
-                    <td colspan="4"><input id="contactAltName" type="text" name="altName" class="form-control" value="<?php if($_POST) echo $_POST['altName']; ?>"></td>
+                    <td colspan="4"><input id="contactAltName" type="text" name="altName" class="form-control" value="<?php if($_POST) echo $_POST['altName']; ?>">
+                        <?php
+                        if(array_key_exists('altContactNameError', $errors)){
+                            echo '<ul id="altContactNameError" class="error">';
+                            echo '<li>'.$errors['altContactNameError'].'</li>';
+                            echo '</ul>';
+                        }
+                        ?>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2">Alternate Contact Phone:</td>
-                    <td colspan="4"><input id="altPhone" type="text" name="altPhone" class="form-control" value="<?php if($_POST) echo $_POST['altPhone']; ?>"></td>
+                    <td colspan="4"><input id="altPhone" type="text" name="altPhone" class="form-control" value="<?php if($_POST) echo $_POST['altPhone']; ?>">
+                        <?php
+                        if(array_key_exists('altContactPhoneError', $errors)){
+                            echo '<ul id="altContactPhoneError" class="error">';
+                            echo '<li>'.$errors['altContactPhoneError'].'</li>';
+                            echo '</ul>';
+                        }
+                        ?>
+                    </td>
                 </tr>
                 </tbody>
             </table>
