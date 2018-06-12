@@ -200,9 +200,11 @@ $(document).on('click', 'input.payMethod', function () {
     }
 })
 
+
+//remove current errors upon user input
 $(document).on('click', 'input.creditMethod', function () {
     $('#transTypeError, #checkNumError, #sourceTypeError').addClass('hidden');
-    $('#transTypeError, #sourceTypeError, #checkNumError').html('');
+    $('#transTypeError, #checkNumError, #sourceTypeError').html('');
 })
 
 
@@ -475,7 +477,7 @@ $(document).on('click', '#submit', function (e) {
     });
 
     //TODO - validate that required fields are filled in
-
+    if()
 
     //submit to database if passed validation
     if(valid){
