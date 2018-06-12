@@ -313,7 +313,7 @@ $(document).on('input', '#paid, #discount', function () {
     else{
         $(this).parent().after(
             "<ul id='"+$(this).attr('id')+"Error' class='error'>" +
-                "<li>Input must be a number with no more then 2 decimals</li>" +
+                "<li>Input must be a positive number with no more then 2 decimals</li>" +
             "</ul>"
         );
     }
@@ -477,7 +477,26 @@ $(document).on('click', '#submit', function (e) {
     });
 
     //TODO - validate that required fields are filled in
-    if()
+    if(contactId == -1){
+        $('#contactIdError').removeClass('hidden');
+        $('#contactIdError').html('<li>A valid contact is required.</li>')
+        valid = false;
+    }
+    if(transactionItems.length <= 1){
+        $('#itemError').removeClass('hidden');
+        $('#itemError').html('<li>At least one transaction item is required.</li>')
+        valid = false;
+    }
+    if(parseInt(amountPaid) <= 0){
+        $('#amountError').removeClass('hidden');
+        $('#amountError').html('<li>Amount is required</li>')
+        valid = false;
+    }
+    if(transType != 'A' && transType != 'H' && transType != 'R'){
+        $('#transTypeError').removeClass('hidden');
+        $('#transTypeError').html('<li>Payment method is required.</li>')
+        valid = false;
+    }
 
     //submit to database if passed validation
     if(valid){

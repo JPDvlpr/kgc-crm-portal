@@ -1,17 +1,19 @@
-
-    <div class="container">
-        <form id="transactionForm" name="transactionForm" action="#" method="post">
-            <table id="deposit" class="table table-bordered">
-                <thead>
-                <th colspan="6"><strong>Transaction Information</strong></th>
-                </thead>
-                <tbody>
+<?php
+    function transPage(){
+?>
+        <div class="container">
+            <form id="transactionForm" name="transactionForm" action="#" method="post">
+                <table id="deposit" class="table table-bordered">
+                    <thead>
+                    <th colspan="6"><strong>Transaction Information</strong></th>
+                    </thead>
+                    <tbody>
                     <tr>
                         <td colspan="2">Created By: <span class="text-success">*</span></td>
                         <td colspan="4">
                             <select id="adminId" class="form-control">
                                 <?php
-                                    include_once ('views/getAdmins.php');
+                                include_once ('views/getAdmins.php');
                                 ?>
                             </select>
 
@@ -46,7 +48,7 @@
                         <td colspan="6">Reason for Deposit: <span class="text-success">*</span>
                             <div id="categories" class="container">
                                 <?php
-                                    include("categories.php");
+                                include("categories.php");
                                 ?>
                                 <ul id='itemError' class='error hidden'>
                                 </ul>
@@ -54,12 +56,12 @@
                         </td>
                     </tr>
                     <thead id="lineItems" class="hidden">
-                        <th>Qty</th>
-                        <th>Category</th>
-                        <th>Description</th>
-                        <th>Unit Price</th>
-                        <th>Total Price</th>
-                        <th>Delete</th>
+                    <th>Qty</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Unit Price</th>
+                    <th>Total Price</th>
+                    <th>Delete</th>
                     </thead>
                     <tr>
                         <td colspan="2">Total: </td>
@@ -123,14 +125,17 @@
                             </div>
                         </td>
                     </tr>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
 
-            <button id="submit" type="submit" class="btn" name="submit">Submit Transaction</button>
-        </form>
+                <button id="submit" type="submit" class="btn" name="submit">Submit Transaction</button>
+            </form>
 
-        <div id='dialog' title='Delete Confirmation'>
-            <p>Are you sure you want to delete this item</p>
+            <div id='dialog' title='Delete Confirmation'>
+                <p>Are you sure you want to delete this item</p>
+            </div>
+
         </div>
-
-    </div>
+<?php
+    }
+?>
