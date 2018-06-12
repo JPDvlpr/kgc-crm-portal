@@ -26,51 +26,106 @@ function contacts($errors)
                 </tr>
                 <tr>
                     <td colspan="2">Contact Name: <span class="text-success">*</span></td>
-                    <td colspan="4"><input id="contactName" type="text" name="name" class="form-control"></td>
+                    <td colspan="4"><input id="contactName" type="text" name="name" class="form-control" value="<?php if($_POST) echo $_POST['name']; ?>">
+                    <?php
+                        if(array_key_exists('contactNameError', $errors)){
+                            echo '<ul id="contactNameError" class="error">';
+                            echo '<li>'.$errors['contactNameError'].'</li>';
+                            echo '</ul>';
+                        }
+                    ?>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2">Address: <span class="text-success">*</span></td>
                     <td colspan="4">
                         <input id="contactAddress" type="text" name="address" class="form-control"
-                               placeholder="Street Address">
+                               placeholder="Street Address" value="<?php if($_POST) echo $_POST['address']; ?>">
                         <div id="addressDiv" class="input-group">
                             <input id="contactCity" type="text" name="city" class="form-control my-2"
-                                   placeholder="City">
+                                   placeholder="City" value="<?php if($_POST) echo $_POST['city']; ?>">
                             <select id="states" name="state" class="form-control m-2">
                                 <?php
                                 foreach ($states as $state) {
-                                    echo '<option value="' . $state . '">' . $state . '</option>';
+                                    echo '<option value="' . $state . '"';
+                                    if($_POST){
+                                        if($_POST['state'] == $state)
+                                            echo "selected";
+                                    }
+                                    echo '>'.  $state . '</option>';
                                 }
                                 ?>
                             </select>
                             <input id="contactZipCode" type="text" name="zipCode" class="form-control my-2"
-                                   placeholder="Zip Code">
+                                   placeholder="Zip Code" value="<?php if($_POST) echo $_POST['zipCode']; ?>">
                         </div>
-
+                        <?php
+                        if(array_key_exists('addressError', $errors)){
+                            echo '<ul id="addressError" class="error">';
+                            echo '<li>'.$errors['addressError'].'</li>';
+                            echo '</ul>';
+                        }
+                        ?>
+                        <?php
+                        if(array_key_exists('cityError', $errors)){
+                            echo '<ul id="cityError" class="error">';
+                            echo '<li>'.$errors['cityError'].'</li>';
+                            echo '</ul>';
+                        }
+                        ?>
+                        <?php
+                        if(array_key_exists('zipError', $errors)){
+                            echo '<ul id="zipError" class="error">';
+                            echo '<li>'.$errors['zipError'].'</li>';
+                            echo '</ul>';
+                        }
+                        ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">Phone: <span class="text-success">*</span></td>
                     <td colspan="4">
                         <div id="cellPhone" class="input-group w-100">
-                            Primary<input id="contactCellPhone" type="text" name="cellPhone" class="form-control m-2">
+                            Primary<input id="contactCellPhone" type="text" name="cellPhone" class="form-control m-2" value="<?php if($_POST) echo $_POST['cellPhone']; ?>">
                         </div>
                         <div id="otherPhone" class="input-group w-100">
-                            Secondary<input id="contactPhone" type="text" name="phone" class="form-control m-2">
+                            Secondary<input id="contactPhone" type="text" name="phone" class="form-control m-2" value="<?php if($_POST) echo $_POST['phone']; ?>">
                         </div>
+                        <?php
+                        if(array_key_exists('phoneError', $errors)){
+                            echo '<ul id="phoneError" class="error">';
+                            echo '<li>'.$errors['phoneError'].'</li>';
+                            echo '</ul>';
+                        }
+                        ?>
+                        <?php
+                        if(array_key_exists('cellError', $errors)){
+                            echo '<ul id="cellError" class="error">';
+                            echo '<li>'.$errors['cellError'].'</li>';
+                            echo '</ul>';
+                        }
+                        ?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">Email Address: <span class="text-success">*</span></td>
-                    <td colspan="4"><input id="contactEmail" type="email" name="email" class="form-control"></td>
+                    <td colspan="4"><input id="contactEmail" type="email" name="email" class="form-control" value="<?php if($_POST) echo $_POST['email']; ?>">
+                        <?php
+                        if(array_key_exists('emailAddressError', $errors)){
+                            echo '<ul id="emailAddressError" class="error">';
+                            echo '<li>'.$errors['emailAddressError'].'</li>';
+                            echo '</ul>';
+                        }
+                        ?>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2">Alternate Contact Name:</td>
-                    <td colspan="4"><input id="contactAltName" type="text" name="altName" class="form-control"></td>
+                    <td colspan="4"><input id="contactAltName" type="text" name="altName" class="form-control" value="<?php if($_POST) echo $_POST['altName']; ?>"></td>
                 </tr>
                 <tr>
                     <td colspan="2">Alternate Contact Phone:</td>
-                    <td colspan="4"><input id="altPhone" type="text" name="altPhone" class="form-control"></td>
+                    <td colspan="4"><input id="altPhone" type="text" name="altPhone" class="form-control" value="<?php if($_POST) echo $_POST['altPhone']; ?>"></td>
                 </tr>
                 </tbody>
             </table>
@@ -81,5 +136,3 @@ function contacts($errors)
 }
 
 ?>
-
-

@@ -1,9 +1,9 @@
 <?php
 //    //php error reporting
-//    ini_set("display_errors", 1);
-//    error_reporting(E_ALL);
+    ini_set("display_errors", 1);
+    error_reporting(E_ALL);
 
-function processContact($errors)
+function processContact(&$errors)
 {
     //include class object
     include_once "classes/contact.php";
@@ -32,12 +32,7 @@ function processContact($errors)
         $errors = $contact->validateContact($errors);
         if (empty($errors)) {
             $contact->saveContact();
-        } else {
-            foreach ($errors as $error) {
-                if ($error) {
-                    echo "<p>" . $error . "</p>";
-                }
-            }
+            header("location:index.php");
         }
     }
 }
