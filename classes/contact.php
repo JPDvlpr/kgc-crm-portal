@@ -187,11 +187,12 @@ class Contact
         if (($this->phone == null || $this->phone == "") && ($this->cell == null || $this->cell == "")) {
             $errors['phone'] = 'Must enter at least one phone number';
             $errors['cell'] = 'Must enter at least one phone number';
-        } else {
-            if (!validatePhone($this->phone)) {
+        }
+        else {
+            if (!empty($this->phone) && !validatePhone($this->phone)) {
                 $errors['phone'] = 'Invalid phone number';
             }
-            if (!validatePhone($this->cell)) {
+            if (!empty($this->cell) && !validatePhone($this->cell)) {
                 $errors['cell'] = 'Invalid cell phone number';
             }
         }
@@ -204,13 +205,17 @@ class Contact
         }
 
         // Validate Alternate Contact Name (not required)
-        if (!validateName($this->altContactName)) {
-            $errors['altContactName'] = 'Invalid alternate Contact Name';
+        if(!empty($this->altContactName)) {
+            if (!validateName($this->altContactName)) {
+                $errors['altContactName'] = 'Invalid alternate Contact Name';
+            }
         }
 
         // Validate Alternate Contact Phone (not required)
-        if (!validatePhone($this->altContactPhone)) {
-            $errors['altContactPhone'] = 'Invalid alternate contact phone number';
+        if(!empty($this->altContactPhone)) {
+            if (!validatePhone($this->altContactPhone)) {
+                $errors['altContactPhone'] = 'Invalid alternate contact phone number';
+            }
         }
 
         return $errors;

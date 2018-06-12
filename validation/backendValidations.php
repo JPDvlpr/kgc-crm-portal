@@ -140,7 +140,7 @@ function validateName($name)
 
 function validateAddress($address)
 {
-    $regex_address = "/^\d+?[A-Za-z]*\s\w*\s?\w+?\s\w{2}\w*\s*\w*$/";
+    $regex_address = "/^(\w|\d|\s|(?:[' . # -])){0,200}$/";
     return preg_match($regex_address, $address);
 }
 
