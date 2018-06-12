@@ -463,7 +463,7 @@ $(document).on('click', '#submit', function (e) {
         size++;
     });
     //add discount to end of array
-    transactionItems[transactionItems.length-1][0] = 17; // transaction id is 17 for discount
+    transactionItems[transactionItems.length-1][0] = 17; // item id is 17 for discount
     transactionItems[transactionItems.length-1][1] = 1; // quantity is 1 for discount
     transactionItems[transactionItems.length-1][2] = $('#discount').val(); // amount is variable for discount
     transactionItems[transactionItems.length-1][3] = ''; // description is discount

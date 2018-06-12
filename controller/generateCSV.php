@@ -20,6 +20,7 @@ $getCSVFile = function ($table, $category) {
     }
     $transactions = DBTransaction::getFilteredTransactions($filters);
 //    $date = new DateTime();
+    date_default_timezone_set('America/Los_Angeles');
     $count = date("_Y_M_d_H_i_s");
 //    $count = 100;
     $fileName = $fileName.$count.".csv";
