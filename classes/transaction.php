@@ -62,7 +62,7 @@ class Transaction
      * @param $transactionItems
      */
 //    public function __construct($id(move to end), $amount, $transDate, $checkNum, $depositById (not in initial creation), $bankDepositDate, $transStatus, $sourceType, $sourceId, $transType, $contactId, $dateCreated, $createdBy, $dateModified, $modifiedBy, $transactionItems)
-    public function __construct($createdBy, $contactId, $transDate, $transactionItemsArray, $amount, $transDesc, $transType, $checkNum, $ccType, $id = 0)
+    public function __construct($createdBy, $contactId, $transDate, $transactionItemsArray, $amount, $transDesc, $transType, $checkNum, $sourceType, $id = 0)
     {
         if(strlen($transDate) <= 10){
             date_default_timezone_set('America/Los_Angeles');
@@ -84,6 +84,7 @@ class Transaction
 //        $this->sourceId = $sourceId;
         $this->transDesc = $transDesc;
         $this->transType = $transType;
+        $this->sourceType = $sourceType;
         $this->contactId = $contactId;
         $this->dateCreated = $transDate;
         $this->createdBy = $createdBy;
@@ -150,14 +151,10 @@ class Transaction
                 $errors['depositByError'] = 'That admin does not exist.';
             }
 
-            // Todo - will need to check if exists
             // validate bankDepositDate - check if it is a valid date
             if ($this->checkNum != null && !validateDate($this->bankDepositDate)) {
                 $errors['bankDepositDateError'] = 'Invalid Date';
             }
-
-            //        $this->sourceType = $sourceType;
-            //TODO - not sure what this is but need to validate
 
             //        $this->sourceId = $sourceId;
             //TODO - not sure what this is but need to validate
@@ -174,7 +171,6 @@ class Transaction
             $errors['amountError'] = 'Amount must be greater than 0.';
         };
 
-//        $this->transDate = $transDate;
         // validate bankDepositDate - check if it is a valid date
 //        if (!validateDate($this->bankDepositDate)) {
 //            $errors['dateModifiedError'] = 'Invalid Date';
@@ -198,6 +194,17 @@ class Transaction
                 $errors['checkNumError'] = 'Check number is required when the payment method is check.';
             } elseif (!validateInteger($this->checkNum) || $this->checkNum <= 0 ) {
                 $errors['checkNumError'] = 'Check number must be a positive integer.';
+            }
+        }
+
+        //If transaction type is credit than require a source type
+        //Validate that source type exists and is Square or Paypal
+        $source = array('Paypal', 'paypal', 'Square', 'square');
+        if ($this->transType == "R") {
+            if (is_null($this->sourceType) || trim($this->sourceType) == "") {
+                $errors['sourceTypeError'] = 'Source type is required when the payment method is credit.';
+            } elseif (!in_array($this->sourceType, $source)) {
+                $errors['sourceTypeError'] = 'Source type must be a Paypal or Square.';
             }
         }
 
