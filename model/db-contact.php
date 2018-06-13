@@ -15,6 +15,9 @@ require_once("db-object.php");
  * @author Just oK Team
  * @copyright  2018
  */
+
+//TO-DO line 47 & 48 can it be combined into one line?
+//same for 64 & 65
 class DBContact extends DBObject
 {
     /* @param $contactId
@@ -38,9 +41,9 @@ class DBContact extends DBObject
                             $zip, $phone = null, $cell = null, $emailAddress = null, $altContactName = null,
                             $altContactPhone = null, $dateCreated, $createdBy, $dateModified, $modifiedBy,
                             $table="contact"){
+        //database object
         global $dbh;
         $dbh = Parent::connect();
-
         //Define Query
         $sql = "INSERT INTO ". $table;
         $sql = $sql . " (contact_name, address, city, state, zip, ";
@@ -81,7 +84,7 @@ class DBContact extends DBObject
         //Prepare Statement
         $statement = $dbh->prepare($sql);
 
-        //Bind Parameter
+        //Bind Parameters do be inserted as given data type
         $statement->bindParam(':contactName', $contactName,PDO::PARAM_STR);
         $statement->bindParam(':address', $address, PDO::PARAM_STR);
         $statement->bindParam(':city', $city, PDO::PARAM_STR);
@@ -113,8 +116,14 @@ class DBContact extends DBObject
         Parent::disconnect();
     }
 
+    /**
+     * @param contact $table
+     * @return results
+     * gets everything from the contact table
+     */
     public static function getContacts($table = 'contact')
     {
+        //database object
         global $dbh;
         $dbh = (new self)->connect();
 
@@ -128,9 +137,7 @@ class DBContact extends DBObject
         $statement->execute();
 
         $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-
         (new self)->disconnect();
-
         return $results;
     }
 }
