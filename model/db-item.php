@@ -68,6 +68,10 @@ class DBItem extends DBObject
         global $dbh;
         $dbh = Parent::connect();
 
+        // Blocks the insertion into the database of a discount of zero.
+        // 17 is the item number for Discount
+        if($itemId == 17 && $amount == 0) return;
+
         //Define Query
         $sql = "INSERT INTO " . $table;
         $sql = $sql . "(trans_id, ";
