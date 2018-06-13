@@ -126,6 +126,7 @@ $(document).on('blur', '#chosenContact', function () {
 
 //add drop down to categories(reasons for deposit)
 $(document).on('click', 'label.category', function (){
+    $('#cashDonError').remove();
     var category = $(this).attr('id');
     var me = $(this);
     $.ajax({
@@ -182,6 +183,15 @@ $(document).on('click', 'label.category', function (){
 });
 
 
+//validate that cash donation is a proper number
+$(document).on('input', '#cashDonation', function () {
+    $('#cashDonError').remove();
+
+    if(!isPrice($(this).val()) && $(this).val().length > 0)
+        $(this).after('<ul id="cashDonError" class="error"><li>Input must be a positive number with no more then 2 decimals</li></ul>');
+});
+
+
 //add drop downs for check & credit card payment methods
 $(document).on('click', 'input.payMethod', function () {
     $('#checkNum, #paypal, #square, #transTypeError, #checkNumError, #sourceTypeError').addClass('hidden');
@@ -199,21 +209,21 @@ $(document).on('click', 'input.payMethod', function () {
         $('#paypal').removeClass('hidden');
         $('#square').removeClass('hidden');
     }
-})
+});
 
 
 //remove current errors upon user input
 $(document).on('click', 'input.creditMethod', function () {
     $('#transTypeError, #checkNumError, #sourceTypeError').addClass('hidden');
     $('#transTypeError, #checkNumError, #sourceTypeError').html('');
-})
+});
 
 
 //display add button after subcategory is selected
 $(document).on('change input', '#quantity, #cashDonation', function () {
     $('#add').remove();
 
-    if(parseInt($('#quantity').val()) > 0 || $('#cashDonation').val())
+    if(parseInt($('#quantity').val()) > 0 || (parseInt($('#cashDonation').val()) > 0 && $('#cashDonError').length == 0))
         $('#categories').append("<button id='add' class='btn btn-success'>Add</button>");
 });
 
@@ -231,7 +241,8 @@ $(document).on('click', '#add', function (e) {
         selectedId = $( "select#donation option:selected" ).val();
         if($("select#donation option:selected").text() == 'Item'){
             quantity = $('select#quantity').val();
-            desc = $('#itemDonation').val();
+            //prevent code injection from donation item
+            desc = $.parseHTML($('#itemDonation').val()).text();
         }
 
         else {
@@ -276,6 +287,7 @@ $(document).on('click', '#add', function (e) {
     $('#itemError').addClass('hidden');
     $('#add').remove();
     $('select#quantity').val('Qty');
+    $('#cashDonation').val('');
     $('thead#lineItems').removeClass('hidden');
     total = 0.00;
     $('.price').each(function() {
@@ -365,6 +377,7 @@ $(document).on('change', '#date', function () {
 // Change text boxes based on if cash or item is selected within donation
 $(document).on('change', '#donation', function () {
     $('#add').remove();
+    $('#cashDonError').remove();
 
     if($(this).find('option:selected').text() == "Item"){
         $('div.subCategory div.input-group').addClass("hidden");
