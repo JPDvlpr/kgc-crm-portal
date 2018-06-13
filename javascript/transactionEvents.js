@@ -97,27 +97,12 @@ $(document).on('input', '#chosenContact', function () {
             $('#conAddress').html("Address: "+contacts[i]['address']);
             $('#altName').html("Alternate Contact Name: "+contacts[i]['altName']);
             $('#altPhone').html("Alternate Contact Phone: "+contacts[i]['altPhone']);
-            $('#conEmail').removeClass('hidden');
-            $('#conCell').removeClass('hidden');
-            $('#conPhone').removeClass('hidden');
-            $('#conAddress').removeClass('hidden');
-            $('#altName').removeClass('hidden');
-            $('#altPhone').removeClass('hidden');
+            $('#conEmail, #conCell, #conPhone, #conAddress, #altName, #altPhone').removeClass('hidden');
             break;
         }
         else{
-            $('#conEmail').html('');
-            $('#conCell').html('');
-            $('#conPhone').html('');
-            $('#conAddress').html('');
-            $('#altName').html('');
-            $('#altPhone').html('');
-            $('#conEmail').addClass('hidden');
-            $('#conCell').addClass('hidden');
-            $('#conPhone').addClass('hidden');
-            $('#conAddress').addClass('hidden');
-            $('#altName').addClass('hidden');
-            $('#altPhone').addClass('hidden');
+            $('#conEmail, #conCell, #conPhone, #conAddress, #altName, #altPhone').html('');
+            $('#conEmail, #conCell, #conPhone, #conAddress, #altName, #altPhone').addClass('hidden');
         }
     }
 });
