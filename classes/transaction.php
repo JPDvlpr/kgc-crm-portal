@@ -256,23 +256,11 @@ class Transaction
 
         // Validate that at least one line item has been submitted.
         // Less than 2 because the discount submits as a transaction item.
-        // TODO - modifying so that can put in just one if it's not discount - seems the second should
-        // work for validating data pulled from the database if there was no discount, but I can't
-        // think of how to test that.
-        if (is_null($this->transactionItems) || count($this->transactionItems) < 2) {
-
+        // Only checks for enough items if it's a new transaction
+        if ($new && (is_null($this->transactionItems) || count($this->transactionItems) < 2)) {
             $errors['itemError'] = 'At least one transaction item is required.';
         }
-//        if (is_null($this->transactionItems) || count($this->transactionItems) < 1) {
-//
-//            $errors['itemError'] = 'At least one transaction item is required.';
-//        } elseif (count($this->transactionItems) < 2 ) {
-//            foreach ($this->transactionItems as $item) {
-//                if($item->getItemId() == 17){
-//                    $errors['itemError'] = 'At least one transaction item is required.';
-//                }
-//            }
-//        }
+
 
         // Validate each line item
         // TODO make sure that number times itemCost == amount of this line_item
