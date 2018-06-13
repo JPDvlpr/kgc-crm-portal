@@ -39,7 +39,6 @@ class Transaction
     protected $dateModified; // DATETIME
     protected $modifiedBy; // INT(11)
     protected $transactionItems; // an array of transactionItem
-//    protected $errors; // an array of errors indexed by the field (TODO figure out how this will work with the array of transaction items!)
     protected $new;
 
     /**
@@ -61,7 +60,6 @@ class Transaction
      * @param $modifiedBy
      * @param $transactionItems
      */
-//    public function __construct($id(move to end), $amount, $transDate, $checkNum, $depositById (not in initial creation), $bankDepositDate, $transStatus, $sourceType, $sourceId, $transType, $contactId, $dateCreated, $createdBy, $dateModified, $modifiedBy, $transactionItems)
     public function __construct($createdBy, $contactId, $transDate, $transactionItemsArray, $amount, $transDesc, $transType, $checkNum, $sourceType, $id = 0)
     {
         if (strlen($transDate) <= 10) {
@@ -79,9 +77,10 @@ class Transaction
         if ($this->new) {
             $this->transStatus = 'P';
         }
-        // TODO Use sourceType
         $this->sourceType = $sourceType;
-//        $this->sourceId = 0; // TODO get the correct number for this and determine.
+        // TODO - use source id
+        // TODO get the correct number for this and determine.
+        // $this->sourceId = 0;
         $this->transDesc = $transDesc;
         $this->transType = $transType;
         $this->sourceType = $sourceType;
@@ -134,9 +133,6 @@ class Transaction
      */
     public function validateTransaction(&$errors, $new = true)
     {
-        // TODO figure out where to do all of this and what needs to be validated.
-//        // this doesn't feel right... having the $new may correct this
-
         if (!$new) {
             // Validate Transaction ID
             if (!validateInteger($this->id)) {
@@ -144,21 +140,24 @@ class Transaction
                 $errors['idError'] = 'Transaction ID was not valid';
             }
 
-            // Todo - will need to check if exists
             // Validate deposit_by - check if id exists in admin table
+            // Todo - will need to check if exists
             if (!validateAdmin($this->depositBy)) {
                 $errors['depositByError'] = 'That admin does not exist.';
             }
 
-            // validate bankDepositDate - check if it is a valid date
+            // Validate bankDepositDate - check if it is a valid date
             if ($this->checkNum != null && !validateDate($this->bankDepositDate)) {
                 $errors['bankDepositDateError'] = 'Invalid Date';
             }
 
-            //        $this->sourceId = $sourceId;
+            // Validate bankDepositDate - check if it is a valid date
+//        if (!validateDate($this->bankDepositDate)) {
+//            $errors['dateModifiedError'] = 'Invalid Date';
+//        }
+
             //TODO - not sure what this is but need to validate
-
-
+            //        $this->sourceId;
         }
 
         //Validate Amount Payed
@@ -169,11 +168,6 @@ class Transaction
         } elseif ($this->amount < 0) {
             $errors['amountError'] = 'Amount must be at least 0.';
         };
-
-        // validate bankDepositDate - check if it is a valid date
-//        if (!validateDate($this->bankDepositDate)) {
-//            $errors['dateModifiedError'] = 'Invalid Date';
-//        }
 
         // Validate that there is a correct transaction type
         // A = C(A)sh
@@ -261,7 +255,6 @@ class Transaction
             $errors['itemError'] = 'At least one transaction item is required.';
         }
 
-
         // Validate each line item
         // TODO make sure that number times itemCost == amount of this line_item
         // TODO make sure that transaction item is still available in database
@@ -270,8 +263,6 @@ class Transaction
             $item->validateTransactionItem($errors, $count);
             $count++;
         }
-
-//        return $errors;
     }
 
     public function saveTransaction()
