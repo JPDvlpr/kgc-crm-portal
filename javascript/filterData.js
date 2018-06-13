@@ -97,9 +97,6 @@ $(document).on('change', '#cat_name', function () {
 //creates preview of data in csv file
 $(document).on('click', '#preview', function (e) {
     e.preventDefault();
-    // $('#preview').html('Generating');
-    // var filter = ':' + $('#filter').val() + '"';
-    // var filter = $('#filter').val();
 
     var filters = {};
     var filterElements = [$('#start_date'), $('#end_date'), $('#contact_name'), $('#cat_name'), $('#item_name')];
@@ -184,9 +181,8 @@ $(document).on('click', '#preview', function (e) {
 $(document).on('click', '#generate', function (event) {
     event.preventDefault();
     $('#generate').html('Generating');
-    // var filter = ':' + $('#filter').val() + '"';
-    // var filter = $('#filter').val();
     var filters = {};
+    var filterElements = [$('#start_date'), $('#end_date'), $('#contact_name'), $('#cat_name'), $('#item_name')];
 
     for (var i = 0; i < filterElements.length; i++) {
         var index = filterElements[i].attr("id");
