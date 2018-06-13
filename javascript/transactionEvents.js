@@ -37,6 +37,8 @@ $( function() {
                             total += parseInt($(this).html().slice(1));
                     });
                     $('#total').html('$'+total);
+                    $('#discount').val('');
+                    $('#paid').val('');
 
                     $('#dialog').dialog('close');
                 }
@@ -288,6 +290,8 @@ $(document).on('click', '#add', function (e) {
     $('#add').remove();
     $('select#quantity').val('Qty');
     $('#cashDonation').val('');
+    $('#discount').val('');
+    $('#paid').val('');
     $('thead#lineItems').removeClass('hidden');
     total = 0.00;
     $('.price').each(function() {
@@ -313,7 +317,7 @@ $(document).on('input', '#paid, #discount', function () {
         other = $('#discount');
 
 
-    if(isPrice(value) || $(this).val().length == 0) {
+    if((isPrice(value) && parseFloat(value) <= parseFloat($('#total').html().slice(1))) || $(this).val().length == 0) {
         var value = $(this).val();
         var difference = parseFloat($('#total').html().slice(1)) - parseFloat(value);
         if(isNaN(difference) && !value.length){
