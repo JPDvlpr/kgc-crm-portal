@@ -120,8 +120,10 @@ class DBTransaction extends DBObject
                         $sql .= 'trans_date' . " >= '" . $filterValue . "' ";
                     } elseif ($filter == 'end_date') {
                         $sql .= 'trans_date' . " <= '" . $filterValue . "' ";
-                    } elseif ($filterValue == 'Donation variable') {
-                        $sql .= 'cat_name' . " = 'Donation' ";
+                    } elseif ($filter == 'item_name' && $filterValue == 'item') {
+                        $sql .= '(quantity * item_price)' . " = 0 ";
+                    } elseif ($filter == 'item_name' && $filterValue == 'cash') {
+                        $sql .= '(quantity * item_price)' . " > 0 ";
                     } else {
                         $sql .= $filter . " = '" . $filterValue . "' ";
                     }
