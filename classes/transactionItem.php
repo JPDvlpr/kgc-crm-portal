@@ -47,12 +47,12 @@ class TransactionItem
      * @param $errors
      * @param $new
      */
-    public function __construct($transItemId, $transId, $itemDesc, $itemQuantity, $amount, $itemId, $dateCreated, $createdBy)
+    public function __construct($transItemId, $transId, $itemDesc, $quantity, $amount, $itemId, $dateCreated, $createdBy)
     {
         $this->transItemId = $transItemId;
         $this->transId = $transId;
         $this->itemDesc = $itemDesc;
-        $this->itemQuantity = $itemQuantity;
+        $this->quantity = $quantity;
         $this->amount = $amount;
         $this->itemId = $itemId;
         $this->dateCreated = $dateCreated;
@@ -101,9 +101,9 @@ class TransactionItem
 
         // Validate item quantity. This should be 1 for donations and discounts.
         // Todo add to database and to appropriate insert statements
-        if (is_null($this->itemQuantity)) {
+        if (is_null($this->quantity)) {
             $temp['itemQuantity'] = 'Quantity is required';
-        } elseif (!validateInteger($this->itemQuantity)) {
+        } elseif (!validateInteger($this->quantity)) {
             $temp['itemQuantity'] = "Quantity was not valid.";
         }
 
@@ -160,7 +160,7 @@ class TransactionItem
         $saveToLocation = new DBItem();
 
         $saveToLocation->addLineItem($this->transId,
-            $this->itemDesc, $this->amount, $this->itemId,
+            $this->itemDesc, $this->quantity, $this->amount, $this->itemId,
             $this->dateCreated, $this->createdBy, $this->dateModified, $this->modifiedBy,$table = 'transaction_item');
     }
 //        //gives access to the variable in index

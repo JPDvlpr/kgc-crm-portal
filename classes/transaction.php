@@ -168,7 +168,7 @@ class Transaction
         } elseif (!validatePrice($this->amount)) {
             $errors['amountError'] = 'Amount was not valid';
         } elseif ($this->amount < 0) {
-            $errors['amountError'] = 'Amount must be greater than 0.';
+            $errors['amountError'] = 'Amount must be at least 0.';
         };
 
         // validate bankDepositDate - check if it is a valid date

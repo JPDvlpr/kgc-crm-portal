@@ -63,7 +63,7 @@ class DBItem extends DBObject
 
     }
 
-    function addLineItem($transId, $itemDesc, $amount, $itemId, $dateCreated, $createdBy, $dateModified, $modifiedBy, $table = 'transaction_item')
+    function addLineItem($transId, $itemDesc, $quantity, $amount, $itemId, $dateCreated, $createdBy, $dateModified, $modifiedBy, $table = 'transaction_item')
     {
         global $dbh;
         $dbh = Parent::connect();
@@ -72,9 +72,11 @@ class DBItem extends DBObject
         $sql = "INSERT INTO " . $table;
         $sql = $sql . "(trans_id, ";
         $sql = $sql . "item_desc, ";
+        $sql = $sql . "quantity, ";
         $sql = $sql . "amount, item_id, date_created, created_by, date_modified, modified_by)";
         $sql = $sql . "VALUES (:transId, ";
         $sql = $sql . ":itemDesc, ";
+        $sql = $sql . ":quantity, ";
         $sql = $sql . ":amount, :itemId, :dateCreated, :createdBy, :dateModified, :modifiedBy) ";
 
         //Prepare Statement
@@ -83,6 +85,7 @@ class DBItem extends DBObject
         //Bind Parameter
         $statement->bindParam(':transId', $transId, PDO::PARAM_STR);
         $statement->bindParam(':itemDesc', $itemDesc, PDO::PARAM_STR);;
+        $statement->bindParam(':quantity', $quantity, PDO::PARAM_STR);;
         $statement->bindParam(':amount', $amount, PDO::PARAM_STR);
         $statement->bindParam(':itemId', $itemId, PDO::PARAM_STR);
         $statement->bindParam(':dateCreated', $dateCreated, PDO::PARAM_STR);
