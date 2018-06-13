@@ -38,7 +38,7 @@ class DBTransaction extends DBObject
         if ($checkNum != 0) {
             $sql = $sql . "check_num, ";
         }
-        if ($sourceType != null || trim($sourceType) != ""){
+        if ($sourceType != null || trim($sourceType) != "") {
             $sql = $sql . "source_type, ";
         }
         $sql = $sql . "trans_status, trans_desc, trans_type, contact_id,
@@ -47,7 +47,7 @@ class DBTransaction extends DBObject
         if ($checkNum != 0) {
             $sql = $sql . ":checkNum, ";
         }
-        if ($sourceType != null || trim($sourceType) != ""){
+        if ($sourceType != null || trim($sourceType) != "") {
             $sql = $sql . ":sourceType, ";
         }
         $sql = $sql . ":transStatus, :transDesc, :transType, :contactId,
@@ -63,7 +63,7 @@ class DBTransaction extends DBObject
         if ($checkNum != 0) {
             $statement->bindParam(':checkNum', $checkNum, PDO::PARAM_STR);
         }
-        if ($sourceType != null || trim($sourceType) != ""){
+        if ($sourceType != null || trim($sourceType) != "") {
             $statement->bindParam(':sourceType', $sourceType, PDO::PARAM_STR);
         }
         $statement->bindParam(':transStatus', $transStatus, PDO::PARAM_STR);
@@ -109,16 +109,6 @@ class DBTransaction extends DBObject
         $dbh = Parent::connect();
 
         //Define Query
-//        $sql = 'SELECT t.trans_id as "Transaction Number", c.contact_name as "Contact Name",
-//                    t.amount as "Transaction Total", i.item_price as "Item Price",
-//                    ic.cat_name as "Category", i.item_name as "Item",
-//                    (ti.amount/ i.item_price) as Quantity
-//                  FROM transaction t
-//                  INNER JOIN transaction_item ti ON t.trans_id = ti.trans_id
-//                  INNER JOIN contact c ON c.contact_id = t.contact_id
-//                  LEFT JOIN item i ON ti.item_id = i.item_id
-//                  LEFT JOIN item_category ic ON i.cat_id = ic.cat_id ';
-
         $sql = 'SELECT * FROM transaction_information ';
         if (sizeof($filters) > 0) {
             $first = true;
@@ -130,6 +120,8 @@ class DBTransaction extends DBObject
                         $sql .= 'trans_date' . " >= '" . $filterValue . "' ";
                     } elseif ($filter == 'end_date') {
                         $sql .= 'trans_date' . " <= '" . $filterValue . "' ";
+                    } elseif ($filterValue == 'Donation variable') {
+                        $sql .= 'item_name' . " LIKE 'Donation' ";
                     } else {
                         $sql .= $filter . " = '" . $filterValue . "' ";
                     }

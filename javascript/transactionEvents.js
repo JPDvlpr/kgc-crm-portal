@@ -487,7 +487,8 @@ $(document).on('click', '#submit', function (e) {
         $('#itemError').html('<li>At least one transaction item is required.</li>')
         valid = false;
     }
-    if(parseInt(amountPaid) <= 0){
+    //amount paid can be zero, but not less than zero
+    if(parseInt(amountPaid) < 0){
         $('#amountError').removeClass('hidden');
         $('#amountError').html('<li>Amount is required</li>')
         valid = false;
