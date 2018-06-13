@@ -121,7 +121,7 @@ class DBTransaction extends DBObject
                     } elseif ($filter == 'end_date') {
                         $sql .= 'trans_date' . " <= '" . $filterValue . "' ";
                     } elseif ($filterValue == 'Donation variable') {
-                        $sql .= 'item_name' . " LIKE 'Donation' ";
+                        $sql .= 'cat_name' . " = 'Donation' ";
                     } else {
                         $sql .= $filter . " = '" . $filterValue . "' ";
                     }

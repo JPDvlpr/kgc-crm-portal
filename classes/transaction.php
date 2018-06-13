@@ -8,7 +8,7 @@
  * @version 0.1
  */
 
-include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/validation/backendValidations.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . "/kgc-crm-portal-team/validation/backendValidations.php");
 include_once("transactionItem.php");
 
 /**
@@ -64,11 +64,11 @@ class Transaction
 //    public function __construct($id(move to end), $amount, $transDate, $checkNum, $depositById (not in initial creation), $bankDepositDate, $transStatus, $sourceType, $sourceId, $transType, $contactId, $dateCreated, $createdBy, $dateModified, $modifiedBy, $transactionItems)
     public function __construct($createdBy, $contactId, $transDate, $transactionItemsArray, $amount, $transDesc, $transType, $checkNum, $sourceType, $id = 0)
     {
-        if(strlen($transDate) <= 10){
+        if (strlen($transDate) <= 10) {
             date_default_timezone_set('America/Los_Angeles');
             $date = $transDate;
-            $time = date('H:i:s',time());
-            $transDate = $date." ".$time;
+            $time = date('H:i:s', time());
+            $transDate = $date . " " . $time;
         }
 
         $this->new = true;
@@ -105,7 +105,6 @@ class Transaction
             $lineNumber++;
         }
     }
-
 
 
     /**
@@ -192,7 +191,7 @@ class Transaction
         if ($this->transType == "H") {
             if (is_null($this->checkNum) || trim($this->checkNum) == "") {
                 $errors['checkNumError'] = 'Check number is required when the payment method is check.';
-            } elseif (!validateInteger($this->checkNum) || $this->checkNum <= 0 ) {
+            } elseif (!validateInteger($this->checkNum) || $this->checkNum <= 0) {
                 $errors['checkNumError'] = 'Check number must be a positive integer.';
             }
         }
@@ -209,7 +208,7 @@ class Transaction
             } elseif (in_array($this->sourceType, $paypal)) {
                 $this->sourceType = 'pay'; // trying to get it down to 5 characters
             } elseif (in_array($this->sourceType, $square)) {
-                $this->sourceType ='squar'; // trying to get it down to 5 characters
+                $this->sourceType = 'squar'; // trying to get it down to 5 characters
             }
         }
 
@@ -230,7 +229,7 @@ class Transaction
         }
 
         // Validate dateCreated - check if it is a valid date
-        if (is_null($this->dateCreated) || trim($this->dateCreated) == "" ) {
+        if (is_null($this->dateCreated) || trim($this->dateCreated) == "") {
             $errors['dateCreatedError'] = 'A valid date is required.';
         } elseif (!validateDateTime($this->dateCreated)) {
             $errors['dateCreatedError'] = 'Invalid Date';
@@ -257,14 +256,27 @@ class Transaction
 
         // Validate that at least one line item has been submitted.
         // Less than 2 because the discount submits as a transaction item.
+        // TODO - modifying so that can put in just one if it's not discount - seems the second should
+        // work for validating data pulled from the database if there was no discount, but I can't
+        // think of how to test that.
         if (is_null($this->transactionItems) || count($this->transactionItems) < 2) {
+
             $errors['itemError'] = 'At least one transaction item is required.';
         }
+//        if (is_null($this->transactionItems) || count($this->transactionItems) < 1) {
+//
+//            $errors['itemError'] = 'At least one transaction item is required.';
+//        } elseif (count($this->transactionItems) < 2 ) {
+//            foreach ($this->transactionItems as $item) {
+//                if($item->getItemId() == 17){
+//                    $errors['itemError'] = 'At least one transaction item is required.';
+//                }
+//            }
+//        }
 
         // Validate each line item
         // TODO make sure that number times itemCost == amount of this line_item
         // TODO make sure that transaction item is still available in database
-        // TODO seems the problem is with the names of the transaction items.
         $count = 1;
         foreach ($this->transactionItems as $item) {
             $item->validateTransactionItem($errors, $count);
