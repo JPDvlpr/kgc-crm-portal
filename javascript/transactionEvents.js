@@ -123,6 +123,22 @@ $(document).on('input', '#chosenContact', function () {
 });
 
 
+//if contact doesn't exist display error and add
+//link to new contact form
+$(document).on('blur', '#chosenContact', function () {
+    for(var i = 0; i < contacts.length; i++) {
+        if ($(this).val() == contacts[i]['name']) {
+            $('#contactIdError').html('');
+            $('#contactIdError').addClass('hidden');
+            return;
+        }
+    }
+
+    $('#contactIdError').html("<li>Contact doesn't exist. <a href='contactIndex.php'>Add a new Contact?</a>");
+    $('#contactIdError').removeClass('hidden');
+});
+
+
 //add drop down to categories(reasons for deposit)
 $(document).on('click', 'label.category', function (){
     var category = $(this).attr('id');
