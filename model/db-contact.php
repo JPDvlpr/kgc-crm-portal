@@ -136,6 +136,7 @@ class DBContact extends DBObject
         //execute query
         $statement->execute();
 
+        // get results in an associative array
         $results = $statement->fetchAll(PDO::FETCH_ASSOC);
         (new self)->disconnect();
         return $results;
