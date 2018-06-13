@@ -3,6 +3,7 @@
     require_once("views/newContact.php");
     require_once("processContact.php");
     $errors = array();
+    $success = array();
     processContact($errors);
 
     standard_header("New Contact","/kgc-crm-portal-team/styles/contact.css");

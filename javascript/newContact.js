@@ -149,5 +149,7 @@ $(document).on('click', '#submit', function (e) {
 
     if(!valid)
         e.preventDefault();
+    else
+        alert('Your form was submitted successfully.');
 
 });
