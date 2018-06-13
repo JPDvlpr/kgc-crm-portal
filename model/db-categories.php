@@ -53,13 +53,22 @@ class DBCategories extends DBObject
 
         Parent::disconnect();
 
+        //create a new array
         $categories = array();
-        foreach ($results as $result){
+
+        //store the categories name
+        foreach ($results as $result) {
             $categories[] = $result['cat_name'];
         }
         return $categories;
     }
 
+    /**
+     * @param $category
+     * @param item_category $table
+     * @return catId
+     * gets the category id from item_category table
+     */
     function getId($category, $table = 'item_category')
     {
         //gives access to the variable in index
@@ -75,7 +84,6 @@ class DBCategories extends DBObject
         //3. Bind parameters
         $statement->bindParam(':category', $category, PDO::PARAM_STR);
 
-
         //4.Execute statement
         $statement->execute();
 
@@ -84,7 +92,7 @@ class DBCategories extends DBObject
 
         Parent::disconnect();
 
-        foreach ($results as $result){
+        foreach ($results as $result) {
             $catId = $result['cat_id'];
         }
         return $catId;
