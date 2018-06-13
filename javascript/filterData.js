@@ -150,7 +150,7 @@ $(document).on('click', '#preview', function (e) {
             });
 
             //replace download with generate csv
-            $('#download').replaceWith('<button id="generate">Generate CSV</button>');
+            $('#download').replaceWith('<button id="generate" class="btn">Generate CSV</button>');
 
             $('html, body').animate({
                 scrollTop: $("#results").offset().top
@@ -210,7 +210,7 @@ $(document).on('click', '#generate', function (event) {
 
         success: function (results) {
             var filename = "files/" + results;
-            $('#generate').replaceWith('<button id="download"><a href="' + filename + '"download>Download CSV</a></button>');
+            $('#generate').replaceWith('<button id="download" class="btn"><a href="' + filename + '"download>Download CSV</a></button>');
             console.log(filename);
         },
         error: function (xhr, textStatus, thrownError, data) {

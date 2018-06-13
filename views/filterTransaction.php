@@ -90,11 +90,11 @@ User can choose a filename
     <div class="row p-3">
         <div class="col-1"></div>
         <div class="col-2">
-            <button id="preview">Preview Data</button>
+            <button id="preview" class="btn">Preview Data</button>
         </div>
         <div class="col-6"></div>
         <div class="col-2">
-            <button id="generate">Generate CSV</button>
+            <button id="generate" class="btn">Generate CSV</button>
         </div>
     </div>
 </form>
