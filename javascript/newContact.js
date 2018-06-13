@@ -149,7 +149,7 @@ $(document).on('click', '#submit', function (e) {
         valid = false;
     }
 
-    if(isEmptyString($('#contactCellPhone').val() && isEmptyString($('#contactPhone').val()))){
+    if(isEmptyString($('#contactCellPhone').val()) && isEmptyString($('#contactPhone').val())){
         $("#reqPhone").remove();
         $('#contactPhone').after("<ul id='reqPhone' class='error'>" +
             "<li>At least one phone number is required</li>" +
