@@ -34,7 +34,7 @@ $.ajax({
 $(document).on('change', '#cat_name', function () {
     var category = $(this).val();
     var me = $('#item_name');
-    
+
     //if discount is selected
     if (category == "Discount") {
         me.addClass('hidden');
