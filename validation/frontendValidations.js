@@ -103,7 +103,7 @@ function sayHelloscript(){
 
 function validName(name) {
     if(isEmptyString(name)) return false;
-    if(name.match(/^\D(\w|\s|(?:[' -])){0,200}$/)){
+    if(name.match(/^(\w|\s|(?:[' -]))\D{0,200}$/)){
         return true;
     }
     return false;
@@ -119,7 +119,7 @@ function validAddress(address) {
 
 function validCity(city) {
     if(isEmptyString(city)) return false;
-    if(city.match(/^\D(\w|\s){0,45}$/)){
+    if(city.match(/^(\w|\s)\D{0,45}$/)){
         return true;
     }
     return false;

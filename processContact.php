@@ -32,7 +32,7 @@ function processContact(&$errors)
         $errors = $contact->validateContact($errors);
         if (empty($errors)) {
             $contact->saveContact();
-            header("location:index.php");
+            header("location: transactionIndex.php");
         }
     }
 }

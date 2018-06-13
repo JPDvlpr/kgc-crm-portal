@@ -134,7 +134,7 @@ function validateInteger($integer)
 
 function validateName($name)
 {
-    $regex_name = "/^\D(\w|\s|(?:[' , . -])){0,200}$/i";
+    $regex_name = "/^(\w|\s|(?:[' , . -]))\D{0,200}$/i";
     return (preg_match($regex_name, $name));
 }
 
