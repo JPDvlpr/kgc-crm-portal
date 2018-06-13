@@ -34,33 +34,22 @@ $.ajax({
 $(document).on('change', '#cat_name', function () {
     var category = $(this).val();
     var me = $('#item_name');
+    
     //if discount is selected
-    var discount = $('#discount')
     if (category == "Discount") {
-        me.prop('disabled', false);
-        me.addClass('hidden'),
-            $('#discount').removeClass('hidden');
-        discount.append('<div class="input-group">\n' +
-            '<div class="input-group-prepend">\n' +
-            '<span class="input-group-text">$</span>\n' +
-            '</div>\n' +
-            '<input id="discount" type="text" class="form-control">' +
-            '</div>');
-    //    if donation is selected
+        me.addClass('hidden');
+   // if donation is selected
     } else if (category == "Donation") {
-        discount.empty();
         me.empty();
+        me.removeClass('hidden');
         $('#item_name').prop('disabled', false);
         $('#item_name').removeClass('hidden');
-        discount.addClass('hidden');
         me.append('<option value="all">All</option>' +
             '<option value="item">Item</option>' +
             '<option value="cash">Cash</option>');
     }
     else { //if anything else is selected besides donation or discount
-        discount.empty();
         me.empty();
-        discount.addClass('hidden');
         me.removeClass('hidden');
         $.ajax({
             type: "POST",

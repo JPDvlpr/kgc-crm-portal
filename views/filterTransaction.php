@@ -76,9 +76,6 @@ User can choose a filename
         <div class="col-4 border" id="second-form">
             <br>
 
-            <div id="discount">
-            </div>
-
             <select id="item_name" class="form-control" disabled>
                 <option value="all">Please Select Category First</option>
             </select>

@@ -16,12 +16,18 @@ $previewCSVData = function () {
 
 //    filter data header
     $transactions = DBTransaction::getFilteredTransactions($filters);
-    $previews = array(array("Transaction Date","Contact Name", "Total Amount", "Item Description"));
+    $previews = array(array("Transaction Date","Contact Name", "Line Amount", "Item Description"));
 
 //    filtered data from database
     foreach ($transactions as $transaction) {
-        $store = array($transaction['trans_date'],$transaction['contact_name'],
-            $transaction['total_amount'],$transaction['item_name']);
+        if($transaction['cat_name'] == 'Donation'){
+            $store = array($transaction['trans_date'], $transaction['contact_name'],
+                '$ ' . ($transaction['quantity'] * $transaction['item_price']), $transaction['item_desc']. ' (' . $transaction['quantity'] . ')' );
+        } else {
+            $store = array($transaction['trans_date'], $transaction['contact_name'],
+                '$ ' . ($transaction['quantity'] * $transaction['item_price']), $transaction['item_name'] . ' (' . $transaction['quantity'] . ')');
+        }
+
         array_push($previews, $store);
     }
 
