@@ -103,7 +103,7 @@ function sayHelloscript(){
 
 function validName(name) {
     if(isEmptyString(name)) return false;
-    if(name.match(/^(\w|\s|(?:[' -]))\D{0,200}$/)){
+    if(name.match(/^(\w|\s|(^[\? \! ]))*$\D{0,200}$/)){
         return true;
     }
     return false;
