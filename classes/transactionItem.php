@@ -119,6 +119,7 @@ class TransactionItem
             $temp['itemId'] = 'Item ID was not valid';
         }
         //TODO - check for existence in database here (add a check if $new for existence in database
+        // Almost working
 //        elseif ($new) {
 //            $checkLocation = new DBItem();
 //            $check = $checkLocation->getItem('item');
