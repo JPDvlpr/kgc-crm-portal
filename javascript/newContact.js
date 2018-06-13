@@ -1,3 +1,5 @@
+//Here an error message is displayed if there is
+// an error with the contact name
 $(document).on('input', '#contactName', function () {
     $("#validName").remove();
     $("#reqName").remove();
@@ -8,6 +10,8 @@ $(document).on('input', '#contactName', function () {
     }
 });
 
+//Here an error message is displayed if there is
+// an error with the address
 $(document).on('input', '#contactAddress', function () {
     $("#addressErrors").remove();
     $("#reqAddress").remove();
@@ -18,6 +22,8 @@ $(document).on('input', '#contactAddress', function () {
     }
 });
 
+//Here an error message is displayed if there is
+// an error with the city
 $(document).on('input', '#contactCity', function () {
     $("#cityErrors").remove();
     $("#reqCity").remove();
@@ -28,6 +34,8 @@ $(document).on('input', '#contactCity', function () {
     }
 });
 
+//Here an error message is displayed if there is
+// an error with the zip code
 $(document).on('input', '#contactZipCode', function () {
     $("#zipCodeErrors").remove();
     $("#reqZip").remove();
@@ -38,6 +46,8 @@ $(document).on('input', '#contactZipCode', function () {
     }
 });
 
+//Here an error message is displayed if there is
+// an error with the cell phone
 $(document).on('input', '#contactCellPhone', function () {
     $("#cellPhoneError").remove();
     $("#reqPhone").remove();
@@ -48,6 +58,8 @@ $(document).on('input', '#contactCellPhone', function () {
     }
 });
 
+//Here an error message is displayed if there is
+// an error with the phone number
 $(document).on('input', '#contactPhone', function () {
     $("#otherPhoneError").remove();
     $("#reqPhone").remove();
@@ -58,6 +70,8 @@ $(document).on('input', '#contactPhone', function () {
     }
 });
 
+//Here an error message is displayed if there is
+// an error with the alternate contact phone number
 $(document).on('input', '#altPhone', function () {
     $("#altPhoneError").remove();
     if(!validPhone($(this).val()) && $(this).val().length > 0){
@@ -67,6 +81,8 @@ $(document).on('input', '#altPhone', function () {
     }
 });
 
+//Here an error message is displayed if there is
+// an error with the email
 $(document).on('input', '#contactEmail', function () {
     $("#emailError").remove();
     $("#reqEmail").remove();
@@ -77,6 +93,8 @@ $(document).on('input', '#contactEmail', function () {
     }
 });
 
+//Here an error message is displayed if there is
+// an error with the alternate contact name
 $(document).on('input', '#contactAltName', function () {
     $("#altNameError").remove();
     if(!validName($(this).val()) && $(this).val().length > 0){
@@ -86,6 +104,8 @@ $(document).on('input', '#contactAltName', function () {
     }
 });
 
+//Here if there are errors the form doesn't
+// submit and errors are displayed for required fields.
 $(document).on('click', '#submit', function (e) {
 
     valid = true;
