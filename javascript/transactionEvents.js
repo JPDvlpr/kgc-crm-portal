@@ -246,7 +246,7 @@ $(document).on('click', '#add', function (e) {
         if($("select#donation option:selected").text() == 'Item'){
             quantity = $('select#quantity').val();
             //prevent code injection from donation item
-            desc = $.parseHTML($('#itemDonation').val()).text();
+            desc = $('#itemDonation').val();
         }
 
         else {
