@@ -1,8 +1,19 @@
 <?php
 //    //php error reporting
-    ini_set("display_errors", 1);
-    error_reporting(E_ALL);
+ini_set("display_errors", 1);
+error_reporting(E_ALL);
 
+/**
+ * Here the processContact() function takes the parameter errors
+ * so that the function can check against the errors array. Then
+ * if the POST array is set is stores the POST information into variables
+ * and creates a new Contact with those variables. Then the function
+ * checks if there aren't any server side errors before submitting
+ * the form.
+ * @param $errors
+ *
+ * @author Just oK TeaM
+ */
 function processContact(&$errors)
 {
     //include class object

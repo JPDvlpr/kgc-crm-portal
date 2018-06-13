@@ -1,6 +1,15 @@
 <?php
+/**
+ * The contacts() function takes the errors variable to
+ * see if there aren't any errors. Then the function
+ * displays the new contact form, so the user can enter a new contact.
+ * @param $errors
+ *
+ * @author Just oK TeaM
+ */
 function contacts($errors)
 {
+    //The array of states
     $states = array('WA', 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL',
         'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
         'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM',
