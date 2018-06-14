@@ -8,7 +8,7 @@
  * @version 0.1
  */
 
-include_once($_SERVER['DOCUMENT_ROOT']."/kgc-crm-portal-team/validation/backendValidations.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . "/kgc-crm-portal-team/validation/backendValidations.php");
 
 /**
  * Class "TransactionItem" represents a transaction_item on the CRM Portal.
@@ -119,8 +119,14 @@ class TransactionItem
             $temp['itemId'] = 'Item ID was not valid';
         }
         //TODO - check for existence in database here (add a check if $new for existence in database
-//        elseif($new && itemId not  in database) {
-//            $errors['itemId'] = 'Sorry, this item is no longer available.';
+        // Almost working
+//        elseif ($new) {
+//            $checkLocation = new DBItem();
+//            $check = $checkLocation->getItem('item');
+//            foreach ($check as $checkItem) {
+//                if ($checkItem['item_id'] == $this->itemId && $checkItem['status'] != 'A')
+//                    $temp['itemId'] = 'Sorry, this item is no longer available.';
+//            }
 //        }
 
         // Validate dateCreated - check if it is a valid date
@@ -143,10 +149,10 @@ class TransactionItem
             $temp['modifiedBy'] = 'That admin does not exist.';
         }
 
-        if(!empty($temp)) {
+        if (!empty($temp)) {
 //            $errors['item'.$count] = $temp;
-            $errors['item'.$count] = "This item contained an error or is no longer available. 
-                 Please remove this item and reenter item number".$count;
+            $errors['item' . $count] = "This item contained an error or is no longer available. 
+                 Please remove this item and reenter item number" . $count;
         }
     }
 
@@ -161,50 +167,16 @@ class TransactionItem
 
         $saveToLocation->addLineItem($this->transId,
             $this->itemDesc, $this->quantity, $this->amount, $this->itemId,
-            $this->dateCreated, $this->createdBy, $this->dateModified, $this->modifiedBy,$table = 'transaction_item');
+            $this->dateCreated, $this->createdBy, $this->dateModified, $this->modifiedBy, $table = 'transaction_item');
     }
-//        //gives access to the variable in index
-//        global $dbh;
-//
-//        $dbh = Parent::connect();
-//
-//        //1. Define the query
-//        $sql = "INSERT INTO " . $table;
-//
-//        if ($numReturn != 0) {
-//            $sql = $sql . " LIMIT :number";
-//        }
-//
-//        //2. Prepare the statement
-//        $statement = $dbh->prepare($sql);
-//
-//        //3. Bind parameters
-//        if ($numReturn != 0) {
-//            $statement->bindParam(':number', $numReturn, PDO::PARAM_INT);
-//        }
-//
-//        //4.Execute statement
-//        $statement->execute();
-//
-//        //5. Return the results
-//        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-//
-//        Parent::disconnect();
-//
-//        if (empty($result)) {
-//            return -1;
-//        }
-//
-//        return $result;
-//        //Todo write to database
-//        $this->new = false;
-//    }
 
-    public function getItemId(){
+    public function getItemId()
+    {
         return $this->itemId;
     }
 
-    public function getTransactionItemId(){
+    public function getTransactionItemId()
+    {
         return $this->transItemId;
     }
 }

@@ -170,11 +170,13 @@ $(document).on('click', 'label.category', function (){
                         "<select id='subCategory' name='subCategory' class='form-control'></select>" +
                     "</div>");
                 for (var i = 0; i < data.length; i++) {
-                    $('#subCategory').append(
-                        "<option value='" + data[i]['item_id'] + "'> " +
-                        data[i]['item_name'] + " - $" + data[i]['item_price'] +
-                        "  </option>"
-                    );
+                    if(data[i]['status'] == 'A'){
+                        $('#subCategory').append(
+                            "<option value='" + data[i]['item_id'] + "'> " +
+                            data[i]['item_name'] + " - $" + data[i]['item_price'] +
+                            "  </option>"
+                        );
+                    }
                 }
             }
         },
@@ -244,7 +246,7 @@ $(document).on('click', '#add', function (e) {
         if($("select#donation option:selected").text() == 'Item'){
             quantity = $('select#quantity').val();
             //prevent code injection from donation item
-            desc = $.parseHTML($('#itemDonation').val()).text();
+            desc = $('#itemDonation').val();
         }
 
         else {
