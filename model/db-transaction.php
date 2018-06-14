@@ -2,6 +2,9 @@
 
 require_once("db-object.php");
 
+/**
+ * Class DBTransaction extends DBObject
+ */
 class DBTransaction extends DBObject
 {
     /* @param $id
@@ -82,6 +85,10 @@ class DBTransaction extends DBObject
         return $dbh->lastInsertId();
     }
 
+    /**
+     * @param transaction $table
+     * @return array
+     */
     function getTransactions($table = 'transaction')
     {
         global $dbh;
@@ -103,6 +110,10 @@ class DBTransaction extends DBObject
         return $results;
     }
 
+    /**
+     * @param null $filters
+     * @return array
+     */
     public static function getFilteredTransactions($filters = null)
     {
         global $dbh;
@@ -130,13 +141,10 @@ class DBTransaction extends DBObject
                     $first = false;
                 }
             }
-
         }
         //prepare statement
         $statement = $dbh->prepare($sql);
-
-        //bind (but nothing to bind yet
-
+        
         //execute query
         $statement->execute();
 
@@ -145,6 +153,5 @@ class DBTransaction extends DBObject
         Parent::disconnect();
 
         return $results;
-
     }
 }
